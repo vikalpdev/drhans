@@ -1,0 +1,23 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e4fdef"/>
+      <stop offset="100%" stop-color="#d3f1ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" fill="url(#bg4)"/>
+  <circle cx="150" cy="150" r="95" fill="#ffffff" opacity="0.5"/>
+  <!-- head -->
+  <circle cx="150" cy="118" r="28" fill="#163b57"/>
+  <!-- body -->
+  <path d="M150 146 C168 146 180 162 180 182 L180 220 C180 226 175 231 169 231 L131 231 C125 231 120 226 120 220 L120 182 C120 162 132 146 150 146 Z" fill="#163b57"/>
+  <!-- arms out for balance -->
+  <line x1="120" y1="175" x2="90" y2="160" stroke="#163b57" stroke-width="10" stroke-linecap="round"/>
+  <line x1="180" y1="175" x2="210" y2="160" stroke="#163b57" stroke-width="10" stroke-linecap="round"/>
+  <!-- motion swirl arrows around head -->
+  <path d="M110 95 a45 45 0 1 1 -6 40" fill="none" stroke="#2a9d8f" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 10"/>
+  <path d="M100 130 l-10 6 l4 -12" fill="none" stroke="#2a9d8f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- balance line beneath feet -->
+  <line x1="95" y1="252" x2="205" y2="252" stroke="#2a9d8f" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="150" cy="252" r="7" fill="#2a9d8f"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e4fdef"/>
+      <stop offset="100%" stop-color="#d3f1ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" fill="url(#bg2)"/>
+  <circle cx="150" cy="150" r="95" fill="#ffffff" opacity="0.5"/>
+  <!-- headphone band -->
+  <path d="M95 155 C95 108 118 78 150 78 C182 78 205 108 205 155" fill="none" stroke="#163b57" stroke-width="9" stroke-linecap="round"/>
+  <!-- ear cups -->
+  <rect x="78" y="145" width="30" height="46" rx="14" fill="#163b57"/>
+  <rect x="192" y="145" width="30" height="46" rx="14" fill="#163b57"/>
+  <rect x="86" y="153" width="14" height="30" rx="7" fill="#2a9d8f"/>
+  <rect x="200" y="153" width="14" height="30" rx="7" fill="#2a9d8f"/>
+  <!-- sound waves -->
+  <path d="M235 150 q10 10 0 20" stroke="#2a9d8f" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M245 140 q22 20 0 40" stroke="#2a9d8f" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- waveform bars -->
+  <g fill="#2a9d8f">
+    <rect x="110" y="222" width="6" height="20" rx="3"/>
+    <rect x="122" y="212" width="6" height="34" rx="3"/>
+    <rect x="134" y="200" width="6" height="46" rx="3"/>
+    <rect x="146" y="216" width="6" height="30" rx="3"/>
+    <rect x="158" y="208" width="6" height="40" rx="3"/>
+    <rect x="170" y="220" width="6" height="24" rx="3"/>
+    <rect x="182" y="214" width="6" height="32" rx="3"/>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreAppointmentRequest;
+use App\Mail\AppointmentReceivedMail;
+use App\Models\Appointment;
+use App\Models\Centre;
+use App\Models\Specialist;
+use Illuminate\Support\Facades\Mail;
+
+class AppointmentController extends Controller
+{
+    public function create()
+    {
+        $centres = Centre::orderBy('order')->get();
+        $specialists = Specialist::orderBy('order')->get();
+
+        return view('appointment.create', [
+            'centres' => $centres,
+            'specialists' => $specialists,
+            'selectedCentre' => $centres->firstWhere('slug', request('centre')),
+            'selectedSpecialist' => $specialists->firstWhere('slug', request('specialist')),
+            'selectedDate' => request('date'),
+            'selectedDepartment' => request('department'),
+        ]);
+    }
+
+    public function store(StoreAppointmentRequest $request)
+    {
+        $appointment = Appointment::create($request->safe()->except('website'));
+
+        Mail::to(config('mail.admin_address'))->send(new AppointmentReceivedMail($appointment));
+
+        return back()->with('success', "Thank you! Your appointment request has been received. Our team will confirm shortly.");
+    }
+}

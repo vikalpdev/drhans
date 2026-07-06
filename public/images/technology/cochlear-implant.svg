@@ -1,0 +1,22 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e4fdef"/>
+      <stop offset="100%" stop-color="#d3f1ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="300" fill="url(#bg3)"/>
+  <circle cx="150" cy="150" r="95" fill="#ffffff" opacity="0.5"/>
+  <!-- ear outline -->
+  <path d="M140 90 C170 85 198 108 198 140 C198 158 188 165 188 178 C188 195 178 208 162 210 C155 211 148 206 148 199 C148 190 156 188 156 178 C156 165 130 165 122 145 C114 126 118 96 140 90 Z"
+        fill="none" stroke="#163b57" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- implant processor behind ear -->
+  <circle cx="215" cy="120" r="16" fill="#2a9d8f"/>
+  <circle cx="215" cy="120" r="6" fill="#ffffff"/>
+  <!-- coil wire -->
+  <path d="M203 132 C195 145 185 150 172 152" fill="none" stroke="#2a9d8f" stroke-width="5" stroke-linecap="round"/>
+  <!-- signal dots -->
+  <circle cx="235" cy="105" r="3" fill="#71c8bc"/>
+  <circle cx="242" cy="118" r="3" fill="#71c8bc"/>
+  <circle cx="238" cy="132" r="3" fill="#71c8bc"/>
+</svg>

@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-navy-50: #eef3f6;
+    --color-navy-100: #d3e0e8;
+    --color-navy-200: #a8bccb;
+    --color-navy-300: #7a98ad;
+    --color-navy-400: #4c738e;
+    --color-navy-500: #1e4d6f;
+    --color-navy-600: #163b57;
+    --color-navy-700: #12314a;
+    --color-navy-800: #0d2536;
+    --color-navy-900: #081925;
+
+    --color-teal-50: #eefaf8;
+    --color-teal-100: #d3f1ec;
+    --color-teal-200: #a2dcd4;
+    --color-teal-300: #71c8bc;
+    --color-teal-400: #3fb3a3;
+    --color-teal-500: #2a9d8f;
+    --color-teal-600: #227e73;
+    --color-teal-700: #1a5f57;
+    --color-teal-800: #12403b;
+
+    --color-mint-50: #f4fefa;
+    --color-mint-100: #e4fdef;
+    --color-mint-200: #cdf7e2;
+}
+
+/* Scroll-reveal (JS adds .js to <html>; without JS content stays visible).
+   Uses an animation (not transition) so it never overrides hover transitions. */
+.js [data-reveal] {
+    opacity: 0;
+}
+
+.js [data-reveal].revealed {
+    opacity: 1;
+    animation: reveal-rise 0.6s ease both;
+    animation-delay: var(--reveal-delay, 0s);
+}
+
+@keyframes reveal-rise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] {
+        opacity: 1;
+    }
+
+    .js [data-reveal].revealed {
+        animation: none;
+    }
+}
+
+[x-cloak] {
+    display: none !important;
+}
