@@ -1,8 +1,8 @@
-<x-layouts.app :title="$treatment->name">
+<x-layouts.app :title="$treatment->meta_title ?? $treatment->name" :description="$treatment->meta_description">
     <x-hero
         :title="$treatment->name"
         :subtitle="$treatment->overview ?? $treatment->summary"
-        :breadcrumbs="['Treatments' => route('treatments.index'), $treatment->name => null]"
+        :breadcrumbs="['Speciality Service' => route('treatments.index'), $treatment->name => null]"
         :image-model="$treatment"
         image-collection="hero_image"
     >
@@ -44,12 +44,39 @@
                             <a href="{{ route('specialists.index') }}" class="group inline-flex items-center gap-1 text-teal-300 hover:text-teal-200 font-heading font-semibold text-sm transition-colors">
                                 Meet Our Specialists <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                             </a>
-                            <a href="tel:+919876543210" class="flex items-center gap-2 text-sm text-navy-100 hover:text-white transition-colors">
-                                <x-app-icon name="phone" class="w-4 h-4 text-teal-300" /> +91 98765 43210
+                            <a href="tel:+919811703926" class="flex items-center gap-2 text-sm text-navy-100 hover:text-white transition-colors">
+                                <x-app-icon name="phone" class="w-4 h-4 text-teal-300" /> +91-98117 03926
                             </a>
                         </div>
                     </div>
                 </aside>
+            </div>
+        </section>
+    @endif
+
+    @if (!empty($treatment->services))
+        <section class="bg-mint-50/60 py-16">
+            <div class="mx-auto max-w-5xl px-6">
+                <div class="text-center mb-12" data-reveal>
+                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">What We Offer</p>
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Our {{ $treatment->name }} Services</h2>
+                </div>
+                <div class="divide-y divide-navy-100 bg-white rounded-2xl border border-navy-100 shadow-sm overflow-hidden">
+                    @foreach ($treatment->services as $i => $service)
+                        <div class="group flex flex-col sm:flex-row gap-5 sm:gap-8 p-7 lg:p-8 hover:bg-mint-50/50 transition-colors duration-300" data-reveal style="--reveal-delay: {{ $i * 0.05 }}s">
+                            <div class="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-4 sm:w-16 shrink-0">
+                                <span class="font-heading font-extrabold text-2xl text-mint-200 group-hover:text-teal-200 transition-colors duration-300 select-none">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                <div class="w-11 h-11 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300 shrink-0">
+                                    <x-app-icon :name="$treatment->icon ?? 'heart'" class="w-5 h-5 text-teal-600 group-hover:text-white transition-colors duration-300" />
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-lg text-navy-600 mb-2">{{ $service['title'] }}</h3>
+                                <p class="text-sm text-navy-500 leading-relaxed">{{ $service['description'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </section>
     @endif

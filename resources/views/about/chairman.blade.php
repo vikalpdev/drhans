@@ -1,7 +1,7 @@
 <x-layouts.app title="From the Chairman's Desk">
     <x-hero
-        title="From the Chairman's Desk"
-        subtitle="For over three decades, my mission has been simple yet profound - to restore the gift of hearing, balance and communication, and to bring hope back to the lives of thousands of patients and their families."
+        :title="$page->content['hero_title'] ?? 'From the Chairman\'s Desk'"
+        :subtitle="$page->content['hero_subtitle'] ?? 'For over three decades, my mission has been simple yet profound - to restore the gift of hearing, balance and communication, and to bring hope back to the lives of thousands of patients and their families.'"
         :breadcrumbs="['About Us' => route('about.index'), 'Chairman\'s Desk' => null]"
         :image-model="$chairman"
         image-collection="photo"
@@ -40,7 +40,7 @@
 
                     <div>
                         <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">My Journey</p>
-                        <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-4">A Journey of Purpose</h2>
+                        <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-4">{{ $page->content['journey_title'] ?? 'A Journey of Purpose' }}</h2>
                         <div class="space-y-3">
                             @foreach (explode("\n\n", $chairman->bio) as $paragraph)
                                 <p class="text-sm text-navy-500 leading-relaxed">{{ $paragraph }}</p>
@@ -50,7 +50,7 @@
 
                     <div class="bg-mint-50 rounded-2xl p-7">
                         <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">What Guides Me</p>
-                        <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-3">My Beliefs</h2>
+                        <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-3">{{ $page->content['beliefs_title'] ?? 'My Beliefs' }}</h2>
                         <ul class="grid sm:grid-cols-2 gap-1">
                             @foreach (['Patients first, always', 'Ethical practice and transparency', 'Innovation with compassion', 'Building a team that learns and grows together', 'Creating centres that are accessible, advanced and trusted'] as $belief)
                                 <li class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white transition-colors duration-200 text-sm text-navy-600">

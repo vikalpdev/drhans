@@ -111,7 +111,7 @@
                 <div class="bg-mint-50 rounded-2xl p-6">
                     <h3 class="font-heading font-bold text-navy-600 mb-2">Need Help?</h3>
                     <p class="text-sm text-navy-500 mb-4">Talk to our care team for guidance.</p>
-                    <a href="tel:+919876543210" class="inline-flex w-full items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
+                    <a href="tel:+919811703926" class="inline-flex w-full items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
                         <x-app-icon name="phone" class="w-4 h-4" /> Talk to Our Care Team
                     </a>
                 </div>

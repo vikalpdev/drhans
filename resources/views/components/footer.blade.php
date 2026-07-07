@@ -23,7 +23,7 @@
                 <li><a href="{{ route('home') }}" class="hover:text-teal-300">Home</a></li>
                 <li><a href="{{ route('about.index') }}" class="hover:text-teal-300">About Us</a></li>
                 <li><a href="{{ route('centres.index') }}" class="hover:text-teal-300">Our Centres</a></li>
-                <li><a href="{{ route('treatments.index') }}" class="hover:text-teal-300">Treatments</a></li>
+                <li><a href="{{ route('treatments.index') }}" class="hover:text-teal-300">Speciality Service</a></li>
                 <li><a href="{{ route('specialists.index') }}" class="hover:text-teal-300">Specialists</a></li>
                 <li><a href="{{ route('conditions.index') }}" class="hover:text-teal-300">Conditions Treated</a></li>
                 <li><a href="{{ route('gallery.index') }}" class="hover:text-teal-300">Photo Gallery</a></li>
@@ -81,7 +81,7 @@
             </ul>
             <h3 class="font-heading font-semibold text-white mb-3">Contact Us</h3>
             <ul class="space-y-2 text-sm text-navy-200">
-                <li class="flex items-center gap-2"><x-app-icon name="phone" class="w-4 h-4 shrink-0" /> +91 98765 43210</li>
+                <li class="flex items-center gap-2"><x-app-icon name="phone" class="w-4 h-4 shrink-0" /> +91-98117 03926</li>
                 <li class="flex items-center gap-2"><x-app-icon name="mail" class="w-4 h-4 shrink-0" /> info@drhansent.com</li>
                 <li class="flex items-start gap-2"><x-app-icon name="clock" class="w-4 h-4 shrink-0 mt-0.5" /> Mon - Sat: 9 AM - 7 PM<br>Sunday: 10 AM - 2 PM</li>
             </ul>

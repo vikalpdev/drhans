@@ -1,7 +1,7 @@
 <x-layouts.app title="About Us">
     <x-hero
-        title="Dr Hans' Centre for ENT"
-        subtitle="A legacy of trust. A commitment to excellence. Dr Hans' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, a pioneer in Cochlear Implant Surgery with 35+ years of experience and 3500+ successful procedures."
+        :title="$page->content['hero_title'] ?? 'Dr Hans\' Centre for ENT'"
+        :subtitle="$page->content['hero_subtitle'] ?? 'A legacy of trust. A commitment to excellence. Dr Hans\' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, a pioneer in Cochlear Implant Surgery with 35+ years of experience and 3500+ successful procedures.'"
         :breadcrumbs="['About Us' => null]"
         :image-model="$founder"
         image-collection="photo"
@@ -28,14 +28,14 @@
                     <x-app-icon name="target" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 class="font-heading font-semibold text-navy-600">Our Mission</h3>
-                <p class="text-sm text-navy-500 mt-2">To deliver advanced ENT care through precise diagnosis, innovative treatments, and a patient-first approach.</p>
+                <p class="text-sm text-navy-500 mt-2">{{ $page->content['mission_description'] ?? 'To deliver advanced ENT care through precise diagnosis, innovative treatments, and a patient-first approach.' }}</p>
             </div>
             <div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6">
                 <div class="w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center mb-4 transition-colors duration-300">
                     <x-app-icon name="eye" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 class="font-heading font-semibold text-navy-600">Our Vision</h3>
-                <p class="text-sm text-navy-500 mt-2">To ensure every patient experiences clarity, confidence and long-term well-being through care that evolves with them.</p>
+                <p class="text-sm text-navy-500 mt-2">{{ $page->content['vision_description'] ?? 'To ensure every patient experiences clarity, confidence and long-term well-being through care that evolves with them.' }}</p>
             </div>
             <div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6">
                 <div class="w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center mb-4 transition-colors duration-300">
@@ -60,7 +60,7 @@
             <div>
                 <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Why Choose Us</p>
                 <h2 class="font-heading font-bold text-2xl text-white mt-2 mb-2">Why Choose Dr Hans' Centre for ENT?</h2>
-                <p class="text-sm text-navy-100 mb-6">We combine world-class expertise with compassion and advanced technology to deliver the best outcomes for our patients.</p>
+                <p class="text-sm text-navy-100 mb-6">{{ $page->content['why_choose_description'] ?? 'We combine world-class expertise with compassion and advanced technology to deliver the best outcomes for our patients.' }}</p>
                 <div class="space-y-1.5">
                     @foreach ([
                         ['user-group', 'Expertise You Can Trust', 'Led by highly experienced ENT surgeons, audiologists and rehabilitation specialists.'],

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Centre;
+use App\Models\ConditionTreated;
 use App\Models\Treatment;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -20,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['components.header', 'components.footer'], function ($view) {
             $view->with('navCentres', Cache::remember('nav.centres', 3600, fn () => Centre::orderBy('order')->get()));
             $view->with('navTreatments', Cache::remember('nav.treatments', 3600, fn () => Treatment::orderBy('order')->get()));
+            $view->with('navConditionGroups', Cache::remember('nav.condition-groups', 3600, function () {
+                $conditions = ConditionTreated::orderBy('order')->get()->groupBy('category');
+
+                return collect(ConditionTreated::CATEGORIES)
+                    ->map(fn ($label, $key) => ['label' => $label, 'items' => $conditions->get($key, collect())])
+                    ->filter(fn ($group) => $group['items']->isNotEmpty())
+                    ->values();
+            }));
         });
     }
 }

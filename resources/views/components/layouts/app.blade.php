@@ -35,10 +35,10 @@
         x-transition:leave-end="opacity-0 translate-y-4"
         class="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5"
     >
-        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="w-12 h-12 rounded-full bg-[#25D366] shadow-lg shadow-black/15 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-transform duration-200">
+        <a href="https://wa.me/919811703926" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="w-12 h-12 rounded-full bg-[#25D366] shadow-lg shadow-black/15 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-transform duration-200">
             <x-app-icon name="whatsapp" class="w-6 h-6" />
         </a>
-        <a href="tel:+919876543210" aria-label="Call us" class="w-12 h-12 rounded-full bg-gradient-to-br from-navy-600 to-navy-700 shadow-lg shadow-black/15 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-transform duration-200">
+        <a href="tel:+919811703926" aria-label="Call us" class="w-12 h-12 rounded-full bg-gradient-to-br from-navy-600 to-navy-700 shadow-lg shadow-black/15 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-transform duration-200">
             <x-app-icon name="phone" class="w-5 h-5" />
         </a>
     </div>

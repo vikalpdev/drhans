@@ -5,7 +5,7 @@
         :breadcrumbs="['Contact Us' => null]"
     >
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="phone" class="w-4 h-4 text-teal-500" /> +91 98765 43210</span>
+            <span class="flex items-center gap-1.5"><x-app-icon name="phone" class="w-4 h-4 text-teal-500" /> +91-98117 03926</span>
             <span class="flex items-center gap-1.5"><x-app-icon name="mail" class="w-4 h-4 text-teal-500" /> info@drhansent.com</span>
         </x-slot:stats>
     </x-hero>
@@ -135,10 +135,10 @@
                 <x-app-icon name="phone" class="w-8 h-8 text-teal-300 mb-3" />
                 <h3 class="font-heading font-bold mb-2">Need Immediate Assistance?</h3>
                 <p class="text-sm text-navy-200 mb-4">For urgent ENT care or emergency appointments, please call us directly.</p>
-                <a href="tel:+919876543210" class="inline-flex w-full items-center justify-center gap-2 bg-white hover:bg-teal-50 text-teal-700 font-heading font-semibold px-4 py-2.5 rounded-full text-sm shadow-md transition-colors duration-200">
-                    <x-app-icon name="phone" class="w-4 h-4" /> +91 98765 43210
+                <a href="tel:+919811703926" class="inline-flex w-full items-center justify-center gap-2 bg-white hover:bg-teal-50 text-teal-700 font-heading font-semibold px-4 py-2.5 rounded-full text-sm shadow-md transition-colors duration-200">
+                    <x-app-icon name="phone" class="w-4 h-4" /> +91-98117 03926
                 </a>
-                <a href="https://wa.me/919876543210" target="_blank" class="mt-2.5 inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 hover:border-white text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
+                <a href="https://wa.me/919811703926" target="_blank" class="mt-2.5 inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 hover:border-white text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
                     <x-app-icon name="whatsapp" class="w-4 h-4" /> WhatsApp Us
                 </a>
             </div>

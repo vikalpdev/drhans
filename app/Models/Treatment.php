@@ -14,11 +14,12 @@ class Treatment extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name', 'slug', 'icon', 'summary', 'overview', 'details',
-        'process_steps', 'who_benefits', 'why_choose_us', 'faqs', 'order',
+        'name', 'slug', 'meta_title', 'meta_description', 'icon', 'summary', 'overview', 'details',
+        'services', 'process_steps', 'who_benefits', 'why_choose_us', 'faqs', 'order',
     ];
 
     protected $casts = [
+        'services' => 'array',
         'process_steps' => 'array',
         'who_benefits' => 'array',
         'why_choose_us' => 'array',

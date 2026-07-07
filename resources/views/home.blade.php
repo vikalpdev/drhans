@@ -8,15 +8,15 @@
             <div>
                 <p class="text-teal-700 font-semibold text-xs tracking-widest uppercase">India's Advanced ENT &amp; Hearing Care Network</p>
                 <h1 class="mt-3 font-heading font-extrabold text-4xl lg:text-5xl text-navy-600 leading-tight">
-                    Precision Care for
-                    <span class="inline-grid align-bottom text-left" x-data="rotateWords(4)">
-                        @foreach (['Hearing Loss', 'Vertigo', 'Sinus Problems', 'Every Ear'] as $i => $word)
+                    {{ $page->content['hero_title_prefix'] ?? 'Precision Care for' }}
+                    <span class="inline-grid align-bottom text-left" x-data="rotateWords({{ count($page->content['hero_animated_words'] ?? ['Hearing Loss', 'Vertigo', 'Sinus Problems', 'Every Ear']) }})">
+                        @foreach ($page->content['hero_animated_words'] ?? ['Hearing Loss', 'Vertigo', 'Sinus Problems', 'Every Ear'] as $i => $word)
                             <span class="col-start-1 row-start-1 text-teal-500 whitespace-nowrap transition-opacity duration-500" :class="active === {{ $i }} ? 'opacity-100' : 'opacity-0'" @if ($i > 0) aria-hidden="true" @endif>{{ $word }}</span>
                         @endforeach
                     </span>
                 </h1>
                 <p class="mt-4 text-navy-600 max-w-lg">
-                    Led by Padma Shri awardee Dr. J. M. Hans and a team of ENT specialists delivering world-class hearing, vertigo, sinus, and cochlear implant care.
+                    {{ $page->content['hero_description'] ?? 'Led by Padma Shri awardee Dr. J. M. Hans and a team of ENT specialists delivering world-class hearing, vertigo, sinus, and cochlear implant care.' }}
                 </p>
                 <div class="mt-6 flex flex-wrap gap-3">
                     <a href="{{ route('appointment.create') }}" class="group inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-6 py-3 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg hover:shadow-navy-600/30 hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm transition-all duration-200">
@@ -204,14 +204,9 @@
             <div>
                 <div data-reveal>
                     <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Why Choose Us</p>
-                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-2">Excellence in Every Patient Experience</h2>
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-2">{{ $page->content['why_choose_title'] ?? 'Excellence in Every Patient Experience' }}</h2>
                     <p class="text-sm text-navy-100 leading-relaxed mt-4">
-                        Dr Hans' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by
-                        Padma Shri awardee Dr. J. M. Hans, one of India's most respected cochlear implant surgeons.
-                        What began as a single clinic with a simple promise &mdash; honest, world-class ENT care for every
-                        family &mdash; has grown into 6 centres trusted by over 50,000 patients. From advanced diagnostics
-                        and endoscopic surgery to hearing implants and long-term rehabilitation, we bring every stage
-                        of ear, nose and throat care under one roof.
+                        {!! nl2br(e($page->content['why_choose_description'] ?? 'Dr Hans\' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, one of India\'s most respected cochlear implant surgeons. What began as a single clinic with a simple promise — honest, world-class ENT care for every family — has grown into 6 centres trusted by over 50,000 patients. From advanced diagnostics and endoscopic surgery to hearing implants and long-term rehabilitation, we bring every stage of ear, nose and throat care under one roof.')) !!}
                     </p>
                 </div>
                 <ul class="space-y-1.5 mt-6">
@@ -246,7 +241,7 @@
 
             <div>
                 <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Advanced Technology</p>
-                <h2 class="font-heading font-bold text-2xl text-white mt-2 mb-5">World-class Technology for Better Outcomes</h2>
+                <h2 class="font-heading font-bold text-2xl text-white mt-2 mb-5">{{ $page->content['tech_title'] ?? 'World-class Technology for Better Outcomes' }}</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     @foreach ([
                         ['endoscopic-surgery', 'Endoscopic ENT Surgery'],

@@ -23,13 +23,13 @@ class ConditionTreated extends Model
     ];
 
     public const CATEGORIES = [
-        'ear' => 'Ear Conditions',
-        'nose_sinus' => 'Nose & Sinus Conditions',
-        'throat' => 'Throat Conditions',
-        'head_neck' => 'Head & Neck Conditions',
-        'hearing_balance' => 'Hearing & Balance Disorders',
-        'pediatric' => 'Pediatric ENT Conditions',
-        'sleep' => 'Sleep Related Conditions',
-        'allergy' => 'Allergy & Immunology',
+        'ear' => 'Ear (Otology)',
+        'nose_sinus' => 'Nose & Sinus',
+        'throat' => 'Voice & Throat',
+        'vertigo_balance' => 'Vertigo & Balance',
+        'tinnitus' => 'Tinnitus',
+        'pediatric' => 'Paediatric ENT',
+        'speech_disorders' => 'Speech Disorders',
+        'head_neck' => 'Head & Neck',
     ];
 }

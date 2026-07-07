@@ -12,6 +12,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         return view('home', [
+            'page' => \App\Models\Page::where('slug', 'home')->first(),
             'centres' => Centre::orderBy('order')->get(),
             'treatments' => Treatment::orderBy('order')->get(),
             'specialists' => Specialist::where('type', 'ent_surgeon')->orderBy('order')->get(),

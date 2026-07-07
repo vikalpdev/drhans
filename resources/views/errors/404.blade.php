@@ -27,7 +27,7 @@
 
             <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl mx-auto">
                 @foreach ([
-                    ['ear', 'Treatments', route('treatments.index')],
+                    ['ear', 'Speciality Service', route('treatments.index')],
                     ['user-group', 'Specialists', route('specialists.index')],
                     ['location', 'Our Centres', route('centres.index')],
                     ['phone', 'Contact Us', route('contact.index')],
