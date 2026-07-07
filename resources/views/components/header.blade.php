@@ -57,23 +57,46 @@
 
                 <div class="relative" @mouseenter="conditionsOpen = true" @mouseleave="conditionsOpen = false">
                     <button class="flex items-center gap-1 hover:text-teal-500 {{ request()->routeIs('conditions.*') ? 'text-teal-500' : '' }}">Conditions Treated <x-app-icon name="chevron-down" class="w-3.5 h-3.5" /></button>
-                    <div x-show="conditionsOpen" x-cloak x-transition class="absolute right-0 top-full pt-3 w-[640px]">
-                        <div class="bg-white rounded-xl shadow-xl border border-navy-100 p-5">
-                            <div class="grid grid-cols-3 gap-x-6 gap-y-5">
-                                @foreach ($navConditionGroups as $group)
-                                    <div>
-                                        @if ($group['items']->count() > 1)
-                                            <p class="px-2 text-xs font-semibold text-teal-600 uppercase tracking-wide mb-1.5">{{ $group['label'] }}</p>
+                    <div x-show="conditionsOpen" x-cloak x-transition class="absolute right-0 top-full pt-3 w-[820px]">
+                        <div class="bg-white rounded-2xl shadow-xl border border-navy-100 p-6">
+                            @php
+                                $multiGroups = $navConditionGroups->filter(fn ($g) => $g['items']->count() > 1)->values();
+                                $singleItems = $navConditionGroups->filter(fn ($g) => $g['items']->count() === 1)->map(fn ($g) => $g['items']->first())->values();
+                            @endphp
+                            <div class="grid grid-cols-4 gap-x-6">
+                                @foreach ($multiGroups as $group)
+                                    <div class="{{ !$loop->first ? 'pl-6 border-l border-navy-100' : '' }}">
+                                        <p class="inline-block text-teal-700 font-semibold text-[11px] tracking-wide uppercase bg-mint-100 px-2.5 py-1 rounded-full mb-3">{{ $group['label'] }}</p>
+                                        <div class="space-y-0.5">
                                             @foreach ($group['items'] as $item)
-                                                <a href="{{ route('conditions.show', $item) }}" class="block px-2 py-1.5 text-sm rounded-lg hover:bg-mint-100">{{ $item->name }}</a>
+                                                <a href="{{ route('conditions.show', $item) }}" class="group flex items-center gap-2.5 px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
+                                                    <span class="w-7 h-7 rounded-lg bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-150">
+                                                        <x-app-icon :name="$item->icon ?? 'check'" class="w-3.5 h-3.5 text-teal-600 group-hover:text-white transition-colors duration-150" />
+                                                    </span>
+                                                    {{ $item->name }}
+                                                </a>
                                             @endforeach
-                                        @else
-                                            <a href="{{ route('conditions.show', $group['items']->first()) }}" class="block px-2 py-1.5 text-sm font-semibold text-navy-700 rounded-lg hover:bg-mint-100">{{ $group['label'] }}</a>
-                                        @endif
+                                        </div>
                                     </div>
                                 @endforeach
+                                <div class="pl-6 border-l border-navy-100">
+                                    <p class="inline-block text-teal-700 font-semibold text-[11px] tracking-wide uppercase bg-mint-100 px-2.5 py-1 rounded-full mb-3">More Conditions</p>
+                                    <div class="space-y-0.5">
+                                        @foreach ($singleItems as $item)
+                                            <a href="{{ route('conditions.show', $item) }}" class="group flex items-center gap-2.5 px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
+                                                <span class="w-7 h-7 rounded-lg bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-150">
+                                                    <x-app-icon :name="$item->icon ?? 'check'" class="w-3.5 h-3.5 text-teal-600 group-hover:text-white transition-colors duration-150" />
+                                                </span>
+                                                {{ $item->name }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
-                            <a href="{{ route('conditions.index') }}" class="block mt-4 px-2 py-2 text-sm font-semibold text-teal-500 border-t border-navy-100 pt-3">View All Conditions</a>
+                            <a href="{{ route('conditions.index') }}" class="group flex items-center justify-between mt-5 px-4 py-3 text-sm font-semibold text-teal-600 bg-mint-50 hover:bg-mint-100 rounded-xl transition-colors duration-150">
+                                View All Conditions
+                                <x-app-icon name="arrow-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                            </a>
                         </div>
                     </div>
                 </div>
