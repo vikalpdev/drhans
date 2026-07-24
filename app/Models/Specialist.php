@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
@@ -16,9 +17,9 @@ class Specialist extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name', 'slug', 'meta_title', 'meta_description', 'type', 'designation', 'qualifications',
+        'name', 'slug', 'meta_title', 'meta_description', 'type_id', 'designation', 'qualifications',
         'is_chairman', 'is_founder', 'experience_years', 'procedures_count',
-        'bio', 'expertise', 'interests', 'education', 'experience_timeline',
+        'bio', 'expertise', 'interests', 'languages', 'education', 'experience_timeline',
         'quote', 'order',
     ];
 
@@ -27,6 +28,7 @@ class Specialist extends Model implements HasMedia
         'is_founder' => 'boolean',
         'expertise' => 'array',
         'interests' => 'array',
+        'languages' => 'array',
         'education' => 'array',
         'experience_timeline' => 'array',
     ];
@@ -34,6 +36,11 @@ class Specialist extends Model implements HasMedia
     public function centres(): BelongsToMany
     {
         return $this->belongsToMany(Centre::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(SpecialistType::class, 'type_id');
     }
 
     public function appointments(): HasMany

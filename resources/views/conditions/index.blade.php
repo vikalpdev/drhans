@@ -70,7 +70,7 @@
                 <x-app-icon name="whatsapp" class="w-8 h-8 text-teal-300 mb-3" />
                 <h3 class="font-heading font-bold text-lg">Prefer to Talk First?</h3>
                 <p class="text-sm text-navy-200 mt-1 mb-4">Chat with our care team on WhatsApp for quick guidance.</p>
-                <a href="https://wa.me/919811703926" target="_blank" class="group inline-flex w-fit items-center gap-2 bg-white hover:bg-teal-50 text-teal-700 font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md transition-all duration-200">
+                <a href="{{ \App\Models\Setting::current()->whatsappUrl() }}" target="_blank" class="group inline-flex w-fit items-center gap-2 bg-white hover:bg-teal-50 text-teal-700 font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md transition-all duration-200">
                     <x-app-icon name="whatsapp" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Chat With Us
                 </a>
             </div>

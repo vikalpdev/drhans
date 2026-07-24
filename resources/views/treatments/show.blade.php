@@ -42,8 +42,8 @@
                             <a href="{{ route('specialists.index') }}" class="group inline-flex items-center gap-1 text-teal-300 hover:text-teal-200 font-heading font-semibold text-sm transition-colors">
                                 Meet Our Specialists <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                             </a>
-                            <a href="tel:+919811703926" class="flex items-center gap-2 text-sm text-navy-100 hover:text-white transition-colors">
-                                <x-app-icon name="phone" class="w-4 h-4 text-teal-300" /> +91-98117 03926
+                            <a href="{{ \App\Models\Setting::current()->phoneUrl() }}" class="flex items-center gap-2 text-sm text-navy-100 hover:text-white transition-colors">
+                                <x-app-icon name="phone" class="w-4 h-4 text-teal-300" /> {{ \App\Models\Setting::current()->phone }}
                             </a>
                         </div>
                     </div>

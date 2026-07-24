@@ -2,6 +2,7 @@
     'title' => 'Need Immediate ENT Assistance?',
     'subtitle' => 'Our team is here to help you. Get expert care, right when you need it.',
 ])
+@php $siteSettings = \App\Models\Setting::current(); @endphp
 
 <section class="relative bg-gradient-to-r from-navy-600 to-navy-700 overflow-hidden">
     <div class="absolute -top-16 -right-16 w-56 h-56 bg-teal-500/20 rounded-full blur-3xl"></div>
@@ -16,10 +17,10 @@
             </div>
         </div>
         <div class="flex flex-wrap justify-center gap-3">
-            <a href="tel:+919811703926" class="group inline-flex items-center gap-2 bg-white hover:bg-mint-50 text-navy-700 font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+            <a href="{{ $siteSettings->phoneUrl() }}" class="group inline-flex items-center gap-2 bg-white hover:bg-mint-50 text-navy-700 font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
                 <x-app-icon name="phone" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Call Now
             </a>
-            <a href="https://wa.me/919811703926" target="_blank" class="group inline-flex items-center gap-2 border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+            <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" class="group inline-flex items-center gap-2 border-2 border-white/50 text-white hover:bg-white/10 hover:border-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
                 <x-app-icon name="whatsapp" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> WhatsApp Us
             </a>
             <a href="{{ route('appointment.create') }}" class="group inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-teal-500/30 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">

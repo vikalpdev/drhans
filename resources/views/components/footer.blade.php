@@ -1,4 +1,14 @@
 @props(['navCentres' => collect(), 'navTreatments' => collect()])
+@php
+    $siteSettings = \App\Models\Setting::current();
+    $socialLinks = collect([
+        'facebook' => $siteSettings->facebook_url,
+        'instagram' => $siteSettings->instagram_url,
+        'youtube' => $siteSettings->youtube_url,
+        'linkedin' => $siteSettings->linkedin_url,
+        'x' => $siteSettings->x_url,
+    ])->filter();
+@endphp
 
 <footer class="bg-navy-600 text-navy-100">
     <div class="mx-auto max-w-7xl px-6 py-14 grid grid-cols-2 lg:grid-cols-6 gap-10">
@@ -9,8 +19,8 @@
             </div>
             <p class="text-sm text-navy-200 max-w-xs mb-4">Delivering advanced ENT, Hearing and Vertigo care with compassion, expertise and world-class technology.</p>
             <div class="flex items-center gap-3">
-                @foreach (['facebook', 'instagram', 'youtube', 'linkedin'] as $social)
-                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-teal-500 flex items-center justify-center transition-colors" aria-label="{{ ucfirst($social) }}">
+                @foreach ($socialLinks as $social => $url)
+                    <a href="{{ $url }}" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-teal-500 flex items-center justify-center transition-colors" aria-label="{{ $social === 'x' ? 'X (Twitter)' : ucfirst($social) }}">
                         <span class="text-xs uppercase">{{ substr($social, 0, 2) }}</span>
                     </a>
                 @endforeach
@@ -81,8 +91,8 @@
             </ul>
             <h3 class="font-heading font-semibold text-white mb-3">Contact Us</h3>
             <ul class="space-y-2 text-sm text-navy-200">
-                <li class="flex items-center gap-2"><x-app-icon name="phone" class="w-4 h-4 shrink-0" /> +91-98117 03926</li>
-                <li class="flex items-center gap-2"><x-app-icon name="mail" class="w-4 h-4 shrink-0" /> info@drhansent.com</li>
+                <li class="flex items-center gap-2"><x-app-icon name="phone" class="w-4 h-4 shrink-0" /> {{ $siteSettings->phone }}</li>
+                <li class="flex items-center gap-2"><x-app-icon name="mail" class="w-4 h-4 shrink-0" /> {{ $siteSettings->email }}</li>
                 <li class="flex items-start gap-2"><x-app-icon name="clock" class="w-4 h-4 shrink-0 mt-0.5" /> Mon - Sat: 9 AM - 7 PM<br>Sunday: 10 AM - 2 PM</li>
             </ul>
         </div>
@@ -92,9 +102,9 @@
         <div class="mx-auto max-w-7xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-navy-300">
             <p>&copy; {{ now()->year }} Dr Hans' Centre for ENT. All Rights Reserved.</p>
             <div class="flex items-center gap-4">
-                <a href="#" class="hover:text-teal-300">Privacy Policy</a>
-                <a href="#" class="hover:text-teal-300">Terms &amp; Conditions</a>
-                <a href="#" class="hover:text-teal-300">Refund Policy</a>
+                <a href="{{ $siteSettings->privacy_policy_url ?: '#' }}" class="hover:text-teal-300">Privacy Policy</a>
+                <a href="{{ $siteSettings->terms_url ?: '#' }}" class="hover:text-teal-300">Terms &amp; Conditions</a>
+                <a href="{{ $siteSettings->refund_policy_url ?: '#' }}" class="hover:text-teal-300">Refund Policy</a>
             </div>
         </div>
     </div>

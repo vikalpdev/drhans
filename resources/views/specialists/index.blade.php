@@ -96,7 +96,7 @@
                 </div>
                 <h3 class="font-heading font-bold text-navy-600 text-xl mb-2">Need help choosing the right specialist?</h3>
                 <p class="text-sm text-navy-500 mb-5">Our care team is here to help you find the right doctor for your condition.</p>
-                <a href="tel:+919811703926" class="group inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-navy-600/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+                <a href="{{ \App\Models\Setting::current()->phoneUrl() }}" class="group inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-navy-600/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
                     <x-app-icon name="phone" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Talk to Our Care Team
                 </a>
             </div>

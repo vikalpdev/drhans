@@ -343,8 +343,9 @@
             <div class="bg-white rounded-2xl border border-navy-100 p-6">
                 <h3 class="font-heading font-bold text-navy-600 mb-2">Need Help?</h3>
                 <p class="text-sm text-navy-500 mb-4">Our care team is happy to assist you.</p>
-                <a href="tel:+919811703926" class="inline-flex w-full items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
-                    <x-app-icon name="phone" class="w-4 h-4" /> +91-98117 03926
+                @php $siteSettings = \App\Models\Setting::current(); @endphp
+                <a href="{{ $siteSettings->phoneUrl() }}" class="inline-flex w-full items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm transition-colors duration-200">
+                    <x-app-icon name="phone" class="w-4 h-4" /> {{ $siteSettings->phone }}
                 </a>
                 <p class="text-xs text-navy-400 mt-3">Timings: Mon - Sat: 9 AM - 7 PM<br>Sunday: 10 AM - 2 PM</p>
             </div>

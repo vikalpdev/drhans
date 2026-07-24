@@ -15,7 +15,7 @@ class HomeController extends Controller
             'page' => \App\Models\Page::where('slug', 'home')->first(),
             'centres' => Centre::orderBy('order')->get(),
             'treatments' => Treatment::orderBy('order')->get(),
-            'specialists' => Specialist::where('type', 'ent_surgeon')->orderBy('order')->get(),
+            'specialists' => Specialist::whereHas('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderBy('order')->get(),
             'founder' => Specialist::where('is_founder', true)->first(),
             'testimonials' => TestimonialVideo::orderBy('order')->get(),
         ]);

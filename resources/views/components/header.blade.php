@@ -1,4 +1,5 @@
 @props(['navCentres' => collect(), 'navTreatments' => collect(), 'navConditionGroups' => collect()])
+@php $siteSettings = \App\Models\Setting::current(); @endphp
 
 <header x-data="{ mobileOpen: false, centresOpen: false, treatmentsOpen: false, conditionsOpen: false }" class="fixed inset-x-0 top-0 z-50">
     {{-- Top bar --}}
@@ -7,11 +8,11 @@
             <div class="flex items-center gap-2">
                 <x-app-icon name="phone" class="w-4 h-4" />
                 <span>Emergency ENT Care</span>
-                <a href="tel:+919811703926" class="font-semibold hover:text-teal-300">+91-9811703926</a>
+                <a href="{{ $siteSettings->phoneUrl() }}" class="font-semibold hover:text-teal-300">{{ $siteSettings->phone }}</a>
             </div>
             <div class="flex items-center gap-6">
                 <span class="flex items-center gap-1"><x-app-icon name="location" class="w-4 h-4" /> Select Location</span>
-                <a href="https://wa.me/919811703926" target="_blank" class="flex items-center gap-1 hover:text-teal-300">
+                <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" class="flex items-center gap-1 hover:text-teal-300">
                     <x-app-icon name="whatsapp" class="w-4 h-4" /> WhatsApp Us
                 </a>
             </div>
@@ -149,8 +150,8 @@
                 <a href="{{ route('appointment.create') }}" class="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 text-white font-semibold px-5 py-3 rounded-full shadow-md shadow-navy-600/20">
                     <x-app-icon name="calendar" class="w-4 h-4" /> Book Appointment
                 </a>
-                <a href="tel:+919811703926" class="mt-2 inline-flex items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 font-semibold px-5 py-3 rounded-full">
-                    <x-app-icon name="phone" class="w-4 h-4" /> +91-98117 03926
+                <a href="{{ $siteSettings->phoneUrl() }}" class="mt-2 inline-flex items-center justify-center gap-2 border-2 border-teal-500 text-teal-700 font-semibold px-5 py-3 rounded-full">
+                    <x-app-icon name="phone" class="w-4 h-4" /> {{ $siteSettings->phone }}
                 </a>
             </nav>
         </div>

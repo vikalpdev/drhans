@@ -24,6 +24,7 @@ Route::get('/conditions-treated', [ConditionController::class, 'index'])->name('
 Route::get('/conditions-treated/{condition:slug}', [ConditionController::class, 'show'])->name('conditions.show');
 
 Route::get('/specialists', [SpecialistController::class, 'index'])->name('specialists.index');
+Route::get('/our-team-of-audiologist', [SpecialistController::class, 'audiologists'])->name('specialists.audiologists');
 Route::get('/specialists/{specialist:slug}', [SpecialistController::class, 'show'])->name('specialists.show');
 
 Route::get('/our-centres', [CentreController::class, 'index'])->name('centres.index');

@@ -39,12 +39,10 @@ class SpecialistResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
-                        Forms\Components\Select::make('type')
-                            ->options([
-                                'ent_surgeon' => 'ENT Surgeon',
-                                'audiologist' => 'Audiologist',
-                                'allied' => 'Allied Specialist',
-                            ])
+                        Forms\Components\Select::make('type_id')
+                            ->label('Type')
+                            ->relationship('type', 'name', fn ($query) => $query->orderBy('order'))
+                            ->preload()
                             ->required(),
                         Forms\Components\TextInput::make('designation')->maxLength(255),
                         Forms\Components\TextInput::make('qualifications')->maxLength(255),
@@ -76,6 +74,10 @@ class SpecialistResource extends Resource
                         Forms\Components\Textarea::make('quote')->columnSpanFull(),
                         Forms\Components\TagsInput::make('expertise')->columnSpanFull(),
                         Forms\Components\TagsInput::make('interests')->columnSpanFull(),
+                        Forms\Components\TagsInput::make('languages')
+                            ->label('Languages Spoken')
+                            ->placeholder('e.g. English, Hindi')
+                            ->columnSpanFull(),
                     ])
                     ->collapsible(),
                 Forms\Components\Section::make('Education & Experience (chairman/founder profile)')
@@ -117,17 +119,15 @@ class SpecialistResource extends Resource
                     ->collection('photo')
                     ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('type')->badge(),
+                Tables\Columns\TextColumn::make('type.name')->badge()->label('Type'),
                 Tables\Columns\TextColumn::make('designation')->searchable(),
                 Tables\Columns\IconColumn::make('is_chairman')->boolean(),
                 Tables\Columns\TextColumn::make('experience_years')->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('type')->options([
-                    'ent_surgeon' => 'ENT Surgeon',
-                    'audiologist' => 'Audiologist',
-                    'allied' => 'Allied Specialist',
-                ]),
+                Tables\Filters\SelectFilter::make('type_id')
+                    ->label('Type')
+                    ->relationship('type', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
