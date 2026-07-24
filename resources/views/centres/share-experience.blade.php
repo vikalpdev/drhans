@@ -1,4 +1,4 @@
-<x-layouts.app title="Share Your Experience">
+<x-layouts.app title="Share Your Experience" description="Share your experience with Dr Hans' Centre for ENT. Your feedback helps us improve care and helps other patients choose the right ENT specialist.">
     <x-hero
         title="Share Your Experience"
         subtitle="Your feedback helps us improve and helps other patients make informed decisions. Choose your centre below to leave a review."

@@ -1,4 +1,4 @@
-<x-layouts.app title="Conditions Treated">
+<x-layouts.app title="Conditions Treated" description="Explore the full range of ENT, hearing and vertigo conditions treated at Dr Hans' Centre for ENT, from sinus disorders to hearing loss and tinnitus.">
     <x-hero
         title="Conditions Treated"
         subtitle="From common ENT problems to complex surgeries, our specialists provide accurate diagnosis and advanced treatment for a wide range of ear, nose, throat, head and neck conditions."

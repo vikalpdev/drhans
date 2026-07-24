@@ -1,4 +1,4 @@
-<x-layouts.app title="Speciality Service">
+<x-layouts.app title="Speciality Service" description="Discover our ENT speciality services including cochlear implants, hearing diagnostics, sinus surgery, vertigo treatment and paediatric ENT care.">
     <x-hero
         title="Comprehensive ENT Care for Every Age"
         subtitle="From advanced diagnostics to world-class treatments and rehabilitation, we offer complete ENT care under one roof."

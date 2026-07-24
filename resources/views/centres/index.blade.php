@@ -1,4 +1,4 @@
-<x-layouts.app title="Our Centres">
+<x-layouts.app title="Our Centres" description="Find a Dr Hans' Centre for ENT location near you. Advanced ENT, hearing and vertigo care across multiple centres with expert specialists and modern facilities.">
     <x-hero
         title="Our Centres"
         subtitle="Advanced ENT care is now closer to you. Visit any of our centres for expert consultation, diagnosis and treatment."

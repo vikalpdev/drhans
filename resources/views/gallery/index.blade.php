@@ -1,4 +1,4 @@
-<x-layouts.app title="Photo Gallery">
+<x-layouts.app title="Photo Gallery" description="Browse photos of Dr Hans' Centre for ENT facilities, equipment and patient care moments across our centres.">
     <x-hero
         title="Photo Gallery"
         subtitle="Moments that reflect our commitment to advanced care, compassion, and healthy lives."

@@ -1,4 +1,4 @@
-<x-layouts.app title="Video Gallery">
+<x-layouts.app title="Video Gallery" description="Watch patient testimonials and stories of recovery from Dr Hans' Centre for ENT patients across our hearing, vertigo and ENT care programs.">
     <x-hero
         title="Video Gallery"
         subtitle="Watch real patient stories, treatment insights and a glimpse into life at Dr Hans' Centre for ENT."

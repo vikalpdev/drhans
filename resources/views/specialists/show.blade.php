@@ -1,4 +1,4 @@
-<x-layouts.app :title="$specialist->name">
+<x-layouts.app :title="$specialist->meta_title ?? $specialist->name" :description="$specialist->meta_description ?? null">
     <section class="relative bg-gradient-to-br from-mint-50 via-mint-50 to-white border-b border-navy-100">
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
