@@ -244,9 +244,9 @@
                         More About Us <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </a>
                     @if ($founder)
-                        <p class="text-xs text-navy-200">
+                        <a href="{{ route('about.chairman') }}" class="text-xs text-navy-200 hover:text-teal-300 transition-colors">
                             <span class="font-heading font-semibold text-white">{{ $founder->name }}</span> &middot; Founder &amp; Chairman
-                        </p>
+                        </a>
                     @endif
                 </div>
             </div>
@@ -273,7 +273,7 @@
                 </div>
                 <div class="text-center mt-5">
                     <a href="{{ route('treatments.index') }}" class="group inline-flex items-center gap-1 text-teal-300 hover:text-teal-200 font-heading font-semibold text-sm transition-colors">
-                        View All Technologies <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        View All <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                     </a>
                 </div>
             </div>
