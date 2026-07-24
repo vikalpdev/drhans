@@ -3,10 +3,6 @@
 <div id="{{ $centre->slug }}" class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 overflow-hidden flex flex-col scroll-mt-32 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
     <div class="relative aspect-[16/9] overflow-hidden">
         <x-media-image :model="$centre" collection="image" conversion="card" :alt="$centre->name" icon="building" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-        <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-navy-900/60 to-transparent"></div>
-        <span class="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-white/95 text-navy-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
-            <x-app-icon name="location" class="w-3 h-3 text-teal-500" /> {{ $centre->city }}
-        </span>
     </div>
     <div class="p-5 flex flex-col flex-1">
         <h3 class="font-heading font-semibold text-navy-600 group-hover:text-teal-600 transition-colors duration-200">{{ $centre->name }}</h3>
