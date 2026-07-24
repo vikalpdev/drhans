@@ -46,7 +46,7 @@
                         <a href="{{ route('appointment.create', ['centre' => $centre->slug]) }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
                             <x-app-icon name="calendar" class="w-4 h-4" /> Book Appointment
                         </a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination={{ $centre->lat }},{{ $centre->lng }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200">
+                        <a href="{{ $centre->directionsUrl() }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200">
                             <x-app-icon name="location" class="w-4 h-4" /> Get Directions
                         </a>
                     </div>

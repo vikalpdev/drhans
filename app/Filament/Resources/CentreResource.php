@@ -62,6 +62,12 @@ class CentreResource extends Resource
                             ->default('Sunday: 10 AM - 2 PM'),
                         Forms\Components\TextInput::make('lat')->numeric(),
                         Forms\Components\TextInput::make('lng')->numeric(),
+                        Forms\Components\TextInput::make('google_maps_url')
+                            ->label('Google Business Profile / Maps Link')
+                            ->helperText('Recommended. Paste this centre\'s Google Business Profile or Maps share link — used for "Get Directions" instead of the Lat/Lng coordinates above when set.')
+                            ->url()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
                         Forms\Components\TagsInput::make('facilities')
                             ->placeholder('Add a facility and press enter')
                             ->columnSpanFull(),

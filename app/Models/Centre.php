@@ -18,7 +18,7 @@ class Centre extends Model implements HasMedia
     protected $fillable = [
         'name', 'slug', 'meta_title', 'meta_description', 'city', 'address', 'phone', 'phone_general_enquiry', 'phone_appointment',
         'practo_url', 'justdial_url', 'virtual_tour_url',
-        'opd_weekday', 'opd_sunday', 'lat', 'lng', 'facilities', 'order', 'is_active',
+        'opd_weekday', 'opd_sunday', 'lat', 'lng', 'google_maps_url', 'facilities', 'order', 'is_active',
     ];
 
     protected $casts = [
@@ -41,6 +41,19 @@ class Centre extends Model implements HasMedia
     public function galleryItems(): HasMany
     {
         return $this->hasMany(GalleryItem::class);
+    }
+
+    public function directionsUrl(): ?string
+    {
+        if ($this->google_maps_url) {
+            return $this->google_maps_url;
+        }
+
+        if ($this->lat && $this->lng) {
+            return "https://www.google.com/maps/dir/?api=1&destination={$this->lat},{$this->lng}";
+        }
+
+        return null;
     }
 
     public function virtualTourEmbedUrl(): ?string
