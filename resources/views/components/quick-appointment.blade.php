@@ -7,6 +7,11 @@
             centre: '', centreLabel: 'Choose a centre',
             specialist: '', specialistLabel: 'Choose a doctor',
             date: '', dateLabel: 'Choose date',
+            specialistCentres: @js($specialists->mapWithKeys(fn ($s) => [$s->slug => $s->centres->pluck('slug')])),
+            availableForCentre(specialistSlug) {
+                if (!this.centre) return true;
+                return (this.specialistCentres[specialistSlug] || []).includes(this.centre);
+            },
             calMonth: new Date().getMonth(),
             calYear: new Date().getFullYear(),
             monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -88,7 +93,7 @@
             >
                 <button type="button" @click="centre=''; centreLabel='Choose a centre'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">Choose a centre</button>
                 @foreach ($centres as $centre)
-                    <button type="button" @click="centre='{{ $centre->slug }}'; centreLabel='{{ $centre->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $centre->name }}</button>
+                    <button type="button" @click="centre='{{ $centre->slug }}'; centreLabel='{{ $centre->name }}'; open=null; if (specialist && !availableForCentre(specialist)) { specialist=''; specialistLabel='Choose a doctor'; }" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $centre->name }}</button>
                 @endforeach
             </div>
         </div>
@@ -115,7 +120,7 @@
             >
                 <button type="button" @click="specialist=''; specialistLabel='Choose a doctor'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">Choose a doctor</button>
                 @foreach ($specialists as $specialist)
-                    <button type="button" @click="specialist='{{ $specialist->slug }}'; specialistLabel='{{ $specialist->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $specialist->name }}</button>
+                    <button type="button" x-show="availableForCentre('{{ $specialist->slug }}')" @click="specialist='{{ $specialist->slug }}'; specialistLabel='{{ $specialist->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $specialist->name }}</button>
                 @endforeach
             </div>
         </div>
