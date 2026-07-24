@@ -17,8 +17,8 @@
     </x-hero>
 
     <section class="relative bg-gradient-to-br from-navy-600 to-navy-700 py-16 overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="text-center mb-10" data-reveal>
@@ -37,8 +37,8 @@
     </section>
 
     <section class="relative bg-mint-50 py-16 overflow-hidden">
-        <div class="absolute -top-20 -left-20 w-72 h-72 bg-teal-200/25 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl"></div>
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-teal-200/25 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">

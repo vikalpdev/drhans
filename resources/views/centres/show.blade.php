@@ -1,7 +1,7 @@
 <x-layouts.app :title="$centre->meta_title ?? $centre->name" :description="$centre->meta_description ?? null">
     <section class="relative bg-gradient-to-br from-mint-50 via-mint-50 to-white border-b border-navy-100 overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6 py-10 lg:py-14">
             <nav class="text-sm text-navy-500 mb-6 flex items-center gap-1">

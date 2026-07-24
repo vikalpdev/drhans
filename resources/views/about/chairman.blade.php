@@ -32,7 +32,7 @@
 
                 <div class="space-y-8">
                     <blockquote class="relative bg-gradient-to-br from-navy-600 to-navy-700 rounded-2xl p-8 text-white italic text-lg overflow-hidden">
-                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl hidden sm:block"></div>
                         <x-app-icon name="quote" class="relative w-10 h-10 text-teal-300 opacity-60 mb-4" />
                         <p class="relative">&ldquo;{{ $chairman->quote }}&rdquo;</p>
                         <footer class="relative mt-4 font-heading font-semibold not-italic text-teal-300 text-base">&mdash; {{ $chairman->name }}</footer>

@@ -186,7 +186,7 @@
 
                 @if (!empty($condition->when_to_see_doctor))
                     <div id="when-to-see-doctor" class="relative rounded-2xl bg-gradient-to-br from-navy-600 to-navy-700 p-6 lg:p-7 overflow-hidden scroll-mt-28">
-                        <div class="absolute -top-12 -right-12 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -top-12 -right-12 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl hidden sm:block"></div>
                         <div class="relative flex gap-5">
                             <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                 <x-app-icon name="heart" class="w-6 h-6 text-teal-300" />

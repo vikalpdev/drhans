@@ -1,8 +1,8 @@
 <x-layouts.app :title="$page->content['meta_title'] ?? 'Home'" :description="$page->content['meta_description'] ?? null">
     {{-- Hero --}}
     <section class="relative bg-gradient-to-b from-mint-50 to-white overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-200/25 rounded-full blur-3xl"></div>
-        <div class="absolute top-40 -left-28 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-200/25 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute top-40 -left-28 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6 pt-10 lg:pt-14 pb-4 lg:pb-6 grid lg:grid-cols-2 gap-10 items-center">
             <div>
@@ -204,8 +204,8 @@
 
     {{-- Why choose us + technology --}}
     <section class="relative bg-gradient-to-br from-navy-600 to-navy-700 py-16 overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-12 items-start">
             <div>
@@ -308,8 +308,8 @@
         @touchstart.passive="stopAutoplay()"
         @touchend.passive="setTimeout(() => startAutoplay(), 800)"
     >
-        <div class="absolute -top-24 -right-24 w-72 h-72 bg-teal-200/30 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-navy-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-teal-200/30 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-navy-200/20 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="flex items-end justify-between mb-6" data-reveal>

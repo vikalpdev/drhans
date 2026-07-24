@@ -1,7 +1,7 @@
 <x-layouts.app title="Page Not Found">
     <section class="relative bg-gradient-to-b from-mint-50 to-white overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-200/25 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-200/25 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-navy-200/15 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-3xl px-6 py-20 lg:py-28 text-center">
             <div class="relative inline-flex items-center justify-center mb-6">

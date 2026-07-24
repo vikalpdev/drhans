@@ -11,8 +11,8 @@
     </x-hero>
 
     <section x-data="{ city: 'all' }" class="relative bg-gradient-to-br from-navy-600 to-navy-700 py-16 overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/15 rounded-full blur-3xl hidden sm:block"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
         <div class="flex flex-nowrap sm:flex-wrap gap-2.5 mb-8 bg-white/10 rounded-2xl p-2 w-full sm:w-fit overflow-x-auto sm:overflow-visible [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
@@ -87,7 +87,7 @@
     </section>
 
     <section class="relative bg-mint-50 py-14 overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             @foreach ([

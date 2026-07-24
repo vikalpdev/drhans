@@ -87,7 +87,7 @@
     </section>
 
     <section class="relative bg-mint-50 py-14 overflow-hidden">
-        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl hidden sm:block"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="text-center mb-8">

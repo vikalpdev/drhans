@@ -5,8 +5,8 @@
 @php $siteSettings = \App\Models\Setting::current(); @endphp
 
 <section class="relative bg-gradient-to-r from-navy-600 to-navy-700 overflow-hidden">
-    <div class="absolute -top-16 -right-16 w-56 h-56 bg-teal-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-20 -left-20 w-56 h-56 bg-teal-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-16 -right-16 w-56 h-56 bg-teal-500/20 rounded-full blur-3xl hidden sm:block"></div>
+    <div class="absolute -bottom-20 -left-20 w-56 h-56 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
 
     <div class="relative mx-auto max-w-7xl px-6 py-8 flex flex-col lg:flex-row items-center justify-between gap-5 text-white">
         <div class="flex items-center gap-4 text-center lg:text-left">

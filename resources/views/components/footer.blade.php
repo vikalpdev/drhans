@@ -15,8 +15,8 @@
 @endphp
 
 <footer class="relative bg-gradient-to-br from-navy-600 to-navy-700 text-navy-100 overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
+    <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl hidden sm:block"></div>
 
     <div class="relative mx-auto max-w-7xl px-6 py-10 lg:py-14 grid grid-cols-1 lg:grid-cols-6 gap-2 lg:gap-10 divide-y divide-white/10 lg:divide-y-0">
         <div class="lg:col-span-2 pb-6 lg:pb-0">
