@@ -52,12 +52,6 @@
                                 <p class="text-[11px] text-navy-500">Awardee</p>
                             </div>
                         @endif
-                        @if ($specialist->centres->count())
-                            <div class="bg-white rounded-xl shadow-sm px-4 py-2.5 text-center">
-                                <p class="font-heading font-bold text-navy-600">{{ $specialist->centres->count() }}</p>
-                                <p class="text-[11px] text-navy-500">{{ Str::plural('Centre', $specialist->centres->count()) }}</p>
-                            </div>
-                        @endif
                         @if ($specialist->reviewsCount())
                             <div class="bg-white rounded-xl shadow-sm px-4 py-2.5 text-center">
                                 <p class="font-heading font-bold text-navy-600 flex items-center justify-center gap-1">
