@@ -60,7 +60,7 @@
     @endif
 
     @if (!empty($treatment->services))
-        <section class="bg-mint-50/60 py-16">
+        <section class="bg-mint-50/60 py-16" x-data="{ openService: 0 }">
             <div class="mx-auto max-w-5xl px-6">
                 <div class="text-center mb-12" data-reveal>
                     <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">What We Offer</p>
@@ -68,16 +68,23 @@
                 </div>
                 <div class="divide-y divide-navy-100 bg-white rounded-2xl border border-navy-100 shadow-sm overflow-hidden">
                     @foreach ($treatment->services as $i => $service)
-                        <div class="group flex flex-col sm:flex-row gap-5 sm:gap-8 p-7 lg:p-8 hover:bg-mint-50/50 transition-colors duration-300" data-reveal style="--reveal-delay: {{ $i * 0.05 }}s">
-                            <div class="flex sm:flex-col items-center sm:items-start gap-3 sm:gap-4 sm:w-16 shrink-0">
-                                <span class="font-heading font-extrabold text-2xl text-mint-200 group-hover:text-teal-200 transition-colors duration-300 select-none">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                                <div class="w-11 h-11 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300 shrink-0">
-                                    <x-app-icon :name="$treatment->icon ?? 'heart'" class="w-5 h-5 text-teal-600 group-hover:text-white transition-colors duration-300" />
+                        <div class="group" data-reveal style="--reveal-delay: {{ $i * 0.05 }}s">
+                            <button
+                                type="button"
+                                @click="openService = (openService === {{ $i }} ? null : {{ $i }})"
+                                class="w-full flex items-center gap-4 sm:gap-5 p-5 sm:p-6 text-left hover:bg-mint-50/50 transition-colors duration-300"
+                            >
+                                <span class="font-heading font-extrabold text-xl sm:text-2xl text-mint-200 group-hover:text-teal-200 transition-colors duration-300 select-none shrink-0">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center transition-colors duration-300 shrink-0" :class="openService === {{ $i }} ? 'bg-teal-500' : 'bg-mint-100'">
+                                    <x-app-icon :name="$treatment->icon ?? 'heart'" class="w-5 h-5 transition-colors duration-300" x-bind:class="openService === {{ $i }} ? 'text-white' : 'text-teal-600'" />
                                 </div>
-                            </div>
-                            <div>
-                                <h3 class="font-heading font-bold text-lg text-navy-600 mb-2">{{ $service['title'] }}</h3>
-                                <div class="text-sm text-navy-500 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">{!! $service['description'] !!}</div>
+                                <h3 class="flex-1 font-heading font-bold text-base sm:text-lg text-navy-600">{{ $service['title'] }}</h3>
+                                <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openService === {{ $i }} ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                    <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openService === {{ $i }} && 'rotate-180'" />
+                                </span>
+                            </button>
+                            <div x-show="openService === {{ $i }}" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                <div class="px-5 sm:px-6 pb-6 text-sm text-navy-500 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">{!! $service['description'] !!}</div>
                             </div>
                         </div>
                     @endforeach
