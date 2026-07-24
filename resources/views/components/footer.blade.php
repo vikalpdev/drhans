@@ -1,4 +1,4 @@
-@props(['navCentres' => collect(), 'navTreatments' => collect()])
+@props(['navCentres' => collect(), 'navTreatments' => collect(), 'navConditionGroups' => collect()])
 @php
     $siteSettings = \App\Models\Setting::current();
     $socialLinks = collect([
@@ -61,19 +61,14 @@
                 <h3 class="font-heading font-semibold text-white">Conditions Treated</h3>
                 <span class="lg:hidden text-lg leading-none text-teal-300 w-5 text-center" x-text="open ? '−' : '+'"></span>
             </button>
+            @php $footerConditions = $navConditionGroups->flatMap(fn ($g) => $g['items']); @endphp
             <ul x-show="open" class="lg:!block lg:!h-auto space-y-2 text-sm text-navy-200 mt-3">
-                @foreach ([
-                    'Head & Neck',
-                    'Children (Paediatric) ENT',
-                    'Tinnitus (Ringing Ears)',
-                    'Dizziness & Vertigo (Neuro-otology)',
-                    'Voice & Throat (Laryngology)',
-                    'Nose & Sinus (Rhinology)',
-                    'Speech Disorders (Speech Problems)',
-                    'Ear (Otology)',
-                ] as $condition)
-                    <li><a href="{{ route('conditions.index') }}" class="hover:text-teal-300 transition-colors">{{ $condition }}</a></li>
+                @foreach ($footerConditions->take(8) as $condition)
+                    <li><a href="{{ route('conditions.show', $condition) }}" class="hover:text-teal-300 transition-colors">{{ $condition->name }}</a></li>
                 @endforeach
+                @if ($footerConditions->count() > 8)
+                    <li><a href="{{ route('conditions.index') }}" class="font-semibold text-teal-300 hover:text-teal-200 transition-colors">View All Conditions</a></li>
+                @endif
             </ul>
         </div>
 
@@ -83,21 +78,12 @@
                 <span class="lg:hidden text-lg leading-none text-teal-300 w-5 text-center" x-text="open ? '−' : '+'"></span>
             </button>
             <ul x-show="open" class="lg:!block lg:!h-auto space-y-2 text-sm text-navy-200 mt-3">
-                @foreach ([
-                    'Cochlear and Hearing Implant',
-                    'Diagnosis & Treatment of Hearing Loss',
-                    'Allergy Diagnosis & Immunotherapy',
-                    'Throat & Larynx Surgery',
-                    'Ear Surgery',
-                    'Ringing Ears',
-                    'Nose & Sinus Surgery',
-                    'Dizziness & Vertigo',
-                    'CBCT Facilities',
-                    'Hyperbaric Oxygen Therapy (HBOT)',
-                    'Children Paediatric Ear, Nose, Throat',
-                ] as $procedure)
-                    <li><a href="{{ route('treatments.index') }}" class="hover:text-teal-300 transition-colors">{{ $procedure }}</a></li>
+                @foreach ($navTreatments->take(8) as $treatment)
+                    <li><a href="{{ route('treatments.show', $treatment) }}" class="hover:text-teal-300 transition-colors">{{ $treatment->name }}</a></li>
                 @endforeach
+                @if ($navTreatments->count() > 8)
+                    <li><a href="{{ route('treatments.index') }}" class="font-semibold text-teal-300 hover:text-teal-200 transition-colors">View All Services</a></li>
+                @endif
             </ul>
         </div>
 
