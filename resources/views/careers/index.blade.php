@@ -42,19 +42,19 @@
             <div class="space-y-4">
                 @forelse ($jobs as $job)
                     <div x-show="dept === 'all' || dept === '{{ $job->department }}'" x-transition.opacity class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl transition-all duration-300 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-300">
-                                <x-app-icon name="briefcase" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
-                            </div>
-                            <div>
-                                <p class="font-heading font-semibold text-navy-600">{{ $job->title }}</p>
-                                <div class="flex flex-wrap gap-1.5 mt-1.5">
-                                    <span class="text-[11px] font-semibold text-teal-700 bg-mint-100 px-2.5 py-0.5 rounded-full">{{ \App\Models\JobOpening::DEPARTMENTS[$job->department] }}</span>
-                                    <span class="text-[11px] font-semibold text-navy-500 bg-navy-50 px-2.5 py-0.5 rounded-full">{{ $job->type }}</span>
-                                    <span class="text-[11px] font-semibold text-navy-500 bg-navy-50 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1"><x-app-icon name="location" class="w-3 h-3" /> {{ $job->location }}</span>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-300">
+                                    <x-app-icon name="briefcase" class="w-5 h-5 sm:w-6 sm:h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
                                 </div>
-                                <p class="text-sm text-navy-500 mt-2 max-w-lg">{{ $job->description }}</p>
+                                <p class="font-heading font-semibold text-navy-600">{{ $job->title }}</p>
                             </div>
+                            <div class="flex flex-wrap gap-1.5 mt-2.5">
+                                <span class="text-[11px] font-semibold text-teal-700 bg-mint-100 px-2.5 py-0.5 rounded-full">{{ \App\Models\JobOpening::DEPARTMENTS[$job->department] }}</span>
+                                <span class="text-[11px] font-semibold text-navy-500 bg-navy-50 px-2.5 py-0.5 rounded-full">{{ $job->type }}</span>
+                                <span class="text-[11px] font-semibold text-navy-500 bg-navy-50 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1"><x-app-icon name="location" class="w-3 h-3" /> {{ $job->location }}</span>
+                            </div>
+                            <p class="text-sm text-navy-500 mt-2 max-w-lg">{{ $job->description }}</p>
                         </div>
                         <a href="{{ $job->apply_email ? 'mailto:'.$job->apply_email.'?subject='.rawurlencode('Application for '.$job->title) : route('contact.index') }}" class="shrink-0 inline-flex w-fit items-center gap-1 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold text-sm px-4 py-2 rounded-full transition-colors duration-200">
                             Apply Now <x-app-icon name="chevron-right" class="w-4 h-4" />
