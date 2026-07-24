@@ -126,10 +126,8 @@ class SpecialistResource extends Resource
                     ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('type.name')->badge()->label('Type'),
-                Tables\Columns\TextColumn::make('designation')->searchable(),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\IconColumn::make('is_chairman')->boolean(),
-                Tables\Columns\TextColumn::make('experience_years')->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type_id')
