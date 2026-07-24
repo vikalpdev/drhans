@@ -52,10 +52,6 @@ class TestimonialVideoResource extends Resource
         return $table
             ->defaultSort('order')
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('thumbnail')
-                    ->collection('thumbnail')
-                    ->conversion('thumb'),
-                Tables\Columns\TextColumn::make('patient_name')->searchable(),
                 Tables\Columns\TextColumn::make('title')->searchable(),
                 Tables\Columns\TextColumn::make('category.name')->badge(),
                 Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
