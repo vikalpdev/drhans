@@ -90,6 +90,66 @@ class PageResource extends Resource
                             ->label('Beliefs Title'),
                     ])
                     ->visible(fn ($record) => $record?->slug === 'chairman'),
+
+                // Careers Page Fields
+                Forms\Components\Section::make('Careers Page Content')
+                    ->schema([
+                        Forms\Components\TextInput::make('content.hero_title')
+                            ->label('Hero Title'),
+                        Forms\Components\Textarea::make('content.hero_subtitle')
+                            ->label('Hero Subtitle')
+                            ->rows(3),
+                        Forms\Components\TagsInput::make('content.hero_stats')
+                            ->label('Hero Highlight Pills')
+                            ->columnSpanFull(),
+
+                        Forms\Components\Repeater::make('content.stats_strip')
+                            ->label('Stats Strip')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat')->required(),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.resume_box_title')
+                            ->label('"No Role for You" Box — Title'),
+                        Forms\Components\Textarea::make('content.resume_box_description')
+                            ->label('"No Role for You" Box — Description')
+                            ->rows(2),
+
+                        Forms\Components\TagsInput::make('content.why_work_with_us')
+                            ->label('Why Work With Us — Bullet Points')
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('content.culture_eyebrow')
+                            ->label('Culture Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.culture_title')
+                            ->label('Culture Section — Title'),
+                        Forms\Components\Repeater::make('content.culture_cards')
+                            ->label('Culture Cards')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name used elsewhere on the site, e.g. shield, award, user-group, heart.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\Textarea::make('description')->rows(2)->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Card')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.cta_title')
+                            ->label('Bottom CTA — Title'),
+                        Forms\Components\Textarea::make('content.cta_subtitle')
+                            ->label('Bottom CTA — Subtitle')
+                            ->rows(2),
+                    ])
+                    ->columns(2)
+                    ->visible(fn ($record) => $record?->slug === 'careers'),
             ]);
     }
 

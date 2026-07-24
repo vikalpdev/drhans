@@ -1,11 +1,11 @@
 <x-layouts.app title="Careers">
     <x-hero
-        title="Build Your Career With Us"
-        subtitle="Join Dr Hans' Centre for ENT and be part of a team that's passionate about delivering exceptional care and making a real difference in people's lives."
+        :title="$page->content['hero_title'] ?? 'Build Your Career With Us'"
+        :subtitle="$page->content['hero_subtitle'] ?? 'Join Dr Hans\' Centre for ENT and be part of a team that\'s passionate about delivering exceptional care and making a real difference in people\'s lives.'"
         :breadcrumbs="['Careers' => null]"
     >
         <x-slot:stats>
-            @foreach (['Patient First Approach', 'Growth & Learning Opportunities', 'Supportive & Inclusive Work Culture'] as $s)
+            @foreach ($page->content['hero_stats'] ?? ['Patient First Approach', 'Growth & Learning Opportunities', 'Supportive & Inclusive Work Culture'] as $s)
                 <span class="flex items-center gap-1.5"><x-app-icon name="check-circle" class="w-4 h-4 text-teal-500" /> {{ $s }}</span>
             @endforeach
         </x-slot:stats>
@@ -13,10 +13,10 @@
 
     <section class="mx-auto max-w-7xl px-6 py-12">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bg-mint-50 rounded-2xl p-6 text-center">
-            @foreach ([['100+', 'Team Members'], ['6', 'Centres Across India'], ['20+', 'Specialities'], ['Endless', 'Opportunities']] as [$stat, $label])
+            @foreach ($page->content['stats_strip'] ?? [['stat' => '100+', 'label' => 'Team Members'], ['stat' => '6', 'label' => 'Centres Across India'], ['stat' => '20+', 'label' => 'Specialities'], ['stat' => 'Endless', 'label' => 'Opportunities']] as $item)
                 <div>
-                    <p class="font-heading font-bold text-xl text-navy-600">{{ $stat }}</p>
-                    <p class="text-xs text-navy-500 mt-1">{{ $label }}</p>
+                    <p class="font-heading font-bold text-xl text-navy-600">{{ $item['stat'] }}</p>
+                    <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>
                 </div>
             @endforeach
         </div>
@@ -51,7 +51,7 @@
                                 <p class="text-sm text-navy-500 mt-2 max-w-lg">{{ $job->description }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('contact.index') }}" class="shrink-0 inline-flex w-fit items-center gap-1 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold text-sm px-4 py-2 rounded-full transition-colors duration-200">
+                        <a href="{{ $job->apply_email ? 'mailto:'.$job->apply_email.'?subject='.rawurlencode('Application for '.$job->title) : route('contact.index') }}" class="shrink-0 inline-flex w-fit items-center gap-1 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold text-sm px-4 py-2 rounded-full transition-colors duration-200">
                             Apply Now <x-app-icon name="chevron-right" class="w-4 h-4" />
                         </a>
                     </div>
@@ -64,8 +64,8 @@
         <aside class="space-y-6">
             <div class="bg-gradient-to-br from-navy-600 to-navy-700 rounded-2xl p-6 text-white">
                 <x-app-icon name="mail" class="w-8 h-8 text-teal-300 mb-3" />
-                <h3 class="font-heading font-bold mb-2">Don't See a Role for You?</h3>
-                <p class="text-sm text-navy-200 mb-4">We're always looking for talented individuals. Share your resume with us.</p>
+                <h3 class="font-heading font-bold mb-2">{{ $page->content['resume_box_title'] ?? "Don't See a Role for You?" }}</h3>
+                <p class="text-sm text-navy-200 mb-4">{{ $page->content['resume_box_description'] ?? "We're always looking for talented individuals. Share your resume with us." }}</p>
                 <a href="{{ route('contact.index') }}" class="inline-flex w-full items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-heading font-semibold px-4 py-2.5 rounded-full text-sm shadow-md shadow-teal-500/20 hover:shadow-lg transition-all duration-200">
                     <x-app-icon name="mail" class="w-4 h-4" /> Send Your Resume
                 </a>
@@ -73,7 +73,7 @@
             <div class="bg-white rounded-2xl border border-navy-100 p-6">
                 <h3 class="font-heading font-bold text-navy-600 mb-3">Why Work With Us?</h3>
                 <ul class="space-y-2">
-                    @foreach (['Meaningful work that impacts lives', 'Continuous learning & development', 'Modern facilities & technology', 'Collaborative & friendly environment', 'Work-life balance'] as $item)
+                    @foreach ($page->content['why_work_with_us'] ?? ['Meaningful work that impacts lives', 'Continuous learning & development', 'Modern facilities & technology', 'Collaborative & friendly environment', 'Work-life balance'] as $item)
                         <li class="flex items-center gap-2 text-sm text-navy-600"><x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $item }}</li>
                     @endforeach
                 </ul>
@@ -86,22 +86,22 @@
 
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="text-center mb-8">
-                <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">Life at Dr Hans'</p>
-                <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-3">Our Culture. Our Commitment.</h2>
+                <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">{{ $page->content['culture_eyebrow'] ?? "Life at Dr Hans'" }}</p>
+                <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-3">{{ $page->content['culture_title'] ?? 'Our Culture. Our Commitment.' }}</h2>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-center">
-                @foreach ([
-                    ['shield', 'Integrity & Respect', 'We treat every patient and team member with honesty and respect.'],
-                    ['award', 'Excellence', 'We strive for excellence in everything we do.'],
-                    ['user-group', 'Teamwork', 'We believe great outcomes come from working together.'],
-                    ['heart', 'Empathy', 'We care deeply for our patients and each other.'],
-                ] as [$icon, $title, $desc])
+                @foreach ($page->content['culture_cards'] ?? [
+                    ['icon' => 'shield', 'title' => 'Integrity & Respect', 'description' => 'We treat every patient and team member with honesty and respect.'],
+                    ['icon' => 'award', 'title' => 'Excellence', 'description' => 'We strive for excellence in everything we do.'],
+                    ['icon' => 'user-group', 'title' => 'Teamwork', 'description' => 'We believe great outcomes come from working together.'],
+                    ['icon' => 'heart', 'title' => 'Empathy', 'description' => 'We care deeply for our patients and each other.'],
+                ] as $card)
                     <div class="group bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center mx-auto mb-3 transition-colors duration-300">
-                            <x-app-icon :name="$icon" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
+                            <x-app-icon :name="$card['icon']" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
                         </div>
-                        <p class="font-heading font-semibold text-navy-600 text-sm">{{ $title }}</p>
-                        <p class="text-xs text-navy-500 mt-1.5">{{ $desc }}</p>
+                        <p class="font-heading font-semibold text-navy-600 text-sm">{{ $card['title'] }}</p>
+                        <p class="text-xs text-navy-500 mt-1.5">{{ $card['description'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -109,7 +109,7 @@
     </section>
 
     <x-cta-banner
-        title="Ready to make a difference?"
-        subtitle="Join a team that helps people hear better and live better, every day."
+        :title="$page->content['cta_title'] ?? 'Ready to make a difference?'"
+        :subtitle="$page->content['cta_subtitle'] ?? 'Join a team that helps people hear better and live better, every day.'"
     />
 </x-layouts.app>

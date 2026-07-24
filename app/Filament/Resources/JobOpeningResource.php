@@ -30,6 +30,12 @@ class JobOpeningResource extends Resource
                 Forms\Components\TextInput::make('location')->required()->maxLength(255),
                 Forms\Components\Toggle::make('is_active')->default(true),
                 Forms\Components\Textarea::make('description')->required()->columnSpanFull(),
+                Forms\Components\TextInput::make('apply_email')
+                    ->label('Apply Now email')
+                    ->helperText('Applicants will be directed to email this address. Leave blank to use the general contact page.')
+                    ->email()
+                    ->maxLength(255)
+                    ->columnSpanFull(),
             ]);
     }
 

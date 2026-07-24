@@ -41,9 +41,42 @@ class PageSeeder extends Seeder
             'content' => [
                 'hero_title' => 'From the Chairman\'s Desk',
                 'hero_subtitle' => 'For over three decades, my mission has been simple yet profound - to restore the gift of hearing, balance and communication, and to bring hope back to the lives of thousands of patients and their families.',
-                
+
                 'journey_title' => 'A Journey of Purpose',
                 'beliefs_title' => 'My Beliefs',
+            ]
+        ]);
+
+        Page::updateOrCreate(['slug' => 'careers'], [
+            'name' => 'Careers',
+            'content' => [
+                'hero_title' => 'Build Your Career With Us',
+                'hero_subtitle' => "Join Dr Hans' Centre for ENT and be part of a team that's passionate about delivering exceptional care and making a real difference in people's lives.",
+                'hero_stats' => ['Patient First Approach', 'Growth & Learning Opportunities', 'Supportive & Inclusive Work Culture'],
+
+                'stats_strip' => [
+                    ['stat' => '100+', 'label' => 'Team Members'],
+                    ['stat' => '6', 'label' => 'Centres Across India'],
+                    ['stat' => '20+', 'label' => 'Specialities'],
+                    ['stat' => 'Endless', 'label' => 'Opportunities'],
+                ],
+
+                'resume_box_title' => "Don't See a Role for You?",
+                'resume_box_description' => "We're always looking for talented individuals. Share your resume with us.",
+
+                'why_work_with_us' => ['Meaningful work that impacts lives', 'Continuous learning & development', 'Modern facilities & technology', 'Collaborative & friendly environment', 'Work-life balance'],
+
+                'culture_eyebrow' => "Life at Dr Hans'",
+                'culture_title' => 'Our Culture. Our Commitment.',
+                'culture_cards' => [
+                    ['icon' => 'shield', 'title' => 'Integrity & Respect', 'description' => 'We treat every patient and team member with honesty and respect.'],
+                    ['icon' => 'award', 'title' => 'Excellence', 'description' => 'We strive for excellence in everything we do.'],
+                    ['icon' => 'user-group', 'title' => 'Teamwork', 'description' => 'We believe great outcomes come from working together.'],
+                    ['icon' => 'heart', 'title' => 'Empathy', 'description' => 'We care deeply for our patients and each other.'],
+                ],
+
+                'cta_title' => 'Ready to make a difference?',
+                'cta_subtitle' => 'Join a team that helps people hear better and live better, every day.',
             ]
         ]);
     }

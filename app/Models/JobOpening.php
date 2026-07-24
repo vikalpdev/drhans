@@ -11,7 +11,7 @@ class JobOpening extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'department', 'type', 'location', 'description', 'is_active',
+        'title', 'department', 'type', 'location', 'description', 'apply_email', 'is_active',
     ];
 
     protected $casts = [
