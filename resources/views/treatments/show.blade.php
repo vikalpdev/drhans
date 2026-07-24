@@ -135,10 +135,14 @@
                 </div>
             </div>
             <div class="bg-gradient-to-br from-navy-600 to-navy-700 rounded-2xl p-7 text-white flex flex-col justify-between">
-                <div>
-                    <x-app-icon name="calendar" class="w-8 h-8 text-teal-300 mb-3" />
-                    <h3 class="font-heading font-bold">Not sure if you need this treatment?</h3>
-                    <p class="text-sm text-navy-300 mt-2">Book an evaluation with our experts.</p>
+                <div class="flex items-start gap-4">
+                    <div class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                        <x-app-icon name="calendar" class="w-5 h-5 text-teal-300" />
+                    </div>
+                    <div>
+                        <h3 class="font-heading font-bold">Not sure if you need this treatment?</h3>
+                        <p class="text-sm text-navy-300 mt-1">Book an evaluation with our experts.</p>
+                    </div>
                 </div>
                 <a href="{{ route('appointment.create') }}" class="mt-5 inline-flex w-fit items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-teal-500/20 hover:shadow-lg transition-all duration-200">
                     Book Evaluation <x-app-icon name="arrow-right" class="w-4 h-4" />
