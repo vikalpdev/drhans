@@ -26,6 +26,11 @@
                 name: '{{ old('name') }}', phone: '{{ old('phone') }}', email: '{{ old('email') }}',
                 centresMap: @js($centres->pluck('name', 'id')),
                 specialistsMap: @js($specialists->pluck('name', 'id')),
+                specialistCentres: @js($specialists->mapWithKeys(fn ($s) => [(string) $s->id => $s->centres->pluck('id')])),
+                availableForCentre(specialistId) {
+                    if (!this.centre_id) return true;
+                    return (this.specialistCentres[specialistId] || []).includes(Number(this.centre_id));
+                },
                 calMonth: {{ $selectedDate ? (int) date('n', strtotime($selectedDate)) - 1 : now()->month - 1 }},
                 calYear: {{ $selectedDate ? (int) date('Y', strtotime($selectedDate)) : now()->year }},
                 monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -197,7 +202,7 @@
                             >
                                 <button type="button" @click="centre_id=''; centreLabel='Choose your preferred centre'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Choose your preferred centre</button>
                                 @foreach ($centres as $centre)
-                                    <button type="button" @click="centre_id='{{ $centre->id }}'; centreLabel='{{ $centre->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $centre->name }}</button>
+                                    <button type="button" @click="centre_id='{{ $centre->id }}'; centreLabel='{{ $centre->name }}'; open=null; if (specialist_id && !availableForCentre(specialist_id)) { specialist_id=''; specialistLabel='Any Available Doctor'; }" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $centre->name }}</button>
                                 @endforeach
                             </div>
                         </div>
@@ -246,7 +251,7 @@
                             >
                                 <button type="button" @click="specialist_id=''; specialistLabel='Any Available Doctor'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Any Available Doctor</button>
                                 @foreach ($specialists as $specialist)
-                                    <button type="button" @click="specialist_id='{{ $specialist->id }}'; specialistLabel='{{ $specialist->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $specialist->name }}</button>
+                                    <button type="button" x-show="availableForCentre('{{ $specialist->id }}')" @click="specialist_id='{{ $specialist->id }}'; specialistLabel='{{ $specialist->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $specialist->name }}</button>
                                 @endforeach
                             </div>
                         </div>
