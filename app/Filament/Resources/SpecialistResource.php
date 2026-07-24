@@ -36,7 +36,8 @@ class SpecialistResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                            ->dehydrateStateUsing(fn (?string $state) => trim($state)),
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->maxLength(255)

@@ -1,6 +1,6 @@
 @php
     $chatbotCentres = \App\Models\Centre::where('is_active', true)->orderBy('order')->get();
-    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->orderBy('name')->get();
+    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->orderByRaw('TRIM(name)')->get();
     $chatbotDepartments = ['ENT', 'Hearing Care', 'Vertigo'];
 @endphp
 

@@ -14,8 +14,8 @@ class SpecialistController extends Controller
         return view('specialists.index', [
             'page' => Page::where('slug', 'specialists')->first(),
             'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
-            'surgeons' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderBy('name')->get(),
-            'allied' => Specialist::where('is_active', true)->whereDoesntHave('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderBy('name')->get(),
+            'surgeons' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderByRaw('TRIM(name)')->get(),
+            'allied' => Specialist::where('is_active', true)->whereDoesntHave('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderByRaw('TRIM(name)')->get(),
         ]);
     }
 
@@ -23,7 +23,7 @@ class SpecialistController extends Controller
     {
         return view('specialists.audiologists', [
             'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
-            'audiologists' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'audiologist'))->orderBy('name')->get(),
+            'audiologists' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'audiologist'))->orderByRaw('TRIM(name)')->get(),
         ]);
     }
 

@@ -20,7 +20,7 @@ class CentreController extends Controller
 
         return view('centres.show', [
             'centre' => $centre->load(['galleryItems' => fn ($q) => $q->where('is_active', true)]),
-            'specialists' => $centre->specialists()->where('is_active', true)->orderBy('name')->get(),
+            'specialists' => $centre->specialists()->where('is_active', true)->orderByRaw('TRIM(name)')->get(),
         ]);
     }
 
