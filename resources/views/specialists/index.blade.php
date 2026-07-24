@@ -26,7 +26,7 @@
     </x-hero>
 
     <section x-data="{ centre: 'all' }" class="mx-auto max-w-7xl px-6 py-16">
-        <div class="flex flex-wrap gap-2.5 mb-10 bg-mint-50 border border-navy-100 rounded-full p-2">
+        <div class="flex flex-wrap gap-2.5 mb-10 bg-mint-50 border border-navy-100 rounded-2xl p-2">
             <button
                 @click="centre = 'all'"
                 :class="centre === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"

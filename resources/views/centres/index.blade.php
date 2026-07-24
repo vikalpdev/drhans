@@ -15,7 +15,7 @@
         <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
-        <div class="flex flex-wrap gap-2.5 mb-8 bg-white/10 rounded-full p-2 w-fit">
+        <div class="flex flex-wrap gap-2.5 mb-8 bg-white/10 rounded-2xl p-2 w-fit">
             <button
                 @click="city = 'all'"
                 :class="city === 'all' ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-md shadow-teal-500/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
@@ -55,14 +55,14 @@
                             <x-app-icon name="phone" class="w-3.5 h-3.5 shrink-0" /> {{ $centre->phone }}
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-3 mt-4">
-                        <a href="{{ route('appointment.create', ['centre' => $centre->slug]) }}" class="inline-flex w-fit items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 mt-4">
+                        <a href="{{ route('appointment.create', ['centre' => $centre->slug]) }}" class="inline-flex w-full sm:w-fit items-center justify-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
                             <x-app-icon name="calendar" class="w-4 h-4" /> Book Appointment
                         </a>
-                        <a href="{{ $centre->directionsUrl() }}" target="_blank" rel="noopener" class="inline-flex w-fit items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200">
+                        <a href="{{ $centre->directionsUrl() }}" target="_blank" rel="noopener" class="inline-flex w-full sm:w-fit items-center justify-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200">
                             <x-app-icon name="location" class="w-4 h-4" /> Get Directions
                         </a>
-                        <a href="{{ route('centres.show', $centre) }}" class="group/link inline-flex w-fit items-center gap-1 text-teal-600 hover:text-teal-700 font-heading font-semibold text-sm px-2 py-2.5">
+                        <a href="{{ route('centres.show', $centre) }}" class="group/link inline-flex w-full sm:w-fit items-center justify-center sm:justify-start gap-1 text-teal-600 hover:text-teal-700 font-heading font-semibold text-sm px-2 py-2.5">
                             View Details <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
                         </a>
                     </div>
