@@ -19,12 +19,19 @@
     @if ($treatment->details)
         <section class="mx-auto max-w-7xl px-6 py-16">
             <div class="grid lg:grid-cols-[1fr_320px] gap-8">
-                <div class="bg-white rounded-2xl border border-navy-100 p-8">
+                <div class="bg-white rounded-2xl border border-navy-100 p-8" x-data="{ expanded: false }">
                     <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">About the Treatment</p>
                     <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-2 mb-5">Understanding {{ $treatment->name }}</h2>
-                    <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">
-                        {!! $treatment->details !!}
+                    <div class="relative lg:max-h-none lg:overflow-visible" :class="expanded ? '' : 'max-h-96 overflow-hidden'">
+                        <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">
+                            {!! $treatment->details !!}
+                        </div>
+                        <div x-show="!expanded" class="lg:hidden absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                     </div>
+                    <button type="button" @click="expanded = !expanded" class="lg:hidden mt-4 inline-flex items-center gap-1.5 text-teal-600 hover:text-teal-700 font-heading font-semibold text-sm">
+                        <span x-text="expanded ? 'Show Less' : 'Read More'"></span>
+                        <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="expanded && 'rotate-180'" />
+                    </button>
                 </div>
 
                 <aside>
