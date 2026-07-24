@@ -35,7 +35,7 @@
         x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0 translate-y-4"
-        class="fixed bottom-5 right-5 z-40 flex flex-row sm:flex-col gap-2.5"
+        class="fixed bottom-5 left-5 sm:left-auto sm:right-5 z-40 flex flex-row sm:flex-col gap-2.5"
     >
         @php $siteSettings = \App\Models\Setting::current(); @endphp
         <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="w-12 h-12 rounded-full bg-[#25D366] shadow-lg shadow-black/15 flex items-center justify-center text-white hover:scale-110 active:scale-95 transition-transform duration-200">
