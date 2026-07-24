@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('specialists.index') }}" class="hover:text-teal-500 {{ request()->routeIs('specialists.*') ? 'text-teal-500' : '' }}">Specialists</a>
+                <a href="{{ route('specialists.index') }}" class="hover:text-teal-500 {{ request()->routeIs('specialists.index', 'specialists.show') ? 'text-teal-500' : '' }}">Specialists</a>
 
                 <div class="relative" @mouseenter="conditionsOpen = true" @mouseleave="conditionsOpen = false">
                     <button class="flex items-center gap-1 hover:text-teal-500 {{ request()->routeIs('conditions.*') ? 'text-teal-500' : '' }}">Conditions Treated <x-app-icon name="chevron-down" class="w-3.5 h-3.5" /></button>
