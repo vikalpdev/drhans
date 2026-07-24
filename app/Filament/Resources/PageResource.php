@@ -34,6 +34,18 @@ class PageResource extends Resource
                             ->disabled(),
                     ])->columns(2),
 
+                Forms\Components\Section::make('SEO')
+                    ->schema([
+                        Forms\Components\TextInput::make('content.meta_title')
+                            ->label('Meta Title')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('content.meta_description')
+                            ->label('Meta Description')
+                            ->maxLength(255),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
+
                 // Home Page Fields
                 Forms\Components\Section::make('Home Page Content')
                     ->schema([

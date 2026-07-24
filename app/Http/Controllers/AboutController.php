@@ -10,7 +10,7 @@ class AboutController extends Controller
     {
         return view('about.index', [
             'page' => \App\Models\Page::where('slug', 'about')->first(),
-            'founder' => Specialist::where('is_founder', true)->first(),
+            'founder' => Specialist::where('is_founder', true)->where('is_active', true)->first(),
         ]);
     }
 
@@ -18,7 +18,7 @@ class AboutController extends Controller
     {
         return view('about.chairman', [
             'page' => \App\Models\Page::where('slug', 'chairman')->first(),
-            'chairman' => Specialist::where('is_chairman', true)->first(),
+            'chairman' => Specialist::where('is_chairman', true)->where('is_active', true)->first(),
         ]);
     }
 }

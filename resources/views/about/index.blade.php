@@ -1,4 +1,4 @@
-<x-layouts.app title="About Us">
+<x-layouts.app :title="$page->content['meta_title'] ?? 'About Us'" :description="$page->content['meta_description'] ?? null">
     <x-hero
         :title="$page->content['hero_title'] ?? 'Dr Hans\' Centre for ENT'"
         :subtitle="$page->content['hero_subtitle'] ?? 'A legacy of trust. A commitment to excellence. Dr Hans\' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, a pioneer in Cochlear Implant Surgery with 35+ years of experience and 3500+ successful procedures.'"

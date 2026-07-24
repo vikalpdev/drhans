@@ -1,4 +1,4 @@
-<x-layouts.app title="Contact Us">
+<x-layouts.app :title="$page->content['meta_title'] ?? 'Contact Us'" :description="$page->content['meta_description'] ?? null">
     <x-hero
         :title="$page->content['hero_title'] ?? 'Contact Us'"
         :subtitle="$page->content['hero_subtitle'] ?? 'We\'re here to help you with all your ENT, Hearing and Vertigo care needs. Reach out to us or visit our nearest centre.'"

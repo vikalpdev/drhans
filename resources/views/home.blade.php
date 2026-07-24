@@ -1,4 +1,4 @@
-<x-layouts.app title="Home">
+<x-layouts.app :title="$page->content['meta_title'] ?? 'Home'" :description="$page->content['meta_description'] ?? null">
     {{-- Hero --}}
     <section class="relative bg-gradient-to-b from-mint-50 to-white overflow-hidden">
         <div class="absolute -top-24 -right-24 w-80 h-80 bg-teal-200/25 rounded-full blur-3xl"></div>

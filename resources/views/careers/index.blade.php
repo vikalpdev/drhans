@@ -1,4 +1,4 @@
-<x-layouts.app title="Careers">
+<x-layouts.app :title="$page->content['meta_title'] ?? 'Careers'" :description="$page->content['meta_description'] ?? null">
     <x-hero
         :title="$page->content['hero_title'] ?? 'Build Your Career With Us'"
         :subtitle="$page->content['hero_subtitle'] ?? 'Join Dr Hans\' Centre for ENT and be part of a team that\'s passionate about delivering exceptional care and making a real difference in people\'s lives.'"
