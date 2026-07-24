@@ -1,4 +1,4 @@
-<x-layouts.app title="Book an Appointment">
+<x-layouts.app title="Book an Appointment" description="Book your ENT, hearing or vertigo consultation at Dr Hans' Centre for ENT. Choose your preferred centre, doctor and time slot in a few quick steps.">
     <x-hero
         title="Book an Appointment"
         subtitle="Schedule your visit with our ENT specialists. Select your preferred centre, doctor and time. We're here to help you hear better, breathe better and live better."
@@ -203,30 +203,6 @@
                                 <button type="button" @click="centre_id=''; centreLabel='Choose your preferred centre'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Choose your preferred centre</button>
                                 @foreach ($centres as $centre)
                                     <button type="button" @click="centre_id='{{ $centre->id }}'; centreLabel='{{ $centre->name }}'; open=null; if (specialist_id && !availableForCentre(specialist_id)) { specialist_id=''; specialistLabel='Any Available Doctor'; }" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $centre->name }}</button>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-xs font-medium text-navy-500 mb-1.5 block">Select Department</label>
-                        <div class="relative">
-                            <button
-                                type="button"
-                                @click="open = (open === 'department' ? null : 'department')"
-                                class="w-full flex items-center gap-3 rounded-xl border bg-white pl-4 pr-3.5 py-2.5 text-left transition-colors duration-200"
-                                :class="open === 'department' ? 'border-teal-500 ring-1 ring-teal-500' : 'border-navy-100 hover:border-teal-300'"
-                            >
-                                <x-app-icon name="cog" class="w-4 h-4 text-navy-400 shrink-0" />
-                                <span class="flex-1 text-sm text-navy-600 truncate" x-text="department"></span>
-                                <x-app-icon name="chevron-down" class="w-4 h-4 text-navy-400 shrink-0 transition-transform duration-150" x-bind:class="open === 'department' && 'rotate-180'" />
-                            </button>
-                            <div
-                                x-show="open === 'department'" x-cloak
-                                x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
-                                class="absolute z-20 mt-2 w-full bg-white rounded-xl shadow-xl border border-navy-100 py-2"
-                            >
-                                @foreach (['ENT', 'Hearing Care', 'Vertigo'] as $dept)
-                                    <button type="button" @click="department='{{ $dept }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $dept }}</button>
                                 @endforeach
                             </div>
                         </div>
