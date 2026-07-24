@@ -1,5 +1,5 @@
 <x-layouts.app :title="$specialist->name">
-    <section class="relative bg-gradient-to-br from-mint-50 via-mint-50 to-white border-b border-navy-100 overflow-hidden">
+    <section class="relative bg-gradient-to-br from-mint-50 via-mint-50 to-white border-b border-navy-100">
         <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl"></div>
 
