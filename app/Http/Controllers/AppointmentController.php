@@ -28,9 +28,20 @@ class AppointmentController extends Controller
 
     public function store(StoreAppointmentRequest $request)
     {
-        $appointment = Appointment::create($request->safe()->except('website'));
+        $data = $request->safe()->except('website');
 
-        Mail::to(config('mail.admin_address'))->send(new AppointmentReceivedMail($appointment));
+        $isDuplicate = Appointment::where('phone', $data['phone'])
+            ->where('created_at', '>=', now()->subHours(6))
+            ->exists();
+
+        $appointment = Appointment::create([
+            ...$data,
+            'status' => $isDuplicate ? 'junk' : 'new',
+        ]);
+
+        if (! $isDuplicate) {
+            Mail::to(config('mail.admin_address'))->send(new AppointmentReceivedMail($appointment));
+        }
 
         return back()->with('success', "Thank you! Your appointment request has been received. Our team will confirm shortly.");
     }

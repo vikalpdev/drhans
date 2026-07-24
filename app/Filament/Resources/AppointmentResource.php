@@ -30,7 +30,7 @@ class AppointmentResource extends Resource
                 Forms\Components\Select::make('specialist_id')->relationship('specialist', 'name'),
                 Forms\Components\DatePicker::make('preferred_date'),
                 Forms\Components\Select::make('status')
-                    ->options(['new' => 'New', 'confirmed' => 'Confirmed', 'cancelled' => 'Cancelled'])
+                    ->options(['new' => 'New', 'confirmed' => 'Confirmed', 'cancelled' => 'Cancelled', 'junk' => 'Junk'])
                     ->required()
                     ->default('new'),
             ]);
@@ -50,12 +50,13 @@ class AppointmentResource extends Resource
                     'new' => 'warning',
                     'confirmed' => 'success',
                     'cancelled' => 'danger',
+                    'junk' => 'gray',
                 }),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')->options([
-                    'new' => 'New', 'confirmed' => 'Confirmed', 'cancelled' => 'Cancelled',
+                    'new' => 'New', 'confirmed' => 'Confirmed', 'cancelled' => 'Cancelled', 'junk' => 'Junk',
                 ]),
             ])
             ->actions([

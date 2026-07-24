@@ -133,7 +133,7 @@
         },
     }"
     x-init="if (localStorage.getItem('chatbotDismissed') !== '1') { setTimeout(() => { open = true; scrollDown(); }, 1500); }"
-    class="fixed bottom-5 right-5 z-50"
+    class="fixed bottom-[136px] right-5 z-50"
 >
     {{-- Toggle button --}}
     <button
