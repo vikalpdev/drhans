@@ -1,7 +1,9 @@
 <x-layouts.app :title="$specialist->name">
     <section class="relative bg-gradient-to-br from-mint-50 via-mint-50 to-white border-b border-navy-100">
-        <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl"></div>
+        </div>
 
         <div class="relative mx-auto max-w-7xl px-6 py-10 lg:py-14">
             <nav class="text-sm text-navy-500 mb-6 flex items-center gap-1">
@@ -91,7 +93,7 @@
                 <div class="bg-white rounded-2xl border border-navy-100 p-8">
                     <p class="text-teal-700 font-semibold text-xs tracking-widest uppercase mb-2">About {{ $specialist->is_chairman ? 'the Chairman' : 'the Doctor' }}</p>
                     <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Meet {{ $specialist->name }}</h2>
-                    <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                    <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:text-sm [&_li]:text-navy-600 [&_li]:leading-relaxed [&_strong]:font-semibold">
                         {!! $specialist->bio !!}
                     </div>
                 </div>
