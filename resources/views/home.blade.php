@@ -39,17 +39,17 @@
                     @elseif ($hasFounderPhoto)
                         <x-media-image :model="$founder" collection="photo" conversion="hero" alt="ENT consultation" eager class="w-full h-full object-cover" />
                     @else
-                        <div class="relative w-full h-full bg-gradient-to-br from-navy-600 to-teal-600 flex flex-col items-center justify-center gap-5 p-8">
+                        <div class="relative w-full h-full bg-gradient-to-br from-navy-500 to-teal-600 flex flex-col items-center justify-center gap-5 p-8">
                             <div class="absolute inset-0 opacity-20">
                                 <div class="absolute -top-10 -left-10 w-48 h-48 rounded-full border-[20px] border-white/40"></div>
                                 <div class="absolute -bottom-14 -right-14 w-64 h-64 rounded-full border-[24px] border-white/30"></div>
                             </div>
                             <div class="relative w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center">
-                                <x-app-icon name="ear" class="w-10 h-10 text-teal-500" />
+                                <x-app-icon name="building" class="w-10 h-10 text-teal-500" />
                             </div>
                             <div class="relative text-center">
-                                <p class="font-heading font-bold text-white text-xl">Dr Hans' Centre for ENT</p>
-                                <p class="text-teal-100 text-sm mt-1">One Centre, Complete ENT Care.</p>
+                                <p class="font-heading font-bold text-white text-xl">A Legacy of Trust Since Day One</p>
+                                <p class="text-teal-100 text-sm mt-1">ENT, Hearing &amp; Vertigo care under one roof.</p>
                             </div>
                             <div class="relative flex gap-3">
                                 @foreach (['ear', 'wind', 'voice', 'vertigo'] as $icon)
