@@ -69,7 +69,7 @@
                     @foreach ($page->content['milestones'] ?? [
                         ['icon' => 'award', 'title' => 'Padma Shri Awardee', 'description' => 'Honoured by the Government of India for outstanding contribution to medicine.'],
                         ['icon' => 'ear-implant', 'title' => 'Pioneer in Cochlear Implant Surgery', 'description' => 'Performed 3500+ successful cochlear implant procedures.'],
-                        ['icon' => 'clock', 'title' => $chairman->experience_years . '+ Years of Experience', 'description' => 'Dedicated to clinical excellence, research and innovation.'],
+                        ['icon' => 'clock', 'title' => 'Decades of Clinical Experience', 'description' => 'Dedicated to clinical excellence, research and innovation.'],
                         ['icon' => 'user-group', 'title' => 'Global Recognition', 'description' => 'Author of numerous research papers and invited faculty at national & international conferences.'],
                     ] as $milestone)
                         <div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 text-center">

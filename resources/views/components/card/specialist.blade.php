@@ -24,11 +24,6 @@
         @endif
         <div class="flex flex-wrap items-center gap-1.5 mt-2.5">
             <span class="inline-flex w-fit items-center text-[11px] font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $specialist->designation }}</span>
-            @if ($specialist->experience_years)
-                <span class="inline-flex w-fit items-center gap-1 text-[11px] font-semibold text-navy-500 bg-navy-50 px-2.5 py-1 rounded-full">
-                    <x-app-icon name="clock" class="w-3 h-3 text-teal-500 shrink-0" /> {{ $specialist->experience_years }}+ Yrs
-                </span>
-            @endif
         </div>
         <div class="mt-auto pt-4">
             <a href="{{ route('specialists.show', $specialist) }}" class="w-full inline-flex items-center justify-center border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold text-sm px-4 py-2 rounded-full transition-colors duration-200">

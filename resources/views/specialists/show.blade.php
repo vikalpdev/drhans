@@ -33,13 +33,13 @@
                         </span>
                     @endif
 
+                    @if (!empty($specialist->languages))
+                        <p class="text-xs text-navy-500 mt-3 flex items-center gap-1.5">
+                            <x-app-icon name="chat" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ implode(', ', $specialist->languages) }}
+                        </p>
+                    @endif
+
                     <div class="flex flex-wrap gap-3 mt-6">
-                        @if ($specialist->experience_years)
-                            <div class="bg-white rounded-xl shadow-sm px-4 py-2.5 text-center">
-                                <p class="font-heading font-bold text-navy-600">{{ $specialist->experience_years }}+</p>
-                                <p class="text-[11px] text-navy-500">Years Experience</p>
-                            </div>
-                        @endif
                         @if ($specialist->procedures_count)
                             <div class="bg-white rounded-xl shadow-sm px-4 py-2.5 text-center">
                                 <p class="font-heading font-bold text-navy-600">{{ $specialist->procedures_count }}+</p>

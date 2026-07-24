@@ -49,7 +49,7 @@ class SpecialistResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('designation')->maxLength(255),
                         Forms\Components\TextInput::make('qualifications')->maxLength(255),
-                        Forms\Components\TextInput::make('experience_years')->required()->numeric()->default(0),
+                        Forms\Components\TextInput::make('experience_years')->numeric()->default(0)->dehydrateStateUsing(fn (?string $state) => $state ?? 0),
                         Forms\Components\TextInput::make('procedures_count')->numeric(),
                         Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
                         Forms\Components\Toggle::make('is_active')
