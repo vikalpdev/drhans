@@ -101,7 +101,7 @@
                 <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Specialists at This Centre</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     @foreach ($specialists as $specialist)
-                        <x-card.specialist :specialist="$specialist" />
+                        <x-card.specialist :specialist="$specialist" :show-qualification="false" />
                     @endforeach
                 </div>
             </div>
