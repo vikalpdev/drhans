@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? "Dr Hans' Centre for ENT" }} | {{ config('app.name') }}</title>
     <meta name="description" content="{{ $description ?? "India's advanced ENT & Hearing Care network led by Padma Shri awardee Dr. J. M. Hans. Precision ENT, hearing, vertigo, sinus and cochlear implant care across Delhi NCR." }}">
     <link rel="icon" href="/favicon.ico" sizes="any">
@@ -42,5 +43,7 @@
             <x-app-icon name="phone" class="w-5 h-5" />
         </a>
     </div>
+
+    <x-chatbot />
 </body>
 </html>
