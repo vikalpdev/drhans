@@ -40,8 +40,20 @@ Alpine.data('rotateWords', (count = 2, interval = 2800) => ({
     },
 }));
 
+// Shared UI state: whether the footer is currently in view, so floating action
+// buttons (WhatsApp/Call/Chat) can get out of the way instead of covering footer links.
+Alpine.store('ui', { nearFooter: false });
+
 window.Alpine = Alpine;
 Alpine.start();
+
+const footerEl = document.querySelector('footer');
+if (footerEl && 'IntersectionObserver' in window) {
+    const footerIo = new IntersectionObserver(([entry]) => {
+        Alpine.store('ui').nearFooter = entry.isIntersecting;
+    }, { threshold: 0, rootMargin: '0px 0px -40% 0px' });
+    footerIo.observe(footerEl);
+}
 
 // Scroll-reveal: elements with [data-reveal] fade+rise in when they enter the viewport
 if (!reducedMotion && 'IntersectionObserver' in window) {

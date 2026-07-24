@@ -26,7 +26,7 @@
     <div
         x-data="{ show: false }"
         @scroll.window.passive="show = window.scrollY > 500"
-        x-show="show"
+        x-show="show && !$store.ui.nearFooter"
         x-cloak
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4"

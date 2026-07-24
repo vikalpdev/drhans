@@ -56,6 +56,14 @@
                                 <p class="text-[11px] text-navy-500">{{ Str::plural('Centre', $specialist->centres->count()) }}</p>
                             </div>
                         @endif
+                        @if ($specialist->reviewsCount())
+                            <div class="bg-white rounded-xl shadow-sm px-4 py-2.5 text-center">
+                                <p class="font-heading font-bold text-navy-600 flex items-center justify-center gap-1">
+                                    <x-app-icon name="star" class="w-4 h-4 text-amber-400 fill-amber-400" /> {{ number_format($specialist->averageRating(), 1) }}
+                                </p>
+                                <p class="text-[11px] text-navy-500">{{ $specialist->reviewsCount() }} {{ Str::plural('Review', $specialist->reviewsCount()) }}</p>
+                            </div>
+                        @endif
                     </div>
 
                     @if (!empty($specialist->expertise))
@@ -188,6 +196,103 @@
             </div>
         </section>
     @endif
+
+    <section class="mx-auto max-w-7xl px-6 py-14">
+        <div class="grid lg:grid-cols-[1fr_400px] gap-8">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <h2 class="font-heading font-bold text-xl text-navy-600">Patient Reviews</h2>
+                    @if ($specialist->reviewsCount())
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">
+                            <x-app-icon name="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400" /> {{ number_format($specialist->averageRating(), 1) }} &middot; {{ $specialist->reviewsCount() }} {{ Str::plural('Review', $specialist->reviewsCount()) }}
+                        </span>
+                    @endif
+                </div>
+
+                @if ($specialist->approvedReviews->count())
+                    <div class="space-y-4">
+                        @foreach ($specialist->approvedReviews as $review)
+                            <div class="bg-white rounded-2xl border border-navy-100 p-5">
+                                <div class="flex items-center justify-between gap-3 mb-2">
+                                    <p class="font-heading font-semibold text-navy-600 text-sm">{{ $review->name }}</p>
+                                    <p class="text-[11px] text-navy-400">{{ $review->created_at->format('M Y') }}</p>
+                                </div>
+                                <div class="flex items-center gap-0.5 mb-2">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <x-app-icon name="star" class="w-3.5 h-3.5 {{ $i <= $review->rating ? 'text-amber-400 fill-amber-400' : 'text-navy-100 fill-navy-100' }}" />
+                                    @endfor
+                                </div>
+                                @if ($review->comment)
+                                    <p class="text-sm text-navy-500 leading-relaxed">{{ $review->comment }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-12 border-2 border-dashed border-navy-100 rounded-2xl">
+                        <x-app-icon name="star" class="w-10 h-10 text-navy-200 mx-auto mb-2" />
+                        <p class="text-navy-500 text-sm">No reviews yet. Be the first to share your experience.</p>
+                    </div>
+                @endif
+            </div>
+
+            <div class="bg-mint-50 rounded-2xl p-6 h-fit">
+                <h3 class="font-heading font-bold text-navy-600 mb-1">Share Your Experience</h3>
+                <p class="text-xs text-navy-500 mb-5">Your review will be published after a quick review by our team.</p>
+
+                @if (session('reviewSuccess'))
+                    <div class="mb-5 bg-teal-100 border border-teal-200 text-teal-800 rounded-lg p-3 text-xs">
+                        {{ session('reviewSuccess') }}
+                    </div>
+                @endif
+
+                <form
+                    action="{{ route('specialists.reviews.store', $specialist) }}"
+                    method="POST"
+                    x-data="{ rating: 0, hoverRating: 0 }"
+                    class="space-y-4"
+                >
+                    @csrf
+                    <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+
+                    <div>
+                        <label class="text-xs font-medium text-navy-500">Your Rating *</label>
+                        <div class="flex items-center gap-1 mt-1.5">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <button
+                                    type="button"
+                                    @click="rating = {{ $i }}"
+                                    @mouseenter="hoverRating = {{ $i }}"
+                                    @mouseleave="hoverRating = 0"
+                                    aria-label="{{ $i }} star"
+                                >
+                                    <x-app-icon name="star" class="w-6 h-6 transition-colors" x-bind:class="(hoverRating || rating) >= {{ $i }} ? 'text-amber-400 fill-amber-400' : 'text-navy-200 fill-navy-200'" />
+                                </button>
+                            @endfor
+                        </div>
+                        <input type="hidden" name="rating" x-bind:value="rating" required>
+                        @error('rating') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-medium text-navy-500">Your Name *</label>
+                        <input type="text" name="name" value="{{ old('name') }}" required class="mt-1.5 w-full rounded-xl border border-navy-100 px-4 py-2.5 text-sm text-navy-600 bg-white transition-colors duration-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:outline-none @error('name') border-red-400 @enderror">
+                        @error('name') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-medium text-navy-500">Your Review</label>
+                        <textarea name="comment" rows="4" class="mt-1.5 w-full rounded-xl border border-navy-100 px-4 py-2.5 text-sm text-navy-600 bg-white transition-colors duration-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:outline-none @error('comment') border-red-400 @enderror" placeholder="Share details of your experience...">{{ old('comment') }}</textarea>
+                        @error('comment') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full shadow-md shadow-teal-500/20 hover:shadow-lg transition-all duration-200">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <x-cta-banner
         title="We're here to help you hear better, live better."

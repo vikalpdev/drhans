@@ -30,7 +30,7 @@ class SpecialistController extends Controller
         abort_if(! $specialist->is_active, Response::HTTP_NOT_FOUND);
 
         return view('specialists.show', [
-            'specialist' => $specialist->load('centres'),
+            'specialist' => $specialist->load(['centres', 'approvedReviews']),
         ]);
     }
 }

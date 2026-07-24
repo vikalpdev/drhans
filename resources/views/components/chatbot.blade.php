@@ -133,6 +133,13 @@
         },
     }"
     x-init="if (localStorage.getItem('chatbotDismissed') !== '1') { setTimeout(() => { open = true; scrollDown(); }, 1500); }"
+    x-show="open || !$store.ui.nearFooter"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
     class="fixed bottom-[136px] right-5 z-50"
 >
     {{-- Toggle button --}}
@@ -157,7 +164,7 @@
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
         class="absolute bottom-[68px] right-0 w-[92vw] max-w-sm bg-white rounded-2xl shadow-2xl border border-navy-100 flex flex-col overflow-hidden"
-        style="height: min(70vh, 560px);"
+        style="height: min(70vh, 560px, calc(100vh - 220px));"
     >
         {{-- Header --}}
         <div class="bg-gradient-to-r from-navy-600 to-navy-700 px-4 py-3.5 flex items-center gap-3 shrink-0">

@@ -49,6 +49,26 @@ class Specialist extends Model implements HasMedia
         return $this->hasMany(Appointment::class);
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(SpecialistReview::class);
+    }
+
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->where('status', 'approved')->latest();
+    }
+
+    public function averageRating(): ?float
+    {
+        return $this->approvedReviews()->avg('rating');
+    }
+
+    public function reviewsCount(): int
+    {
+        return $this->approvedReviews()->count();
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('photo')->singleFile();

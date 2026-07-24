@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SpecialistController;
+use App\Http\Controllers\SpecialistReviewController;
 use App\Http\Controllers\TreatmentController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::get('/conditions-treated/{condition:slug}', [ConditionController::class, 
 Route::get('/specialists', [SpecialistController::class, 'index'])->name('specialists.index');
 Route::get('/our-team-of-audiologist', [SpecialistController::class, 'audiologists'])->name('specialists.audiologists');
 Route::get('/specialists/{specialist:slug}', [SpecialistController::class, 'show'])->name('specialists.show');
+Route::post('/specialists/{specialist:slug}/reviews', [SpecialistReviewController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('specialists.reviews.store');
 
 Route::get('/our-centres', [CentreController::class, 'index'])->name('centres.index');
 
