@@ -15,11 +15,11 @@
         <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl"></div>
 
         <div class="relative mx-auto max-w-7xl px-6">
-        <div class="flex flex-wrap gap-2.5 mb-8 bg-white/10 rounded-2xl p-2 w-fit">
+        <div class="flex flex-nowrap sm:flex-wrap gap-2.5 mb-8 bg-white/10 rounded-2xl p-2 w-full sm:w-fit overflow-x-auto sm:overflow-visible [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
             <button
                 @click="city = 'all'"
                 :class="city === 'all' ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-md shadow-teal-500/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
-                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
             >
                 <x-app-icon name="building" class="w-3.5 h-3.5" /> All Cities
             </button>
@@ -27,7 +27,7 @@
                 <button
                     @click="city = '{{ $city }}'"
                     :class="city === '{{ $city }}' ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-md shadow-teal-500/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
-                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                    class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
                 >
                     <x-app-icon name="location" class="w-3.5 h-3.5" /> {{ $city }}
                 </button>

@@ -22,11 +22,11 @@
         @keydown.escape.window="lightboxOpen = false; activeVideo = null"
     >
         @if ($videos->count())
-            <div class="flex flex-wrap gap-2.5 mb-8 bg-mint-50 border border-navy-100 rounded-2xl p-2 w-fit">
+            <div class="flex flex-nowrap sm:flex-wrap gap-2.5 mb-8 bg-mint-50 border border-navy-100 rounded-2xl p-2 w-full sm:w-fit overflow-x-auto sm:overflow-visible [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
                 <button
                     @click="cat = 'all'"
                     :class="cat === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
-                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                    class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
                 >
                     <x-app-icon name="play" class="w-3.5 h-3.5" /> All Videos
                 </button>
@@ -34,7 +34,7 @@
                     <button
                         @click="cat = '{{ $category->slug }}'"
                         :class="cat === '{{ $category->slug }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
-                        class="px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                        class="shrink-0 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
                     >{{ $category->name }}</button>
                 @endforeach
             </div>

@@ -30,12 +30,12 @@
     <section x-data="{ dept: 'all' }" class="mx-auto max-w-7xl px-6 pb-16 grid lg:grid-cols-[1fr_340px] gap-8">
         <div>
             <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Current Openings</h2>
-            <div class="flex flex-wrap gap-2.5 mb-6 bg-mint-50 border border-navy-100 rounded-2xl p-2 w-fit">
-                <button @click="dept = 'all'" :class="dept === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200">
+            <div class="flex flex-nowrap sm:flex-wrap gap-2.5 mb-6 bg-mint-50 border border-navy-100 rounded-2xl p-2 w-full sm:w-fit overflow-x-auto sm:overflow-visible [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
+                <button @click="dept = 'all'" :class="dept === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'" class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200">
                     <x-app-icon name="briefcase" class="w-3.5 h-3.5" /> All Departments
                 </button>
                 @foreach (\App\Models\JobOpening::DEPARTMENTS as $key => $label)
-                    <button @click="dept = '{{ $key }}'" :class="dept === '{{ $key }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'" class="px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200">{{ $label }}</button>
+                    <button @click="dept = '{{ $key }}'" :class="dept === '{{ $key }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'" class="shrink-0 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200">{{ $label }}</button>
                 @endforeach
             </div>
 
