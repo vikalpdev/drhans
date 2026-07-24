@@ -5,7 +5,6 @@
         x-data="{
             open: null,
             centre: '', centreLabel: 'Choose a centre',
-            department: '', departmentLabel: 'Choose a department',
             specialist: '', specialistLabel: 'Choose a doctor',
             date: '', dateLabel: 'Choose date',
             calMonth: new Date().getMonth(),
@@ -55,7 +54,7 @@
         @click.outside="open = null"
         action="{{ route('appointment.create') }}"
         method="GET"
-        class="bg-navy-600 rounded-2xl shadow-lg p-4 lg:p-5 grid lg:grid-cols-[auto_1fr_1fr_1fr_1fr_auto] gap-3 lg:gap-4 lg:items-center"
+        class="bg-navy-600 rounded-2xl shadow-lg p-4 lg:p-5 grid lg:grid-cols-[auto_1fr_1fr_1fr_auto] gap-3 lg:gap-4 lg:items-center"
     >
         <div class="flex items-center gap-3 pr-2">
             <div class="w-11 h-11 rounded-full border-2 border-white/40 flex items-center justify-center shrink-0">
@@ -90,33 +89,6 @@
                 <button type="button" @click="centre=''; centreLabel='Choose a centre'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">Choose a centre</button>
                 @foreach ($centres as $centre)
                     <button type="button" @click="centre='{{ $centre->slug }}'; centreLabel='{{ $centre->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $centre->name }}</button>
-                @endforeach
-            </div>
-        </div>
-
-        {{-- Department dropdown --}}
-        <div class="relative">
-            <button
-                type="button"
-                @click="open = (open === 'department' ? null : 'department')"
-                class="w-full bg-white rounded-xl px-4 py-2.5 flex items-center justify-between gap-2 border transition-colors"
-                :class="open === 'department' ? 'border-teal-500 ring-2 ring-teal-500/30' : 'border-white/0 hover:border-teal-500/40'"
-            >
-                <span class="flex-1 min-w-0 text-left">
-                    <span class="block text-xs font-semibold text-navy-600">Select Department</span>
-                    <span class="block text-sm text-navy-400 truncate" x-text="departmentLabel"></span>
-                </span>
-                <x-app-icon name="chevron-down" class="w-4 h-4 text-navy-400 shrink-0 transition-transform duration-150" x-bind:class="open === 'department' && 'rotate-180'" />
-            </button>
-            <input type="hidden" name="department" x-bind:value="department">
-            <div
-                x-show="open === 'department'" x-cloak
-                x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
-                class="absolute z-20 mt-2 w-full bg-white rounded-xl shadow-xl border border-navy-100 py-2"
-            >
-                <button type="button" @click="department=''; departmentLabel='Choose a department'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">Choose a department</button>
-                @foreach (['ENT', 'Hearing Care', 'Vertigo'] as $dept)
-                    <button type="button" @click="department='{{ $dept }}'; departmentLabel='{{ $dept }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100">{{ $dept }}</button>
                 @endforeach
             </div>
         </div>
