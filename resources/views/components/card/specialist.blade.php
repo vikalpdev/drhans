@@ -1,6 +1,6 @@
 @props(['specialist', 'showQualification' => true])
 
-<div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 overflow-hidden flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 overflow-hidden flex flex-col h-full shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
     <div class="relative aspect-[4/3] overflow-hidden">
         @if ($specialist->is_chairman)
             <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 bg-gradient-to-r from-navy-600 to-navy-700 text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full shadow-md">
@@ -23,7 +23,7 @@
             <p class="text-xs text-navy-500 mt-0.5">{{ $specialist->qualifications }}</p>
         @endif
         <div class="flex flex-wrap items-center gap-1.5 mt-2.5">
-            <span class="inline-flex w-fit items-center text-[11px] font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $specialist->designation }}</span>
+            <span class="inline-flex items-center text-xs font-semibold text-teal-700 bg-mint-100 border border-teal-100 px-3 py-1.5 rounded-lg leading-snug">{{ $specialist->designation }}</span>
         </div>
         <div class="mt-auto pt-4">
             <a href="{{ route('specialists.show', $specialist) }}" class="w-full inline-flex items-center justify-center border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold text-sm px-4 py-2 rounded-full transition-colors duration-200">

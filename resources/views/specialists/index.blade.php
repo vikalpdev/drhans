@@ -51,7 +51,7 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
             @foreach ($surgeons as $specialist)
-                <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity>
+                <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity class="h-full">
                     <x-card.specialist :specialist="$specialist" :show-qualification="false" />
                 </div>
             @endforeach
