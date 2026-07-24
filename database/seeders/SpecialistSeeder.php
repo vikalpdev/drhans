@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Centre;
 use App\Models\Specialist;
+use App\Models\SpecialistType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -16,10 +17,13 @@ class SpecialistSeeder extends Seeder
         $noida = Centre::where('slug', 'noida')->first();
         $faridabad = Centre::where('slug', 'faridabad')->first();
 
+        $entSurgeonTypeId = SpecialistType::where('slug', 'ent-surgeon')->value('id');
+        $alliedTypeId = SpecialistType::where('slug', 'allied-specialist')->value('id');
+
         $surgeons = [
             [
                 'name' => 'Dr. J. M. Hans',
-                'type' => 'ent_surgeon',
+                'type_id' => $entSurgeonTypeId,
                 'designation' => 'Mentor & Visionary Chairman',
                 'qualifications' => 'MS (ENT), DLO, FRCS (Edin), FACS (USA)',
                 'is_chairman' => true,
@@ -45,7 +49,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Dr. Vivek Gupta',
-                'type' => 'ent_surgeon',
+                'type_id' => $entSurgeonTypeId,
                 'designation' => 'Senior ENT Surgeon',
                 'qualifications' => 'MS (ENT)',
                 'experience_years' => 12,
@@ -65,7 +69,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Dr. Ruchi Bansal',
-                'type' => 'ent_surgeon',
+                'type_id' => $entSurgeonTypeId,
                 'designation' => 'ENT & Skull Base Surgeon',
                 'qualifications' => 'MS (ENT)',
                 'experience_years' => 10,
@@ -85,7 +89,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Dr. Abhishek Jain',
-                'type' => 'ent_surgeon',
+                'type_id' => $entSurgeonTypeId,
                 'designation' => 'ENT Surgeon',
                 'qualifications' => 'MS (ENT)',
                 'experience_years' => 10,
@@ -105,7 +109,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Dr. Neha Khurana',
-                'type' => 'ent_surgeon',
+                'type_id' => $entSurgeonTypeId,
                 'designation' => 'ENT Surgeon',
                 'qualifications' => 'MS (ENT)',
                 'experience_years' => 8,
@@ -128,7 +132,7 @@ class SpecialistSeeder extends Seeder
         $allied = [
             [
                 'name' => 'Ms. Anjali Mehta',
-                'type' => 'allied',
+                'type_id' => $alliedTypeId,
                 'designation' => 'Audiologist',
                 'qualifications' => 'M.Sc. (Audiology & Speech-Language Pathology)',
                 'experience_years' => 8,
@@ -148,7 +152,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Ms. Priya Sharma',
-                'type' => 'allied',
+                'type_id' => $alliedTypeId,
                 'designation' => 'Speech Language Pathologist',
                 'qualifications' => 'M.ASLP (Speech-Language Pathology)',
                 'experience_years' => 7,
@@ -168,7 +172,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Mr. Rohit Verma',
-                'type' => 'allied',
+                'type_id' => $alliedTypeId,
                 'designation' => 'Clinical Audiologist',
                 'qualifications' => 'M.Sc. (Audiology)',
                 'experience_years' => 6,
@@ -188,7 +192,7 @@ class SpecialistSeeder extends Seeder
             ],
             [
                 'name' => 'Ms. Shreya Nair',
-                'type' => 'allied',
+                'type_id' => $alliedTypeId,
                 'designation' => 'Vestibular Therapist',
                 'qualifications' => 'MPT (Neurology), Certified Vestibular Rehabilitation Therapist',
                 'experience_years' => 5,

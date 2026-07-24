@@ -18,12 +18,13 @@ class Specialist extends Model implements HasMedia
 
     protected $fillable = [
         'name', 'slug', 'meta_title', 'meta_description', 'type_id', 'designation', 'qualifications',
-        'is_chairman', 'is_founder', 'experience_years', 'procedures_count',
+        'is_active', 'is_chairman', 'is_founder', 'experience_years', 'procedures_count',
         'bio', 'expertise', 'interests', 'languages', 'education', 'experience_timeline',
         'quote', 'order',
     ];
 
     protected $casts = [
+        'is_active' => 'boolean',
         'is_chairman' => 'boolean',
         'is_founder' => 'boolean',
         'expertise' => 'array',

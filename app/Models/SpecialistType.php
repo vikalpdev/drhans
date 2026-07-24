@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SpecialistType extends Model
 {
-    protected $fillable = ['name', 'slug', 'order'];
+    protected $fillable = ['name', 'slug', 'is_active', 'order'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function specialists(): HasMany
     {

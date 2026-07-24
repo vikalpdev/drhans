@@ -41,7 +41,7 @@ class SpecialistResource extends Resource
                             ->unique(ignoreRecord: true),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
-                            ->relationship('type', 'name', fn ($query) => $query->orderBy('order'))
+                            ->relationship('type', 'name', fn ($query) => $query->where('is_active', true)->orderBy('order'))
                             ->preload()
                             ->required(),
                         Forms\Components\TextInput::make('designation')->maxLength(255),
@@ -49,6 +49,10 @@ class SpecialistResource extends Resource
                         Forms\Components\TextInput::make('experience_years')->required()->numeric()->default(0),
                         Forms\Components\TextInput::make('procedures_count')->numeric(),
                         Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Active')
+                            ->helperText('Turn off to remove this profile from every public page (specialist listings, homepage, appointment booking, chatbot) without deleting it.')
+                            ->default(true),
                         Forms\Components\Toggle::make('is_chairman'),
                         Forms\Components\Toggle::make('is_founder'),
                         Forms\Components\Select::make('centres')
@@ -121,6 +125,7 @@ class SpecialistResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('type.name')->badge()->label('Type'),
                 Tables\Columns\TextColumn::make('designation')->searchable(),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\IconColumn::make('is_chairman')->boolean(),
                 Tables\Columns\TextColumn::make('experience_years')->sortable(),
             ])
@@ -128,6 +133,7 @@ class SpecialistResource extends Resource
                 Tables\Filters\SelectFilter::make('type_id')
                     ->label('Type')
                     ->relationship('type', 'name'),
+                Tables\Filters\TernaryFilter::make('is_active')->label('Active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
