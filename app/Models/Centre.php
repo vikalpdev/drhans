@@ -17,7 +17,7 @@ class Centre extends Model implements HasMedia
 
     protected $fillable = [
         'name', 'slug', 'meta_title', 'meta_description', 'city', 'address', 'phone', 'phone_general_enquiry', 'phone_appointment',
-        'practo_url', 'justdial_url',
+        'practo_url', 'justdial_url', 'virtual_tour_url',
         'opd_weekday', 'opd_sunday', 'lat', 'lng', 'facilities', 'order',
     ];
 
@@ -40,6 +40,19 @@ class Centre extends Model implements HasMedia
     public function galleryItems(): HasMany
     {
         return $this->hasMany(GalleryItem::class);
+    }
+
+    public function virtualTourEmbedUrl(): ?string
+    {
+        if (! $this->virtual_tour_url) {
+            return null;
+        }
+
+        if (preg_match('/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]+)/', $this->virtual_tour_url, $matches)) {
+            return 'https://www.youtube.com/embed/'.$matches[1];
+        }
+
+        return $this->virtual_tour_url;
     }
 
     public function registerMediaCollections(): void

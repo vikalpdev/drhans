@@ -33,6 +33,7 @@ Route::post('/specialists/{specialist:slug}/reviews', [SpecialistReviewControlle
     ->name('specialists.reviews.store');
 
 Route::get('/our-centres', [CentreController::class, 'index'])->name('centres.index');
+Route::get('/our-centres/{centre:slug}', [CentreController::class, 'show'])->name('centres.show');
 Route::get('/share-your-experience', [CentreController::class, 'shareExperience'])->name('centres.share-experience');
 
 Route::get('/book-appointment', [AppointmentController::class, 'create'])->name('appointment.create');

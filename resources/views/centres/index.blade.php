@@ -43,7 +43,8 @@
 
                 <div class="p-6 flex flex-col justify-center">
                     <h3 class="font-heading font-bold text-lg text-navy-600 flex items-center gap-2">
-                        <x-app-icon name="location" class="w-5 h-5 text-teal-500 shrink-0" /> {{ $centre->name }}
+                        <x-app-icon name="location" class="w-5 h-5 text-teal-500 shrink-0" />
+                        <a href="{{ route('centres.show', $centre) }}" class="hover:text-teal-600 transition-colors">{{ $centre->name }}</a>
                     </h3>
                     <p class="text-sm text-navy-500 mt-2">{{ $centre->address }}</p>
                     <div class="flex flex-wrap gap-x-5 gap-y-2 mt-3">
@@ -60,6 +61,9 @@
                         </a>
                         <a href="https://www.google.com/maps/dir/?api=1&destination={{ $centre->lat }},{{ $centre->lng }}" target="_blank" rel="noopener" class="inline-flex w-fit items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold text-sm px-5 py-2.5 rounded-full transition-colors duration-200">
                             <x-app-icon name="location" class="w-4 h-4" /> Get Directions
+                        </a>
+                        <a href="{{ route('centres.show', $centre) }}" class="group/link inline-flex w-fit items-center gap-1 text-teal-600 hover:text-teal-700 font-heading font-semibold text-sm px-2 py-2.5">
+                            View Details <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
                         </a>
                     </div>
                 </div>

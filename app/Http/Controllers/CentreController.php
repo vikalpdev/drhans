@@ -13,6 +13,14 @@ class CentreController extends Controller
         ]);
     }
 
+    public function show(Centre $centre)
+    {
+        return view('centres.show', [
+            'centre' => $centre->load('galleryItems'),
+            'specialists' => $centre->specialists()->where('is_active', true)->orderBy('name')->get(),
+        ]);
+    }
+
     public function shareExperience()
     {
         return view('centres.share-experience', [

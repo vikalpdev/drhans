@@ -77,6 +77,14 @@ class CentreResource extends Resource
                             ->image()
                             ->imageEditor(),
                     ]),
+                Forms\Components\Section::make('Virtual Tour')
+                    ->description('YouTube video link — shown as an embedded video on this centre\'s page.')
+                    ->schema([
+                        Forms\Components\TextInput::make('virtual_tour_url')
+                            ->label('YouTube Video URL')
+                            ->url()
+                            ->maxLength(255),
+                    ]),
                 Forms\Components\Section::make('Review Platform Links')
                     ->description('Used on the "Share Your Experience" page to direct patients to leave a review for this centre.')
                     ->schema([

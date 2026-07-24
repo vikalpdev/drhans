@@ -78,5 +78,6 @@ class Specialist extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->width(300)->height(300)->sharpen(10)->format('webp');
         $this->addMediaConversion('card')->width(480)->height(560)->sharpen(10)->format('webp');
+        $this->addMediaConversion('hero')->width(1280)->height(1280)->sharpen(10)->format('webp');
     }
 }
