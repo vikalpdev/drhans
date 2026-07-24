@@ -64,6 +64,14 @@ class SpecialistResource extends Resource
                             ->preload()
                             ->columnSpanFull(),
                     ]),
+                Forms\Components\Section::make('Availability')
+                    ->description('Which time-of-day slots this doctor can be booked for. Used to filter the options shown to patients on the booking chatbot.')
+                    ->schema([
+                        Forms\Components\Toggle::make('available_morning')->label('Morning')->default(true),
+                        Forms\Components\Toggle::make('available_afternoon')->label('Afternoon')->default(true),
+                        Forms\Components\Toggle::make('available_evening')->label('Evening')->default(true),
+                    ])
+                    ->columns(3),
                 Forms\Components\Section::make('Photo')
                     ->schema([
                         Forms\Components\SpatieMediaLibraryFileUpload::make('photo')

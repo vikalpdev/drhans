@@ -20,13 +20,16 @@ class Specialist extends Model implements HasMedia
         'name', 'slug', 'meta_title', 'meta_description', 'type_id', 'designation', 'qualifications',
         'is_active', 'is_chairman', 'is_founder', 'experience_years', 'procedures_count',
         'bio', 'expertise', 'interests', 'languages', 'education', 'experience_timeline',
-        'quote', 'order',
+        'quote', 'order', 'available_morning', 'available_afternoon', 'available_evening',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'is_chairman' => 'boolean',
         'is_founder' => 'boolean',
+        'available_morning' => 'boolean',
+        'available_afternoon' => 'boolean',
+        'available_evening' => 'boolean',
         'expertise' => 'array',
         'interests' => 'array',
         'languages' => 'array',
