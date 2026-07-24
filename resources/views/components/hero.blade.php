@@ -37,7 +37,7 @@
             @endisset
 
             @isset($actions)
-                <div class="mt-5 flex flex-wrap gap-3">
+                <div class="mt-5 flex flex-wrap gap-2 sm:gap-3">
                     {{ $actions }}
                 </div>
             @endisset

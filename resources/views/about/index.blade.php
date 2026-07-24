@@ -7,10 +7,10 @@
         image-collection="photo"
     >
         <x-slot:actions>
-            <a href="{{ route('centres.index') }}" class="group inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
+            <a href="{{ route('centres.index') }}" class="group inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-4 sm:px-5 py-2.5 rounded-full text-sm shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200 whitespace-nowrap">
                 <x-app-icon name="location" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Our Centres
             </a>
-            <a href="{{ route('about.chairman') }}" class="inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-5 py-2.5 rounded-full text-sm transition-colors duration-200">
+            <a href="{{ route('about.chairman') }}" class="inline-flex items-center gap-1.5 sm:gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-4 sm:px-5 py-2.5 rounded-full text-sm transition-colors duration-200 whitespace-nowrap">
                 <x-app-icon name="user" class="w-4 h-4" /> Chairman's Desk
             </a>
         </x-slot:actions>
@@ -44,7 +44,7 @@
                 <h3 class="font-heading font-semibold text-navy-600">Our Values</h3>
                 <ul class="text-sm text-navy-500 mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5">
                     @foreach ($page->content['our_values'] ?? ['Precision in Care', 'Trust & Transparency', 'Patient-first Approach', 'Clinical Excellence', 'Innovation That Evolves', 'Continuity of Care'] as $value)
-                        <li class="flex items-center gap-1.5"><x-app-icon name="check" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ $value }}</li>
+                        <li class="flex items-start gap-1.5"><x-app-icon name="check" class="w-3.5 h-3.5 text-teal-500 shrink-0 mt-0.5" /> {{ $value }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -93,7 +93,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-gradient-to-br from-navy-500 to-teal-600 ring-1 ring-white/20 flex flex-col items-center justify-center gap-5 p-8 shadow-xl shadow-navy-900/30">
+            <div class="relative rounded-2xl overflow-hidden sm:aspect-[4/3] bg-gradient-to-br from-navy-500 to-teal-600 ring-1 ring-white/20 flex flex-col items-center justify-center gap-3 sm:gap-5 p-6 sm:p-8 shadow-xl shadow-navy-900/30">
                 <div class="absolute inset-0 opacity-20">
                     <div class="absolute -top-10 -left-10 w-48 h-48 rounded-full border-[20px] border-white/40"></div>
                     <div class="absolute -bottom-14 -right-14 w-64 h-64 rounded-full border-[24px] border-white/30"></div>
