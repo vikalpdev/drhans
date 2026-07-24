@@ -5,8 +5,8 @@
         :breadcrumbs="['Our Centres' => null]"
     >
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="location" class="w-4 h-4 text-teal-500" /> <strong class="text-navy-600">{{ $centres->count() }}</strong> Centres Across India</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="user-group" class="w-4 h-4 text-teal-500" /> <strong class="text-navy-600">50,000+</strong> Patients Treated</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="location" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> <strong class="text-navy-600">{{ $centres->count() }}</strong> Centres Across India</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="user-group" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> <strong class="text-navy-600">50,000+</strong> Patients Treated</span>
         </x-slot:stats>
     </x-hero>
 
@@ -71,7 +71,7 @@
                 @if (!empty($centre->facilities))
                     <div class="flex flex-col justify-center bg-mint-50 p-6 md:border-l border-t md:border-t-0 border-navy-100">
                         <p class="text-xs font-semibold text-teal-700 tracking-wide uppercase mb-3">Facilities Available</p>
-                        <ul class="space-y-2">
+                        <ul class="grid grid-cols-2 md:flex md:flex-col gap-x-4 gap-y-2">
                             @foreach ($centre->facilities as $facility)
                                 <li class="flex items-center gap-2 text-sm text-navy-600">
                                     <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $facility }}

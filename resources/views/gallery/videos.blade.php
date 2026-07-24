@@ -5,9 +5,9 @@
         :breadcrumbs="['Video Gallery' => null]"
     >
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="play" class="w-4 h-4 text-teal-500" /> Patient Stories</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="heart" class="w-4 h-4 text-teal-500" /> Real Transformations</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="camera" class="w-4 h-4 text-teal-500" /> Inside Our Centres</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="play" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Patient Stories</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="heart" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Real Transformations</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="camera" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Inside Our Centres</span>
         </x-slot:stats>
         <x-slot:actions>
             <a href="{{ route('gallery.index') }}" class="inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-5 py-2.5 rounded-full text-sm transition-colors duration-200">

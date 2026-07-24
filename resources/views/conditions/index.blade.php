@@ -11,7 +11,7 @@
                 ['heart', 'Patient-first Approach'],
                 ['shield', 'Advanced Treatment Options'],
             ] as [$icon, $s])
-                <span class="flex items-center gap-1.5"><x-app-icon :name="$icon" class="w-4 h-4 text-teal-500" /> {{ $s }}</span>
+                <span class="flex items-start gap-1.5"><x-app-icon :name="$icon" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> {{ $s }}</span>
             @endforeach
         </x-slot:stats>
     </x-hero>

@@ -7,9 +7,9 @@
         image-collection="hero_image"
     >
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="user-group" class="w-4 h-4 text-teal-500" /> Expert ENT Specialists</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="diagnostic" class="w-4 h-4 text-teal-500" /> Advanced Diagnostic Tools</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="shield" class="w-4 h-4 text-teal-500" /> Personalised Treatment Plans</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="user-group" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Expert ENT Specialists</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="diagnostic" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Advanced Diagnostic Tools</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="shield" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Personalised Treatment Plans</span>
         </x-slot:stats>
     </x-hero>
 
@@ -234,7 +234,7 @@
                 @endphp
 
                 @if ($jumpLinks->count() > 1)
-                    <div class="hidden lg:block bg-white rounded-2xl border border-navy-100 p-5 lg:sticky lg:top-32 z-10">
+                    <div class="hidden lg:block bg-white rounded-2xl border border-navy-100 p-5">
                         <h3 class="font-heading font-bold text-navy-600 mb-3 text-sm">On This Page</h3>
                         <ul class="space-y-1">
                             @foreach ($jumpLinks as $id => $label)

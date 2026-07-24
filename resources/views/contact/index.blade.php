@@ -6,8 +6,8 @@
     >
         @php $siteSettings = \App\Models\Setting::current(); @endphp
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="phone" class="w-4 h-4 text-teal-500" /> {{ $siteSettings->phone }}</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="mail" class="w-4 h-4 text-teal-500" /> {{ $siteSettings->email }}</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="phone" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> {{ $siteSettings->phone }}</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="mail" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> {{ $siteSettings->email }}</span>
         </x-slot:stats>
     </x-hero>
 

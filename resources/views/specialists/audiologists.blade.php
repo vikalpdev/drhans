@@ -5,8 +5,8 @@
         :breadcrumbs="['Specialists' => route('specialists.index'), 'Audiologists' => null]"
     >
         <x-slot:stats>
-            <span class="flex items-center gap-1.5"><x-app-icon name="ear" class="w-4 h-4 text-teal-500" /> Expert Audiologists</span>
-            <span class="flex items-center gap-1.5"><x-app-icon name="location" class="w-4 h-4 text-teal-500" /> Multiple Centres</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="ear" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Expert Audiologists</span>
+            <span class="flex items-start gap-1.5"><x-app-icon name="location" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> Multiple Centres</span>
         </x-slot:stats>
     </x-hero>
 

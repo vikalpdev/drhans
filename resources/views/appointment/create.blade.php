@@ -6,7 +6,7 @@
     >
         <x-slot:stats>
             @foreach (['Quick & Easy Booking', 'Flexible Timings', 'Experienced ENT Specialists', 'Patient First Approach'] as $s)
-                <span class="flex items-center gap-1.5"><x-app-icon name="check-circle" class="w-4 h-4 text-teal-500" /> {{ $s }}</span>
+                <span class="flex items-start gap-1.5"><x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" /> {{ $s }}</span>
             @endforeach
         </x-slot:stats>
     </x-hero>
