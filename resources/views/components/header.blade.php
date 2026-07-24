@@ -108,6 +108,7 @@
                         <div class="bg-white rounded-xl shadow-xl border border-navy-100 py-2">
                             <a href="{{ route('about.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">About Us</a>
                             <a href="{{ route('about.chairman') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Chairman's Desk</a>
+                            <a href="{{ route('specialists.audiologists') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Know Your Audiologist</a>
                             <a href="{{ route('gallery.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Photo Gallery</a>
                             <a href="{{ route('gallery.videos') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Video Gallery</a>
                             <a href="{{ route('careers.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Careers</a>
@@ -142,6 +143,7 @@
                 <a href="{{ route('centres.index') }}" class="py-3 border-b border-navy-50">Our Centres</a>
                 <a href="{{ route('treatments.index') }}" class="py-3 border-b border-navy-50">Speciality Service</a>
                 <a href="{{ route('specialists.index') }}" class="py-3 border-b border-navy-50">Specialists</a>
+                <a href="{{ route('specialists.audiologists') }}" class="py-3 border-b border-navy-50">Know Your Audiologist</a>
                 <a href="{{ route('conditions.index') }}" class="py-3 border-b border-navy-50">Conditions Treated</a>
                 <a href="{{ route('gallery.index') }}" class="py-3 border-b border-navy-50">Photo Gallery</a>
                 <a href="{{ route('gallery.videos') }}" class="py-3 border-b border-navy-50">Video Gallery</a>

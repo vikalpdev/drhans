@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CentreController;
+use App\Http\Controllers\CmsPageController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
@@ -33,6 +34,8 @@ Route::get('/book-appointment', [AppointmentController::class, 'create'])->name(
 Route::post('/book-appointment', [AppointmentController::class, 'store'])
     ->middleware('throttle:6,1')
     ->name('appointment.store');
+
+Route::get('/pages/{cmsPage:slug}', [CmsPageController::class, 'show'])->name('cms.show');
 
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-us', [ContactController::class, 'store'])
