@@ -12,14 +12,60 @@ class PageSeeder extends Seeder
         Page::updateOrCreate(['slug' => 'home'], [
             'name' => 'Home',
             'content' => [
+                'hero_eyebrow' => "India's Advanced ENT & Hearing Care Network",
                 'hero_title_prefix' => 'Precision Care for',
                 'hero_animated_words' => ['Hearing Loss', 'Vertigo', 'Sinus Problems', 'Every Ear'],
                 'hero_description' => 'Led by Padma Shri awardee Dr. J. M. Hans and a team of ENT specialists delivering world-class hearing, vertigo, sinus, and cochlear implant care.',
-                
+
+                'hero_badges' => [
+                    ['icon' => 'calendar', 'title' => 'Available Today', 'subtitle' => 'Book Consultation'],
+                    ['icon' => 'ear', 'title' => 'Hearing Test', 'subtitle' => 'Quick & Accurate'],
+                    ['icon' => 'location', 'title' => 'Find Nearby Centre', 'subtitle' => '6 Locations'],
+                ],
+
+                'stats' => [
+                    ['icon' => 'ear-implant', 'stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants Performed'],
+                    ['icon' => 'award', 'stat' => '35+', 'number' => 35, 'suffix' => '+', 'label' => 'Years of Clinical Excellence'],
+                    ['icon' => 'location', 'stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'],
+                    ['icon' => 'cog', 'stat' => 'Advanced', 'number' => null, 'suffix' => '', 'label' => 'Technology & Infrastructure'],
+                    ['icon' => 'heart', 'stat' => 'Patient First', 'number' => null, 'suffix' => '', 'label' => 'Compassionate Care Every Step'],
+                ],
+
+                'centres_eyebrow' => 'Our Centres',
+                'centres_title' => 'Care Available Across Multiple Locations',
+
+                'specialties_eyebrow' => 'Our Specialities',
+                'specialties_title' => 'Comprehensive ENT & Hearing Care',
+
+                'why_choose_eyebrow' => 'Why Choose Us',
                 'why_choose_title' => 'Excellence in Every Patient Experience',
                 'why_choose_description' => "Dr Hans' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, one of India's most respected cochlear implant surgeons.\n\nWhat began as a single clinic with a simple promise — honest, world-class ENT care for every family — has grown into 6 centres trusted by over 50,000 patients. From advanced diagnostics and endoscopic surgery to hearing implants and long-term rehabilitation, we bring every stage of ear, nose and throat care under one roof.",
-                
+                'why_choose_cards' => [
+                    ['icon' => 'award', 'title' => 'Padma Shri Expertise', 'description' => 'Led by Padma Shri awardee Dr. J. M. Hans'],
+                    ['icon' => 'heart', 'title' => 'Patient-first Approach', 'description' => 'Personalized care with compassion'],
+                    ['icon' => 'shield', 'title' => 'International Standards', 'description' => 'Global protocols for safety & outcomes'],
+                    ['icon' => 'check-circle', 'title' => 'Long-term Rehabilitation', 'description' => 'Complete care beyond treatment'],
+                ],
+
+                'tech_eyebrow' => 'Advanced Technology',
                 'tech_title' => 'World-class Technology for Better Outcomes',
+                'tech_items' => [
+                    ['image' => 'endoscopic-surgery', 'name' => 'Endoscopic ENT Surgery'],
+                    ['image' => 'hearing-diagnostics', 'name' => 'Advanced Hearing Diagnostics'],
+                    ['image' => 'cochlear-implant', 'name' => 'Cochlear Implant Technology'],
+                    ['image' => 'balance-vertigo', 'name' => 'Balance & Vertigo Testing'],
+                    ['image' => 'ai-audiology', 'name' => 'AI-assisted Audiology'],
+                    ['image' => '3d-imaging', 'name' => '3D Imaging & Navigation'],
+                ],
+
+                'specialists_eyebrow' => 'Meet Our Specialists',
+                'specialists_title' => 'Expert Doctors. Compassionate Care.',
+
+                'testimonials_eyebrow' => 'Patient Success Stories',
+                'testimonials_title' => 'Real Stories. Real Transformations.',
+
+                'cta_title' => 'Need Immediate ENT Assistance?',
+                'cta_subtitle' => 'Our team is here to help you. Get expert care, right when you need it.',
             ]
         ]);
 

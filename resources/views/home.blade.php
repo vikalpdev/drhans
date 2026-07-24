@@ -6,7 +6,7 @@
 
         <div class="relative mx-auto max-w-7xl px-6 pt-10 lg:pt-14 pb-4 lg:pb-6 grid lg:grid-cols-2 gap-10 items-center">
             <div>
-                <p class="text-teal-700 font-semibold text-xs tracking-widest uppercase">India's Advanced ENT &amp; Hearing Care Network</p>
+                <p class="text-teal-700 font-semibold text-xs tracking-widest uppercase">{{ $page->content['hero_eyebrow'] ?? "India's Advanced ENT & Hearing Care Network" }}</p>
                 <h1 class="mt-3 font-heading font-extrabold text-4xl lg:text-5xl text-navy-600 leading-tight">
                     {{ $page->content['hero_title_prefix'] ?? 'Precision Care for' }}
                     <span class="inline-grid align-bottom text-left" x-data="rotateWords({{ count($page->content['hero_animated_words'] ?? ['Hearing Loss', 'Vertigo', 'Sinus Problems', 'Every Ear']) }})">
@@ -30,8 +30,13 @@
 
             <div class="relative">
                 <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
-                    @php $hasHeroPhoto = $founder && $founder->getFirstMedia('photo'); @endphp
-                    @if ($hasHeroPhoto)
+                    @php
+                        $hasPageHero = $page->getFirstMedia('hero_image');
+                        $hasFounderPhoto = $founder && $founder->getFirstMedia('photo');
+                    @endphp
+                    @if ($hasPageHero)
+                        <x-media-image :model="$page" collection="hero_image" conversion="hero" alt="ENT consultation" eager class="w-full h-full object-cover" />
+                    @elseif ($hasFounderPhoto)
                         <x-media-image :model="$founder" collection="photo" conversion="hero" alt="ENT consultation" eager class="w-full h-full object-cover" />
                     @else
                         <div class="relative w-full h-full bg-gradient-to-br from-navy-600 to-teal-600 flex flex-col items-center justify-center gap-5 p-8">
@@ -57,12 +62,12 @@
                     @endif
                 </div>
                 <div class="hidden lg:flex flex-col gap-3 absolute -right-4 top-6">
-                    @foreach ([['calendar', 'Available Today', 'Book Consultation'], ['ear', 'Hearing Test', 'Quick & Accurate'], ['location', 'Find Nearby Centre', '6 Locations']] as [$icon, $t1, $t2])
+                    @foreach ($page->content['hero_badges'] ?? [['icon' => 'calendar', 'title' => 'Available Today', 'subtitle' => 'Book Consultation'], ['icon' => 'ear', 'title' => 'Hearing Test', 'subtitle' => 'Quick & Accurate'], ['icon' => 'location', 'title' => 'Find Nearby Centre', 'subtitle' => '6 Locations']] as $badge)
                         <div class="bg-white rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 w-56">
-                            <x-app-icon :name="$icon" class="w-5 h-5 text-teal-500 shrink-0" />
+                            <x-app-icon :name="$badge['icon']" class="w-5 h-5 text-teal-500 shrink-0" />
                             <div class="text-xs leading-tight">
-                                <p class="font-semibold text-teal-600">{{ $t1 }}</p>
-                                <p class="text-navy-600">{{ $t2 }}</p>
+                                <p class="font-semibold text-teal-600">{{ $badge['title'] }}</p>
+                                <p class="text-navy-600">{{ $badge['subtitle'] }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -73,21 +78,21 @@
         {{-- Stats band --}}
         <div class="mx-auto max-w-7xl px-6 pb-6 lg:pb-8">
             <div class="bg-white rounded-2xl shadow-lg border border-navy-100 py-6 px-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-6" data-reveal>
-                @foreach ([
-                    ['ear-implant', '3500+', 3500, '+', 'Cochlear Implants Performed'],
-                    ['award', '35+', 35, '+', 'Years of Clinical Excellence'],
-                    ['location', '6', 6, '', 'Centres Across India'],
-                    ['cog', 'Advanced', null, '', 'Technology & Infrastructure'],
-                    ['heart', 'Patient First', null, '', 'Compassionate Care Every Step'],
-                ] as [$icon, $stat, $number, $suffix, $label])
+                @foreach ($page->content['stats'] ?? [
+                    ['icon' => 'ear-implant', 'stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants Performed'],
+                    ['icon' => 'award', 'stat' => '35+', 'number' => 35, 'suffix' => '+', 'label' => 'Years of Clinical Excellence'],
+                    ['icon' => 'location', 'stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'],
+                    ['icon' => 'cog', 'stat' => 'Advanced', 'number' => null, 'suffix' => '', 'label' => 'Technology & Infrastructure'],
+                    ['icon' => 'heart', 'stat' => 'Patient First', 'number' => null, 'suffix' => '', 'label' => 'Compassionate Care Every Step'],
+                ] as $s)
                     <div class="flex flex-col items-center text-center gap-1.5 px-4 {{ !$loop->first ? 'lg:border-l lg:border-navy-100' : '' }} {{ $loop->last ? 'col-span-2 sm:col-span-1' : '' }}">
-                        <x-app-icon :name="$icon" class="w-6 h-6 text-teal-500" />
-                        @if ($number !== null)
-                            <p class="font-heading font-bold text-navy-600" x-data="countUp({{ $number }}, '{{ $suffix }}')" x-text="display">{{ $stat }}</p>
+                        <x-app-icon :name="$s['icon']" class="w-6 h-6 text-teal-500" />
+                        @if (($s['number'] ?? null) !== null)
+                            <p class="font-heading font-bold text-navy-600" x-data="countUp({{ $s['number'] }}, '{{ $s['suffix'] }}')" x-text="display">{{ $s['stat'] }}</p>
                         @else
-                            <p class="font-heading font-bold text-navy-600">{{ $stat }}</p>
+                            <p class="font-heading font-bold text-navy-600">{{ $s['stat'] }}</p>
                         @endif
-                        <p class="text-xs text-navy-500 leading-tight">{{ $label }}</p>
+                        <p class="text-xs text-navy-500 leading-tight">{{ $s['label'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -131,8 +136,8 @@
         <div class="mx-auto max-w-7xl px-6">
             <div class="flex items-end justify-between mb-6" data-reveal>
                 <div>
-                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">Our Centres</p>
-                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Care Available Across Multiple Locations</h2>
+                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">{{ $page->content['centres_eyebrow'] ?? 'Our Centres' }}</p>
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">{{ $page->content['centres_title'] ?? 'Care Available Across Multiple Locations' }}</h2>
                 </div>
                 <div class="hidden sm:flex items-center gap-4">
                     <a href="{{ route('centres.index') }}" class="group inline-flex items-center gap-1 text-teal-500 hover:text-teal-600 font-heading font-semibold text-sm whitespace-nowrap transition-colors">
@@ -169,8 +174,8 @@
     <section class="bg-mint-50 py-16">
         <div class="mx-auto max-w-7xl px-6">
             <div class="text-center mb-10" data-reveal>
-                <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">Our Specialities</p>
-                <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Comprehensive ENT &amp; Hearing Care</h2>
+                <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">{{ $page->content['specialties_eyebrow'] ?? 'Our Specialities' }}</p>
+                <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">{{ $page->content['specialties_title'] ?? 'Comprehensive ENT & Hearing Care' }}</h2>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @foreach ($treatments as $treatment)
@@ -203,26 +208,26 @@
         <div class="relative mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-12 items-start">
             <div>
                 <div data-reveal>
-                    <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Why Choose Us</p>
+                    <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">{{ $page->content['why_choose_eyebrow'] ?? 'Why Choose Us' }}</p>
                     <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-2">{{ $page->content['why_choose_title'] ?? 'Excellence in Every Patient Experience' }}</h2>
                     <p class="text-sm text-navy-100 leading-relaxed mt-4">
                         {!! nl2br(e($page->content['why_choose_description'] ?? 'Dr Hans\' Centre for ENT is a multi-speciality ENT, Hearing and Vertigo care network founded by Padma Shri awardee Dr. J. M. Hans, one of India\'s most respected cochlear implant surgeons. What began as a single clinic with a simple promise — honest, world-class ENT care for every family — has grown into 6 centres trusted by over 50,000 patients. From advanced diagnostics and endoscopic surgery to hearing implants and long-term rehabilitation, we bring every stage of ear, nose and throat care under one roof.')) !!}
                     </p>
                 </div>
                 <ul class="space-y-1.5 mt-6">
-                    @foreach ([
-                        ['award', 'Padma Shri Expertise', 'Led by Padma Shri awardee Dr. J. M. Hans'],
-                        ['heart', 'Patient-first Approach', 'Personalized care with compassion'],
-                        ['shield', 'International Standards', 'Global protocols for safety & outcomes'],
-                        ['check-circle', 'Long-term Rehabilitation', 'Complete care beyond treatment'],
-                    ] as [$icon, $title, $desc])
+                    @foreach ($page->content['why_choose_cards'] ?? [
+                        ['icon' => 'award', 'title' => 'Padma Shri Expertise', 'description' => 'Led by Padma Shri awardee Dr. J. M. Hans'],
+                        ['icon' => 'heart', 'title' => 'Patient-first Approach', 'description' => 'Personalized care with compassion'],
+                        ['icon' => 'shield', 'title' => 'International Standards', 'description' => 'Global protocols for safety & outcomes'],
+                        ['icon' => 'check-circle', 'title' => 'Long-term Rehabilitation', 'description' => 'Complete care beyond treatment'],
+                    ] as $card)
                         <li class="group flex items-start gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors duration-200" data-reveal style="--reveal-delay: {{ $loop->index * 0.06 }}s">
                             <div class="w-10 h-10 rounded-xl bg-white/10 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-200">
-                                <x-app-icon :name="$icon" class="w-5 h-5 text-teal-300 group-hover:text-white group-hover:scale-110 transition-all duration-200" />
+                                <x-app-icon :name="$card['icon']" class="w-5 h-5 text-teal-300 group-hover:text-white group-hover:scale-110 transition-all duration-200" />
                             </div>
                             <div>
-                                <p class="font-heading font-semibold text-white text-sm">{{ $title }}</p>
-                                <p class="text-sm text-navy-200">{{ $desc }}</p>
+                                <p class="font-heading font-semibold text-white text-sm">{{ $card['title'] }}</p>
+                                <p class="text-sm text-navy-200">{{ $card['description'] }}</p>
                             </div>
                         </li>
                     @endforeach
@@ -240,22 +245,22 @@
             </div>
 
             <div>
-                <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Advanced Technology</p>
+                <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">{{ $page->content['tech_eyebrow'] ?? 'Advanced Technology' }}</p>
                 <h2 class="font-heading font-bold text-2xl text-white mt-2 mb-5">{{ $page->content['tech_title'] ?? 'World-class Technology for Better Outcomes' }}</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    @foreach ([
-                        ['endoscopic-surgery', 'Endoscopic ENT Surgery'],
-                        ['hearing-diagnostics', 'Advanced Hearing Diagnostics'],
-                        ['cochlear-implant', 'Cochlear Implant Technology'],
-                        ['balance-vertigo', 'Balance & Vertigo Testing'],
-                        ['ai-audiology', 'AI-assisted Audiology'],
-                        ['3d-imaging', '3D Imaging & Navigation'],
-                    ] as [$image, $tech])
+                    @foreach ($page->content['tech_items'] ?? [
+                        ['image' => 'endoscopic-surgery', 'name' => 'Endoscopic ENT Surgery'],
+                        ['image' => 'hearing-diagnostics', 'name' => 'Advanced Hearing Diagnostics'],
+                        ['image' => 'cochlear-implant', 'name' => 'Cochlear Implant Technology'],
+                        ['image' => 'balance-vertigo', 'name' => 'Balance & Vertigo Testing'],
+                        ['image' => 'ai-audiology', 'name' => 'AI-assisted Audiology'],
+                        ['image' => '3d-imaging', 'name' => '3D Imaging & Navigation'],
+                    ] as $tech)
                         <div class="group rounded-2xl overflow-hidden bg-white shadow-lg shadow-navy-900/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-reveal style="--reveal-delay: {{ $loop->index * 0.05 }}s">
                             <div class="aspect-square overflow-hidden">
-                                <img src="{{ asset('images/technology/' . $image . '.svg') }}" alt="{{ $tech }}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="{{ asset('images/technology/' . $tech['image'] . '.svg') }}" alt="{{ $tech['name'] }}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             </div>
-                            <p class="text-[11px] font-semibold text-navy-600 text-center px-1.5 py-2 leading-tight">{{ $tech }}</p>
+                            <p class="text-[11px] font-semibold text-navy-600 text-center px-1.5 py-2 leading-tight">{{ $tech['name'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -313,8 +318,8 @@
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="flex items-end justify-between mb-6" data-reveal>
                 <div>
-                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">Meet Our Specialists</p>
-                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Expert Doctors. Compassionate Care.</h2>
+                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">{{ $page->content['specialists_eyebrow'] ?? 'Meet Our Specialists' }}</p>
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">{{ $page->content['specialists_title'] ?? 'Expert Doctors. Compassionate Care.' }}</h2>
                 </div>
                 <div class="hidden sm:flex items-center gap-4">
                     <a href="{{ route('specialists.index') }}" class="group inline-flex items-center gap-1 text-teal-500 hover:text-teal-600 font-heading font-semibold text-sm whitespace-nowrap transition-colors">
@@ -357,8 +362,8 @@
             <div class="mx-auto max-w-7xl px-6">
                 <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8" data-reveal>
                     <div>
-                        <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">Patient Success Stories</p>
-                        <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Real Stories. Real Transformations.</h2>
+                        <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">{{ $page->content['testimonials_eyebrow'] ?? 'Patient Success Stories' }}</p>
+                        <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">{{ $page->content['testimonials_title'] ?? 'Real Stories. Real Transformations.' }}</h2>
                     </div>
                     <a href="{{ route('gallery.videos') }}" class="group inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-5 py-2.5 rounded-full text-sm w-fit hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
                         <x-app-icon name="play" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Watch More Stories
@@ -402,5 +407,8 @@
         </section>
     @endif
 
-    <x-cta-banner />
+    <x-cta-banner
+        :title="$page->content['cta_title'] ?? 'Need Immediate ENT Assistance?'"
+        :subtitle="$page->content['cta_subtitle'] ?? 'Our team is here to help you. Get expert care, right when you need it.'"
+    />
 </x-layouts.app>

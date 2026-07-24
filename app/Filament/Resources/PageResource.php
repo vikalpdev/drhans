@@ -51,23 +51,126 @@ class PageResource extends Resource
                 // Home Page Fields
                 Forms\Components\Section::make('Home Page Content')
                     ->schema([
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('hero_image')
+                            ->collection('hero_image')
+                            ->image()
+                            ->imageEditor()
+                            ->helperText('Optional. If left empty, the founder\'s photo is shown instead, then a default illustration.')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('content.hero_eyebrow')
+                            ->label('Hero — Eyebrow Text')
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('content.hero_title_prefix')
                             ->label('Hero Title Prefix'),
                         Forms\Components\TagsInput::make('content.hero_animated_words')
                             ->label('Hero Animated Words'),
                         Forms\Components\Textarea::make('content.hero_description')
                             ->label('Hero Description')
-                            ->rows(3),
-                        
+                            ->rows(3)
+                            ->columnSpanFull(),
+
+                        Forms\Components\Repeater::make('content.hero_badges')
+                            ->label('Hero — Floating Badges')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. calendar, ear, location.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\TextInput::make('subtitle')->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Badge')
+                            ->reorderable(),
+
+                        Forms\Components\Repeater::make('content.stats')
+                            ->label('Stats Band')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. ear-implant, award, location, cog, heart.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('stat')
+                                    ->label('Display text (e.g. "3500+")')
+                                    ->required(),
+                                Forms\Components\TextInput::make('number')
+                                    ->numeric()
+                                    ->helperText('Leave blank for non-numeric stats like "Advanced".'),
+                                Forms\Components\TextInput::make('suffix')
+                                    ->label('Suffix (e.g. "+")'),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(5)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.centres_eyebrow')
+                            ->label('Centres Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.centres_title')
+                            ->label('Centres Section — Title'),
+
+                        Forms\Components\TextInput::make('content.specialties_eyebrow')
+                            ->label('Specialities Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.specialties_title')
+                            ->label('Specialities Section — Title'),
+
+                        Forms\Components\TextInput::make('content.why_choose_eyebrow')
+                            ->label('Why Choose Us — Eyebrow'),
                         Forms\Components\TextInput::make('content.why_choose_title')
                             ->label('Why Choose Us Title'),
                         Forms\Components\Textarea::make('content.why_choose_description')
                             ->label('Why Choose Us Description')
-                            ->rows(5),
-                            
+                            ->rows(5)
+                            ->columnSpanFull(),
+                        Forms\Components\Repeater::make('content.why_choose_cards')
+                            ->label('Why Choose Us — Feature List')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. award, heart, shield, check-circle.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\TextInput::make('description')->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Feature')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.tech_eyebrow')
+                            ->label('Technology Section — Eyebrow'),
                         Forms\Components\TextInput::make('content.tech_title')
                             ->label('Technology Section Title'),
+                        Forms\Components\Repeater::make('content.tech_items')
+                            ->label('Technology Grid')
+                            ->schema([
+                                Forms\Components\TextInput::make('image')
+                                    ->label('Image slug')
+                                    ->helperText('Filename (without .svg) in public/images/technology/, e.g. endoscopic-surgery.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('name')->required(),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Technology')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.specialists_eyebrow')
+                            ->label('Specialists Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.specialists_title')
+                            ->label('Specialists Section — Title'),
+
+                        Forms\Components\TextInput::make('content.testimonials_eyebrow')
+                            ->label('Testimonials Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.testimonials_title')
+                            ->label('Testimonials Section — Title'),
+
+                        Forms\Components\TextInput::make('content.cta_title')
+                            ->label('Bottom CTA — Title'),
+                        Forms\Components\Textarea::make('content.cta_subtitle')
+                            ->label('Bottom CTA — Subtitle')
+                            ->rows(2),
                     ])
+                    ->columns(2)
                     ->visible(fn ($record) => $record?->slug === 'home'),
 
                 // About Us Page Fields

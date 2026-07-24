@@ -31,8 +31,14 @@
             this.addBot('Thanks, ' + this.form.name.split(' ')[0] + '! What\'s the best phone number to reach you on?');
         },
         submitPhone() {
-            if (!this.input.trim()) return;
-            this.form.phone = this.input.trim();
+            const val = this.input.trim();
+            if (!val) return;
+            if (!/^\d{10}$/.test(val)) {
+                this.errorMsg = 'Please enter a valid 10-digit phone number.';
+                return;
+            }
+            this.errorMsg = '';
+            this.form.phone = val;
             this.addUser(this.form.phone);
             this.input = '';
             this.step = 'email';
@@ -41,16 +47,22 @@
         submitEmail() {
             const val = this.input.trim();
             if (val && val.toLowerCase() !== 'skip') {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                    this.errorMsg = 'Please enter a valid email address, or skip.';
+                    return;
+                }
                 this.form.email = val;
                 this.addUser(val);
             } else {
                 this.addUser('Skip');
             }
+            this.errorMsg = '';
             this.input = '';
             this.step = 'centre';
             this.addBot('Which centre would you like to visit?');
         },
         skipEmail() {
+            this.errorMsg = '';
             this.input = '';
             this.addUser('Skip');
             this.step = 'centre';
@@ -252,22 +264,28 @@
         </div>
 
         {{-- Text input footer (only for free-text steps) --}}
-        <div x-show="['name','phone','email'].includes(step)" class="border-t border-navy-100 p-3 flex items-center gap-2 shrink-0">
-            <input
-                type="text"
-                x-model="input"
-                @keydown.enter="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
-                :placeholder="step === 'name' ? 'Type your name...' : step === 'phone' ? 'Type your phone number...' : 'Type your email (optional)...'"
-                class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
-            >
-            <button
-                type="button"
-                @click="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
-                aria-label="Send"
-                class="w-9 h-9 rounded-xl bg-teal-500 hover:bg-teal-600 flex items-center justify-center text-white shrink-0 transition-colors"
-            >
-                <x-app-icon name="chevron-right" class="w-4 h-4" />
-            </button>
+        <div x-show="['name','phone','email'].includes(step)" class="border-t border-navy-100 p-3 shrink-0">
+            <p x-show="errorMsg && ['phone','email'].includes(step)" x-text="errorMsg" class="text-xs text-red-600 mb-2"></p>
+            <div class="flex items-center gap-2">
+                <input
+                    :type="step === 'phone' ? 'tel' : (step === 'email' ? 'email' : 'text')"
+                    :inputmode="step === 'phone' ? 'numeric' : 'text'"
+                    :maxlength="step === 'phone' ? 10 : 255"
+                    x-model="input"
+                    @input="if (step === 'phone') input = input.replace(/\D/g, '').slice(0, 10); errorMsg = '';"
+                    @keydown.enter="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
+                    :placeholder="step === 'name' ? 'Type your name...' : step === 'phone' ? '10-digit phone number...' : 'Type your email (optional)...'"
+                    class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                >
+                <button
+                    type="button"
+                    @click="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
+                    aria-label="Send"
+                    class="w-9 h-9 rounded-xl bg-teal-500 hover:bg-teal-600 flex items-center justify-center text-white shrink-0 transition-colors"
+                >
+                    <x-app-icon name="chevron-right" class="w-4 h-4" />
+                </button>
+            </div>
         </div>
 
         {{-- Date input footer --}}
