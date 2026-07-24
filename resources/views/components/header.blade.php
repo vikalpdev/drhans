@@ -24,7 +24,7 @@
         <div class="mx-auto max-w-7xl px-6 flex items-center justify-between h-16 lg:h-[70px]">
             <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
                 @if ($siteSettings->logoUrl())
-                    <img src="{{ $siteSettings->logoUrl() }}" alt="{{ config('app.name') }}" class="h-9 w-auto">
+                    <img src="{{ $siteSettings->logoUrl() }}" alt="{{ config('app.name') }}" class="h-11 w-auto">
                 @else
                     <span class="font-heading font-extrabold text-xl text-navy-700 leading-none">Dr Hans'</span>
                     <span class="hidden sm:block text-[10px] tracking-widest text-teal-500 font-semibold uppercase">Centre for ENT</span>
