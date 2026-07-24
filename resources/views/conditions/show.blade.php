@@ -234,7 +234,7 @@
                 @endphp
 
                 @if ($jumpLinks->count() > 1)
-                    <div class="bg-white rounded-2xl border border-navy-100 p-5 lg:sticky lg:top-32 z-10">
+                    <div class="hidden lg:block bg-white rounded-2xl border border-navy-100 p-5 lg:sticky lg:top-32 z-10">
                         <h3 class="font-heading font-bold text-navy-600 mb-3 text-sm">On This Page</h3>
                         <ul class="space-y-1">
                             @foreach ($jumpLinks as $id => $label)
@@ -252,7 +252,7 @@
                     </div>
                 @endif
 
-                <x-booking-widget :centres="$centres" />
+                <x-booking-widget :centres="$centres" :specialists="$specialists" />
 
                 <div class="bg-mint-50 rounded-2xl p-6">
                     <h3 class="font-heading font-bold text-navy-600 mb-2">Need Help?</h3>
