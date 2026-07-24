@@ -70,7 +70,51 @@ class PageSeeder extends Seeder
                 'hero_subtitle' => 'For over three decades, my mission has been simple yet profound - to restore the gift of hearing, balance and communication, and to bring hope back to the lives of thousands of patients and their families.',
 
                 'journey_title' => 'A Journey of Purpose',
+
                 'beliefs_title' => 'My Beliefs',
+                'beliefs' => ['Patients first, always', 'Ethical practice and transparency', 'Innovation with compassion', 'Building a team that learns and grows together', 'Creating centres that are accessible, advanced and trusted'],
+
+                'milestones_eyebrow' => 'Recognition',
+                'milestones_title' => 'Milestones & Achievements',
+                'milestones' => [
+                    ['icon' => 'award', 'title' => 'Padma Shri Awardee', 'description' => 'Honoured by the Government of India for outstanding contribution to medicine.'],
+                    ['icon' => 'ear-implant', 'title' => 'Pioneer in Cochlear Implant Surgery', 'description' => 'Performed 3500+ successful cochlear implant procedures.'],
+                    ['icon' => 'clock', 'title' => '35+ Years of Experience', 'description' => 'Dedicated to clinical excellence, research and innovation.'],
+                    ['icon' => 'user-group', 'title' => 'Global Recognition', 'description' => 'Author of numerous research papers and invited faculty at national & international conferences.'],
+                ],
+
+                'impact_stats' => [
+                    ['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants Performed'],
+                    ['stat' => '35+', 'number' => 35, 'suffix' => '+', 'label' => 'Years of Clinical Excellence'],
+                    ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated Successfully'],
+                    ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'],
+                    ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment & Technologies'],
+                ],
+
+                'cta_title' => "We're here to help you hear better, live better.",
+                'cta_subtitle' => 'Book an appointment or visit our nearest centre today.',
+            ]
+        ]);
+
+        Page::updateOrCreate(['slug' => 'contact'], [
+            'name' => 'Contact Us',
+            'content' => [
+                'hero_title' => 'Contact Us',
+                'hero_subtitle' => "We're here to help you with all your ENT, Hearing and Vertigo care needs. Reach out to us or visit our nearest centre.",
+
+                'form_heading' => 'Send Us a Message',
+                'form_subtitle' => 'Fill out the form below and our team will get back to you shortly.',
+                'subjects' => ['General Enquiry', 'Appointment Query', 'Feedback', 'Careers'],
+
+                'urgent_box_title' => 'Need Immediate Assistance?',
+                'urgent_box_description' => 'For urgent ENT care or emergency appointments, please call us directly.',
+
+                'why_us_title' => "We're Here for You",
+                'why_us_list' => ['Expert ENT Specialists', 'Advanced Technology', 'Personalised Care', 'Multiple Centres for Your Convenience'],
+                'office_hours' => 'Mon - Sat: 9 AM - 7 PM · Sun: 10 AM - 2 PM',
+
+                'centres_eyebrow' => 'Visit Us',
+                'centres_title' => 'Our Centres',
             ]
         ]);
 

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Mail\ContactMessageReceivedMail;
 use App\Models\Centre;
 use App\Models\ContactSubmission;
+use App\Models\Page;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -13,6 +14,7 @@ class ContactController extends Controller
     public function index()
     {
         return view('contact.index', [
+            'page' => Page::where('slug', 'contact')->first(),
             'centres' => Centre::orderBy('order')->get(),
         ]);
     }

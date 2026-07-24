@@ -140,10 +140,98 @@ class PageResource extends Resource
                         
                         Forms\Components\TextInput::make('content.journey_title')
                             ->label('Journey Title'),
+
                         Forms\Components\TextInput::make('content.beliefs_title')
                             ->label('Beliefs Title'),
+                        Forms\Components\TagsInput::make('content.beliefs')
+                            ->label('Beliefs — List')
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('content.milestones_eyebrow')
+                            ->label('Milestones Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.milestones_title')
+                            ->label('Milestones Section — Title'),
+                        Forms\Components\Repeater::make('content.milestones')
+                            ->label('Milestones & Achievements — Cards')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. award, ear-implant, clock, user-group.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\Textarea::make('description')->rows(2)->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Milestone')
+                            ->reorderable(),
+
+                        Forms\Components\Repeater::make('content.impact_stats')
+                            ->label('Impact Stats (Bottom Strip)')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat')
+                                    ->label('Display text (e.g. "50,000+")')
+                                    ->required(),
+                                Forms\Components\TextInput::make('number')
+                                    ->numeric()
+                                    ->required(),
+                                Forms\Components\TextInput::make('suffix')
+                                    ->label('Suffix (e.g. "+")'),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(4)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.cta_title')
+                            ->label('Bottom CTA — Title'),
+                        Forms\Components\Textarea::make('content.cta_subtitle')
+                            ->label('Bottom CTA — Subtitle')
+                            ->rows(2),
                     ])
+                    ->columns(2)
                     ->visible(fn ($record) => $record?->slug === 'chairman'),
+
+                // Contact Us Page Fields
+                Forms\Components\Section::make('Contact Page Content')
+                    ->schema([
+                        Forms\Components\TextInput::make('content.hero_title')
+                            ->label('Hero Title'),
+                        Forms\Components\Textarea::make('content.hero_subtitle')
+                            ->label('Hero Subtitle')
+                            ->rows(3),
+
+                        Forms\Components\TextInput::make('content.form_heading')
+                            ->label('Form Section — Heading'),
+                        Forms\Components\Textarea::make('content.form_subtitle')
+                            ->label('Form Section — Subtitle')
+                            ->rows(2),
+                        Forms\Components\TagsInput::make('content.subjects')
+                            ->label('Subject Dropdown — Options')
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('content.urgent_box_title')
+                            ->label('"Need Immediate Assistance" Box — Title'),
+                        Forms\Components\Textarea::make('content.urgent_box_description')
+                            ->label('"Need Immediate Assistance" Box — Description')
+                            ->rows(2),
+
+                        Forms\Components\TextInput::make('content.why_us_title')
+                            ->label('Sidebar — "Why Us" Title'),
+                        Forms\Components\TagsInput::make('content.why_us_list')
+                            ->label('Sidebar — "Why Us" List')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('content.office_hours')
+                            ->label('Sidebar — Office Hours Line')
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('content.centres_eyebrow')
+                            ->label('Centres Section — Eyebrow'),
+                        Forms\Components\TextInput::make('content.centres_title')
+                            ->label('Centres Section — Title'),
+                    ])
+                    ->columns(2)
+                    ->visible(fn ($record) => $record?->slug === 'contact'),
 
                 // Careers Page Fields
                 Forms\Components\Section::make('Careers Page Content')

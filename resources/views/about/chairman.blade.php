@@ -50,7 +50,7 @@
                         <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">What Guides Me</p>
                         <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-3">{{ $page->content['beliefs_title'] ?? 'My Beliefs' }}</h2>
                         <ul class="grid sm:grid-cols-2 gap-1">
-                            @foreach (['Patients first, always', 'Ethical practice and transparency', 'Innovation with compassion', 'Building a team that learns and grows together', 'Creating centres that are accessible, advanced and trusted'] as $belief)
+                            @foreach ($page->content['beliefs'] ?? ['Patients first, always', 'Ethical practice and transparency', 'Innovation with compassion', 'Building a team that learns and grows together', 'Creating centres that are accessible, advanced and trusted'] as $belief)
                                 <li class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white transition-colors duration-200 text-sm text-navy-600">
                                     <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $belief }}
                                 </li>
@@ -62,22 +62,22 @@
 
             <div class="mb-12">
                 <div class="text-center mb-8">
-                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">Recognition</p>
-                    <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-3">Milestones &amp; Achievements</h2>
+                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">{{ $page->content['milestones_eyebrow'] ?? 'Recognition' }}</p>
+                    <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-3">{{ $page->content['milestones_title'] ?? 'Milestones & Achievements' }}</h2>
                 </div>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    @foreach ([
-                        ['award', 'Padma Shri Awardee', 'Honoured by the Government of India for outstanding contribution to medicine.'],
-                        ['ear-implant', 'Pioneer in Cochlear Implant Surgery', 'Performed 3500+ successful cochlear implant procedures.'],
-                        ['clock', $chairman->experience_years . '+ Years of Experience', 'Dedicated to clinical excellence, research and innovation.'],
-                        ['user-group', 'Global Recognition', 'Author of numerous research papers and invited faculty at national & international conferences.'],
-                    ] as [$icon, $title, $desc])
+                    @foreach ($page->content['milestones'] ?? [
+                        ['icon' => 'award', 'title' => 'Padma Shri Awardee', 'description' => 'Honoured by the Government of India for outstanding contribution to medicine.'],
+                        ['icon' => 'ear-implant', 'title' => 'Pioneer in Cochlear Implant Surgery', 'description' => 'Performed 3500+ successful cochlear implant procedures.'],
+                        ['icon' => 'clock', 'title' => $chairman->experience_years . '+ Years of Experience', 'description' => 'Dedicated to clinical excellence, research and innovation.'],
+                        ['icon' => 'user-group', 'title' => 'Global Recognition', 'description' => 'Author of numerous research papers and invited faculty at national & international conferences.'],
+                    ] as $milestone)
                         <div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-6 text-center">
                             <div class="w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center mx-auto mb-3 transition-colors duration-300">
-                                <x-app-icon :name="$icon" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
+                                <x-app-icon :name="$milestone['icon']" class="w-6 h-6 text-teal-500 group-hover:text-white transition-colors duration-300" />
                             </div>
-                            <p class="font-heading font-semibold text-navy-600 text-sm">{{ $title }}</p>
-                            <p class="text-xs text-navy-500 mt-1.5">{{ $desc }}</p>
+                            <p class="font-heading font-semibold text-navy-600 text-sm">{{ $milestone['title'] }}</p>
+                            <p class="text-xs text-navy-500 mt-1.5">{{ $milestone['description'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -86,10 +86,10 @@
 
         <section class="bg-mint-50 py-10">
             <div class="mx-auto max-w-7xl px-6 grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
-                @foreach ([['3500+', 3500, '+', 'Cochlear Implants Performed'], ['35+', 35, '+', 'Years of Clinical Excellence'], ['50,000+', 50000, '+', 'Patients Treated Successfully'], ['6', 6, '', 'Centres Across India'], ['100+', 100, '+', 'Advanced Equipment & Technologies']] as [$stat, $number, $suffix, $label])
+                @foreach ($page->content['impact_stats'] ?? [['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants Performed'], ['stat' => '35+', 'number' => 35, 'suffix' => '+', 'label' => 'Years of Clinical Excellence'], ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated Successfully'], ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'], ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment & Technologies']] as $item)
                     <div class="{{ $loop->last ? 'col-span-2 lg:col-span-1' : '' }}">
-                        <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $number }}, '{{ $suffix }}')" x-text="display">{{ $stat }}</p>
-                        <p class="text-xs text-navy-500 mt-1">{{ $label }}</p>
+                        <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $item['number'] }}, '{{ $item['suffix'] }}')" x-text="display">{{ $item['stat'] }}</p>
+                        <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -97,7 +97,7 @@
     @endif
 
     <x-cta-banner
-        title="We're here to help you hear better, live better."
-        subtitle="Book an appointment or visit our nearest centre today."
+        :title="$page->content['cta_title'] ?? 'We\'re here to help you hear better, live better.'"
+        :subtitle="$page->content['cta_subtitle'] ?? 'Book an appointment or visit our nearest centre today.'"
     />
 </x-layouts.app>

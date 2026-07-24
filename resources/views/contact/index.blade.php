@@ -1,7 +1,7 @@
 <x-layouts.app title="Contact Us">
     <x-hero
-        title="Contact Us"
-        subtitle="We're here to help you with all your ENT, Hearing and Vertigo care needs. Reach out to us or visit our nearest centre."
+        :title="$page->content['hero_title'] ?? 'Contact Us'"
+        :subtitle="$page->content['hero_subtitle'] ?? 'We\'re here to help you with all your ENT, Hearing and Vertigo care needs. Reach out to us or visit our nearest centre.'"
         :breadcrumbs="['Contact Us' => null]"
     >
         <x-slot:stats>
@@ -12,8 +12,8 @@
 
     <section class="mx-auto max-w-7xl px-6 py-16 grid lg:grid-cols-[1fr_360px] gap-8">
         <div class="bg-white rounded-2xl border border-navy-100 p-6 lg:p-8">
-            <h2 class="font-heading font-bold text-navy-600 text-lg mb-1">Send Us a Message</h2>
-            <p class="text-sm text-navy-500 mb-6">Fill out the form below and our team will get back to you shortly.</p>
+            <h2 class="font-heading font-bold text-navy-600 text-lg mb-1">{{ $page->content['form_heading'] ?? 'Send Us a Message' }}</h2>
+            <p class="text-sm text-navy-500 mb-6">{{ $page->content['form_subtitle'] ?? 'Fill out the form below and our team will get back to you shortly.' }}</p>
 
             @if (session('success'))
                 <div class="mb-6 bg-mint-100 border border-teal-200 text-teal-800 rounded-lg p-4 text-sm">
@@ -104,7 +104,7 @@
                                 class="absolute z-20 mt-2 w-full bg-white rounded-xl shadow-xl border border-navy-100 py-2"
                             >
                                 <button type="button" @click="subject=''; subjectLabel='Select subject'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Select subject</button>
-                                @foreach (['General Enquiry', 'Appointment Query', 'Feedback', 'Careers'] as $subj)
+                                @foreach ($page->content['subjects'] ?? ['General Enquiry', 'Appointment Query', 'Feedback', 'Careers'] as $subj)
                                     <button type="button" @click="subject='{{ $subj }}'; subjectLabel='{{ $subj }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $subj }}</button>
                                 @endforeach
                             </div>
@@ -133,8 +133,8 @@
         <aside class="space-y-6">
             <div class="bg-gradient-to-br from-navy-600 to-navy-700 rounded-2xl p-6 text-white">
                 <x-app-icon name="phone" class="w-8 h-8 text-teal-300 mb-3" />
-                <h3 class="font-heading font-bold mb-2">Need Immediate Assistance?</h3>
-                <p class="text-sm text-navy-200 mb-4">For urgent ENT care or emergency appointments, please call us directly.</p>
+                <h3 class="font-heading font-bold mb-2">{{ $page->content['urgent_box_title'] ?? 'Need Immediate Assistance?' }}</h3>
+                <p class="text-sm text-navy-200 mb-4">{{ $page->content['urgent_box_description'] ?? 'For urgent ENT care or emergency appointments, please call us directly.' }}</p>
                 <a href="tel:+919811703926" class="inline-flex w-full items-center justify-center gap-2 bg-white hover:bg-teal-50 text-teal-700 font-heading font-semibold px-4 py-2.5 rounded-full text-sm shadow-md transition-colors duration-200">
                     <x-app-icon name="phone" class="w-4 h-4" /> +91-98117 03926
                 </a>
@@ -144,16 +144,16 @@
             </div>
 
             <div class="bg-mint-50 rounded-2xl p-6">
-                <h3 class="font-heading font-bold text-navy-600 mb-3">We're Here for You</h3>
+                <h3 class="font-heading font-bold text-navy-600 mb-3">{{ $page->content['why_us_title'] ?? "We're Here for You" }}</h3>
                 <ul class="space-y-1">
-                    @foreach (['Expert ENT Specialists', 'Advanced Technology', 'Personalised Care', 'Multiple Centres for Your Convenience'] as $item)
+                    @foreach ($page->content['why_us_list'] ?? ['Expert ENT Specialists', 'Advanced Technology', 'Personalised Care', 'Multiple Centres for Your Convenience'] as $item)
                         <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors duration-200 text-sm text-navy-600">
                             <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $item }}
                         </li>
                     @endforeach
                 </ul>
                 <p class="text-xs text-navy-400 mt-4 flex items-center gap-1.5">
-                    <x-app-icon name="clock" class="w-3.5 h-3.5 shrink-0" /> Mon - Sat: 9 AM - 7 PM &middot; Sun: 10 AM - 2 PM
+                    <x-app-icon name="clock" class="w-3.5 h-3.5 shrink-0" /> {{ $page->content['office_hours'] ?? 'Mon - Sat: 9 AM - 7 PM · Sun: 10 AM - 2 PM' }}
                 </p>
             </div>
         </aside>
@@ -166,8 +166,8 @@
         <div class="relative mx-auto max-w-7xl px-6">
         <div class="flex items-end justify-between mb-6" data-reveal>
             <div>
-                <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">Visit Us</p>
-                <h2 class="font-heading font-bold text-white text-2xl mt-2">Our Centres</h2>
+                <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">{{ $page->content['centres_eyebrow'] ?? 'Visit Us' }}</p>
+                <h2 class="font-heading font-bold text-white text-2xl mt-2">{{ $page->content['centres_title'] ?? 'Our Centres' }}</h2>
             </div>
             <a href="{{ route('centres.index') }}" class="group inline-flex items-center gap-1 text-teal-300 hover:text-teal-200 font-heading font-semibold text-sm transition-colors">
                 View All <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
