@@ -14,6 +14,11 @@
     <section class="mx-auto max-w-7xl px-6 py-12">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 bg-mint-50 rounded-2xl p-6 text-center">
             @foreach ($page->content['stats_strip'] ?? [['stat' => '100+', 'label' => 'Team Members'], ['stat' => '6', 'label' => 'Centres Across India'], ['stat' => '20+', 'label' => 'Specialities'], ['stat' => 'Endless', 'label' => 'Opportunities']] as $item)
+                @php
+                    if ($item['label'] === 'Centres Across India') {
+                        $item['stat'] = (string) $centres->count();
+                    }
+                @endphp
                 <div>
                     <p class="font-heading font-bold text-xl text-navy-600">{{ $item['stat'] }}</p>
                     <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>

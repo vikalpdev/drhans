@@ -85,6 +85,7 @@ class PageResource extends Resource
 
                         Forms\Components\Repeater::make('content.stats')
                             ->label('Stats Band')
+                            ->helperText('A "Centres Across India" entry\'s number is auto-calculated from active centres and overrides whatever is entered here.')
                             ->schema([
                                 Forms\Components\TextInput::make('icon')
                                     ->helperText('Heroicon name, e.g. ear-implant, award, location, cog, heart.')
@@ -210,6 +211,7 @@ class PageResource extends Resource
 
                         Forms\Components\Repeater::make('content.why_choose_stats')
                             ->label('Why Choose Us — Stat Strip')
+                            ->helperText('A "Centres Across India" entry\'s number is auto-calculated from active centres and overrides whatever is entered here.')
                             ->schema([
                                 Forms\Components\TextInput::make('stat')->required(),
                                 Forms\Components\TextInput::make('label')->required(),
@@ -221,6 +223,7 @@ class PageResource extends Resource
 
                         Forms\Components\Repeater::make('content.impact_stats')
                             ->label('Impact Stats (Bottom Strip)')
+                            ->helperText('A "Centres Across India" entry\'s number is auto-calculated from active centres and overrides whatever is entered here.')
                             ->schema([
                                 Forms\Components\TextInput::make('stat')
                                     ->label('Display text (e.g. "50,000+")')
@@ -284,6 +287,7 @@ class PageResource extends Resource
 
                         Forms\Components\Repeater::make('content.impact_stats')
                             ->label('Impact Stats (Bottom Strip)')
+                            ->helperText('A "Centres Across India" entry\'s number is auto-calculated from active centres and overrides whatever is entered here.')
                             ->schema([
                                 Forms\Components\TextInput::make('stat')
                                     ->label('Display text (e.g. "50,000+")')
@@ -364,6 +368,7 @@ class PageResource extends Resource
 
                         Forms\Components\Repeater::make('content.stats_strip')
                             ->label('Stats Strip')
+                            ->helperText('A "Centres Across India" entry\'s number is auto-calculated from active centres and overrides whatever is entered here.')
                             ->schema([
                                 Forms\Components\TextInput::make('stat')->required(),
                                 Forms\Components\TextInput::make('label')->required(),

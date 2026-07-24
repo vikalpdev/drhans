@@ -87,6 +87,13 @@
         <section class="bg-mint-50 py-10">
             <div class="mx-auto max-w-7xl px-6 grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
                 @foreach ($page->content['impact_stats'] ?? [['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants Performed'], ['stat' => '35+', 'number' => 35, 'suffix' => '+', 'label' => 'Years of Clinical Excellence'], ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated Successfully'], ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'], ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment & Technologies']] as $item)
+                    @php
+                        if ($item['label'] === 'Centres Across India') {
+                            $item['stat'] = (string) $centres->count();
+                            $item['number'] = $centres->count();
+                            $item['suffix'] = '';
+                        }
+                    @endphp
                     <div class="{{ $loop->last ? 'col-span-2 lg:col-span-1' : '' }}">
                         <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $item['number'] }}, '{{ $item['suffix'] }}')" x-text="display">{{ $item['stat'] }}</p>
                         <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>

@@ -85,6 +85,13 @@
                     ['icon' => 'cog', 'stat' => 'Advanced', 'number' => null, 'suffix' => '', 'label' => 'Technology & Infrastructure'],
                     ['icon' => 'heart', 'stat' => 'Patient First', 'number' => null, 'suffix' => '', 'label' => 'Compassionate Care Every Step'],
                 ] as $s)
+                    @php
+                        if ($s['label'] === 'Centres Across India') {
+                            $s['stat'] = (string) $centres->count();
+                            $s['number'] = $centres->count();
+                            $s['suffix'] = '';
+                        }
+                    @endphp
                     <div class="flex flex-col items-center text-center gap-1.5 px-4 {{ !$loop->first ? 'lg:border-l lg:border-navy-100' : '' }} {{ $loop->last ? 'col-span-2 sm:col-span-1' : '' }}">
                         <x-app-icon :name="$s['icon']" class="w-6 h-6 text-teal-500" />
                         @if (($s['number'] ?? null) !== null)
@@ -339,7 +346,7 @@
             <div x-ref="specialistsTrack" @scroll.passive="updateProgress()" class="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
                 @foreach ($specialists as $specialist)
                     <div class="snap-start shrink-0 w-[75%] sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]">
-                        <x-card.specialist :specialist="$specialist" />
+                        <x-card.specialist :specialist="$specialist" :show-qualification="false" />
                     </div>
                 @endforeach
             </div>

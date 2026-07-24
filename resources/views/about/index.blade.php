@@ -81,6 +81,11 @@
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8" data-reveal>
                     @foreach ($page->content['why_choose_stats'] ?? [['stat' => '3500+', 'label' => 'Cochlear Implants Performed'], ['stat' => '35+', 'label' => 'Years of Clinical Excellence'], ['stat' => '6', 'label' => 'Centres Across India'], ['stat' => '50K+', 'label' => 'Patients Treated Successfully']] as $item)
+                        @php
+                            if ($item['label'] === 'Centres Across India') {
+                                $item['stat'] = (string) $centres->count();
+                            }
+                        @endphp
                         <div class="bg-white/10 backdrop-blur-sm text-white rounded-xl p-3 text-center">
                             <p class="font-heading font-bold text-teal-300">{{ $item['stat'] }}</p>
                             <p class="text-[10px] mt-1 leading-tight text-navy-100">{{ $item['label'] }}</p>
@@ -149,6 +154,13 @@
     <section class="bg-mint-50 py-10">
         <div class="mx-auto max-w-7xl px-6 grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
             @foreach ($page->content['impact_stats'] ?? [['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants'], ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated'], ['stat' => '9', 'number' => 9, 'suffix' => '', 'label' => 'Expert Specialists'], ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment'], ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India']] as $item)
+                @php
+                    if ($item['label'] === 'Centres Across India') {
+                        $item['stat'] = (string) $centres->count();
+                        $item['number'] = $centres->count();
+                        $item['suffix'] = '';
+                    }
+                @endphp
                 <div class="{{ $loop->last ? 'col-span-2 lg:col-span-1' : '' }}">
                     <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $item['number'] }}, '{{ $item['suffix'] }}')" x-text="display">{{ $item['stat'] }}</p>
                     <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>
