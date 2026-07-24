@@ -113,21 +113,16 @@
         class="bg-white py-16"
         x-data="{
             autoplayId: null,
+            currentIndex: 0,
             scrollTrack(dir) {
                 const track = this.$refs.centresTrack;
-                const card = track.querySelector(':scope > div');
-                const amount = card ? card.offsetWidth + 24 : 320;
-                const maxScroll = track.scrollWidth - track.clientWidth;
-
-                if (dir > 0 && track.scrollLeft >= maxScroll - 10) {
-                    track.scrollTo({ left: 0, behavior: 'smooth' });
-                } else if (dir < 0 && track.scrollLeft <= 10) {
-                    track.scrollTo({ left: maxScroll, behavior: 'smooth' });
-                } else {
-                    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
-                }
+                const cards = [...track.children];
+                if (!cards.length) return;
+                this.currentIndex = (this.currentIndex + dir + cards.length) % cards.length;
+                track.scrollTo({ left: cards[this.currentIndex].offsetLeft, behavior: 'smooth' });
             },
             startAutoplay() {
+                this.stopAutoplay();
                 this.autoplayId = setInterval(() => this.scrollTrack(1), 4000);
             },
             stopAutoplay() {
@@ -285,6 +280,7 @@
         class="relative bg-mint-50 py-16 overflow-hidden"
         x-data="{
             autoplayId: null,
+            currentIndex: 0,
             scrollProgress: 8,
             updateProgress() {
                 const track = this.$refs.specialistsTrack;
@@ -293,17 +289,10 @@
             },
             scrollTrack(dir) {
                 const track = this.$refs.specialistsTrack;
-                const card = track.querySelector(':scope > div');
-                const amount = card ? card.offsetWidth + 20 : 260;
-                const maxScroll = track.scrollWidth - track.clientWidth;
-
-                if (dir > 0 && track.scrollLeft >= maxScroll - 10) {
-                    track.scrollTo({ left: 0, behavior: 'smooth' });
-                } else if (dir < 0 && track.scrollLeft <= 10) {
-                    track.scrollTo({ left: maxScroll, behavior: 'smooth' });
-                } else {
-                    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
-                }
+                const cards = [...track.children];
+                if (!cards.length) return;
+                this.currentIndex = (this.currentIndex + dir + cards.length) % cards.length;
+                track.scrollTo({ left: cards[this.currentIndex].offsetLeft, behavior: 'smooth' });
             },
             startAutoplay() {
                 this.stopAutoplay();
