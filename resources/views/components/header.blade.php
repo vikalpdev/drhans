@@ -11,7 +11,7 @@
                 <a href="{{ $siteSettings->phoneUrl() }}" class="font-semibold hover:text-teal-300">{{ $siteSettings->phone }}</a>
             </div>
             <div class="flex items-center gap-6">
-                <span class="flex items-center gap-1"><x-app-icon name="location" class="w-4 h-4" /> Select Location</span>
+               
                 <a href="{{ $siteSettings->whatsappUrl() }}" target="_blank" class="flex items-center gap-1 hover:text-teal-300">
                     <x-app-icon name="whatsapp" class="w-4 h-4" /> WhatsApp Us
                 </a>
