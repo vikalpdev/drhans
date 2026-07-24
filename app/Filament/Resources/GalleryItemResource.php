@@ -51,7 +51,8 @@ class GalleryItemResource extends Resource
             ->columns([
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image')
                     ->collection('image')
-                    ->conversion('thumb'),
+                    ->conversion('thumb')
+                    ->size(60),
                 Tables\Columns\TextColumn::make('title')->searchable(),
                 Tables\Columns\TextColumn::make('category.name')->badge(),
                 Tables\Columns\TextColumn::make('centre.name'),
