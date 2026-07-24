@@ -46,7 +46,7 @@
         </div>
 
         <div class="flex items-center gap-3 mb-6">
-            <h2 class="font-heading font-bold text-xl text-navy-600">ENT Surgeons</h2>
+            <h2 class="font-heading font-bold text-xl text-navy-600">Otorhinolaryngologists</h2>
             <span class="text-xs font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $surgeons->count() }}</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">

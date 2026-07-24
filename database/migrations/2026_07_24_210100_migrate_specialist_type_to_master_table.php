@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private array $types = [
-        'ent_surgeon' => ['name' => 'ENT Surgeon', 'slug' => 'ent-surgeon'],
+        'ent_surgeon' => ['name' => 'Otorhinolaryngologist', 'slug' => 'ent-surgeon'],
         'audiologist' => ['name' => 'Audiologist', 'slug' => 'audiologist'],
         'allied' => ['name' => 'Allied Specialist', 'slug' => 'allied-specialist'],
     ];
