@@ -32,11 +32,13 @@ class SpecialistTypeResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn (Set $set, ?string $state, ?SpecialistType $record) => $record === null ? $set('slug', Str::slug($state)) : null),
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255)
-                    ->unique(ignoreRecord: true),
+                    ->unique(ignoreRecord: true)
+                    ->disabled(fn (?SpecialistType $record) => $record !== null)
+                    ->helperText('Locked after creation — application code refers to specialists by this slug.'),
                 Forms\Components\TextInput::make('order')
                     ->required()
                     ->numeric()

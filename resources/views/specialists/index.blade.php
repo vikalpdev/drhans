@@ -7,7 +7,7 @@
         <x-slot:stats>
             <span class="flex items-center gap-1.5">
                 <x-app-icon name="user-group" class="w-4 h-4 text-teal-500 shrink-0" />
-                <strong class="text-navy-600">{{ $surgeons->count() + $allied->count() }}</strong> Expert Specialists
+                <strong class="text-navy-600">{{ $surgeons->count() }}</strong> Expert Specialists
             </span>
             <span class="flex items-center gap-1.5">
                 <x-app-icon name="location" class="w-4 h-4 text-teal-500 shrink-0" />
