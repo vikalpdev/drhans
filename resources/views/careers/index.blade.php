@@ -27,8 +27,8 @@
         </div>
     </section>
 
-    <section x-data="{ dept: 'all' }" class="mx-auto max-w-7xl px-6 pb-16 grid lg:grid-cols-[1fr_340px] gap-8">
-        <div>
+    <section x-data="{ dept: 'all' }" class="mx-auto max-w-7xl px-6 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
+        <div class="min-w-0">
             <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Current Openings</h2>
             <div class="flex flex-nowrap sm:flex-wrap gap-2.5 mb-6 bg-mint-50 border border-navy-100 rounded-2xl p-2 w-full sm:w-fit overflow-x-auto sm:overflow-visible [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none;">
                 <button @click="dept = 'all'" :class="dept === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'" class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200">
