@@ -1,7 +1,6 @@
 @php
     $chatbotCentres = \App\Models\Centre::where('is_active', true)->orderBy('order')->get();
-    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->orderByRaw('TRIM(name)')->get();
-    $chatbotDepartments = ['ENT', 'Hearing Care', 'Vertigo'];
+    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->with('centres')->orderByRaw('TRIM(name)')->get();
 @endphp
 
 <div
@@ -10,7 +9,18 @@
         step: 'name',
         input: '',
         errorMsg: '',
-        form: { name: '', phone: '', email: '', centre_id: '', centreLabel: '', department: '', specialist_id: '', specialistLabel: '', preferred_date: '', preferred_time: '' },
+        form: { name: '', phone: '', email: '', centre_id: '', centreLabel: '', department: 'ENT', specialist_id: '', specialistLabel: '', preferred_date: '', preferred_time: '' },
+        specialistCentres: @js($chatbotSpecialists->mapWithKeys(fn ($s) => [$s->id => $s->centres->pluck('id')])),
+        specialistAvailability: @js($chatbotSpecialists->mapWithKeys(fn ($s) => [$s->id => ['Morning' => $s->available_morning, 'Afternoon' => $s->available_afternoon, 'Evening' => $s->available_evening]])),
+        availableForCentre(specialistId) {
+            if (!this.form.centre_id) return true;
+            return (this.specialistCentres[specialistId] || []).includes(this.form.centre_id);
+        },
+        availableAtTime(label) {
+            if (label === 'No preference' || !this.form.specialist_id) return true;
+            const availability = this.specialistAvailability[this.form.specialist_id];
+            return availability ? availability[label] !== false : true;
+        },
         messages: [{ from: 'bot', text: 'Hi! I\'m the booking assistant for Dr Hans\' Centre for ENT. What\'s your name?' }],
         addBot(text) { this.messages.push({ from: 'bot', text }); this.scrollDown(); },
         addUser(text) { this.messages.push({ from: 'user', text }); this.scrollDown(); },
@@ -72,14 +82,8 @@
             this.form.centre_id = id;
             this.form.centreLabel = label;
             this.addUser(label);
-            this.step = 'department';
-            this.addBot('Which department do you need?');
-        },
-        selectDepartment(dept) {
-            this.form.department = dept;
-            this.addUser(dept);
             this.step = 'specialist';
-            this.addBot('Do you have a preferred doctor? You can also skip this.');
+            this.addBot('Do you have a preferred doctor at this centre? You can also skip this.');
         },
         selectSpecialist(id, label) {
             this.form.specialist_id = id;
@@ -152,7 +156,7 @@
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed bottom-[136px] right-5 z-50"
+    class="fixed bottom-20 sm:bottom-[136px] right-5 z-50"
 >
     {{-- Toggle button --}}
     <button
@@ -209,7 +213,7 @@
             {{-- Time choices --}}
             <div x-show="step === 'time'" class="flex flex-wrap gap-2 pt-1">
                 @foreach (['Morning', 'Afternoon', 'Evening', 'No preference'] as $time)
-                    <button type="button" @click="selectTime('{{ $time }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $time }}</button>
+                    <button type="button" x-show="availableAtTime('{{ $time }}')" @click="selectTime('{{ $time }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $time }}</button>
                 @endforeach
             </div>
 
@@ -220,18 +224,11 @@
                 @endforeach
             </div>
 
-            {{-- Department choices --}}
-            <div x-show="step === 'department'" class="flex flex-wrap gap-2 pt-1">
-                @foreach ($chatbotDepartments as $dept)
-                    <button type="button" @click="selectDepartment('{{ $dept }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $dept }}</button>
-                @endforeach
-            </div>
-
             {{-- Specialist choices --}}
             <div x-show="step === 'specialist'" class="flex flex-wrap gap-2 pt-1">
                 <button type="button" @click="skipSpecialist()" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">No preference</button>
                 @foreach ($chatbotSpecialists as $specialist)
-                    <button type="button" @click="selectSpecialist({{ $specialist->id }}, '{{ addslashes($specialist->name) }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $specialist->name }}</button>
+                    <button type="button" x-show="availableForCentre({{ $specialist->id }})" @click="selectSpecialist({{ $specialist->id }}, '{{ addslashes($specialist->name) }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $specialist->name }}</button>
                 @endforeach
             </div>
 
@@ -241,7 +238,6 @@
                 <p><span class="font-semibold text-navy-500">Phone:</span> <span x-text="form.phone"></span></p>
                 <p x-show="form.email"><span class="font-semibold text-navy-500">Email:</span> <span x-text="form.email"></span></p>
                 <p><span class="font-semibold text-navy-500">Centre:</span> <span x-text="form.centreLabel"></span></p>
-                <p><span class="font-semibold text-navy-500">Department:</span> <span x-text="form.department"></span></p>
                 <p x-show="form.specialistLabel"><span class="font-semibold text-navy-500">Doctor:</span> <span x-text="form.specialistLabel"></span></p>
                 <p><span class="font-semibold text-navy-500">Date:</span> <span x-text="form.preferred_date"></span></p>
                 <p><span class="font-semibold text-navy-500">Time:</span> <span x-text="form.preferred_time || 'No preference'"></span></p>
@@ -289,21 +285,26 @@
         </div>
 
         {{-- Date input footer --}}
-        <div x-show="step === 'date'" class="border-t border-navy-100 p-3 flex items-center gap-2 shrink-0">
-            <input
-                type="date"
-                x-model="form.preferred_date"
-                :min="new Date().toISOString().split('T')[0]"
-                class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-base sm:text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
-            >
-            <button
-                type="button"
-                @click="submitDate()"
-                aria-label="Send"
-                class="w-9 h-9 rounded-xl bg-teal-500 hover:bg-teal-600 flex items-center justify-center text-white shrink-0 transition-colors"
-            >
-                <x-app-icon name="chevron-right" class="w-4 h-4" />
-            </button>
+        <div x-show="step === 'date'" class="border-t border-navy-100 p-3 shrink-0">
+            <p class="text-xs text-navy-500 mb-2 flex items-center gap-1.5">
+                <x-app-icon name="calendar" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> Tap the field below to pick a date
+            </p>
+            <div class="flex items-center gap-2">
+                <input
+                    type="date"
+                    x-model="form.preferred_date"
+                    :min="new Date().toISOString().split('T')[0]"
+                    class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-base sm:text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                >
+                <button
+                    type="button"
+                    @click="submitDate()"
+                    aria-label="Send"
+                    class="w-9 h-9 rounded-xl bg-teal-500 hover:bg-teal-600 flex items-center justify-center text-white shrink-0 transition-colors"
+                >
+                    <x-app-icon name="chevron-right" class="w-4 h-4" />
+                </button>
+            </div>
         </div>
     </div>
 </div>
