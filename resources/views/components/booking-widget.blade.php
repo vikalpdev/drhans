@@ -1,10 +1,16 @@
-@props(['centres', 'specialist' => null])
+@props(['centres', 'specialist' => null, 'specialists' => null])
 
 <div
     class="bg-white rounded-2xl shadow-lg p-6 h-fit"
     x-data="{
         open: null,
         centre: '', centreLabel: 'Choose a centre',
+        doctor: '', doctorLabel: 'Any Available Doctor',
+        doctorCentres: @js(($specialists ?? collect())->mapWithKeys(fn ($s) => [$s->slug => $s->centres->pluck('slug')])),
+        availableForCentre(slug) {
+            if (!this.centre) return true;
+            return (this.doctorCentres[slug] || []).includes(this.centre);
+        },
         date: '', dateLabel: 'Choose date',
         calMonth: new Date().getMonth(),
         calYear: new Date().getFullYear(),
@@ -52,6 +58,8 @@
     <form action="{{ route('appointment.create') }}" method="GET" class="space-y-4">
         @if ($specialist)
             <input type="hidden" name="specialist" value="{{ $specialist }}">
+        @else
+            <input type="hidden" name="specialist" x-bind:value="doctor">
         @endif
         <input type="hidden" name="centre" x-bind:value="centre">
         <input type="hidden" name="date" x-bind:value="date">
@@ -76,11 +84,39 @@
                 >
                     <button type="button" @click="centre=''; centreLabel='Choose a centre'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Choose a centre</button>
                     @foreach ($centres as $centre)
-                        <button type="button" @click="centre='{{ $centre->slug }}'; centreLabel='{{ $centre->name }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $centre->name }}</button>
+                        <button type="button" @click="centre='{{ $centre->slug }}'; centreLabel='{{ $centre->name }}'; open=null; if (!availableForCentre(doctor)) { doctor=''; doctorLabel='Any Available Doctor'; }" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $centre->name }}</button>
                     @endforeach
                 </div>
             </div>
         </div>
+
+        @if (!$specialist && $specialists && $specialists->count())
+            <div>
+                <label class="block text-xs font-semibold text-navy-500 mb-1.5">Select Doctor (Optional)</label>
+                <div class="relative">
+                    <button
+                        type="button"
+                        @click="open = (open === 'doctor' ? null : 'doctor')"
+                        class="w-full flex items-center gap-3 rounded-xl border bg-white pl-4 pr-3.5 py-2.5 text-left transition-colors duration-200"
+                        :class="open === 'doctor' ? 'border-teal-500 ring-1 ring-teal-500' : 'border-navy-100 hover:border-teal-300'"
+                    >
+                        <x-app-icon name="user" class="w-4 h-4 text-navy-400 shrink-0" />
+                        <span class="flex-1 text-sm text-navy-600 truncate" x-text="doctorLabel"></span>
+                        <x-app-icon name="chevron-down" class="w-4 h-4 text-navy-400 shrink-0 transition-transform duration-150" x-bind:class="open === 'doctor' && 'rotate-180'" />
+                    </button>
+                    <div
+                        x-show="open === 'doctor'" x-cloak
+                        x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+                        class="absolute z-20 mt-2 w-full bg-white rounded-xl shadow-xl border border-navy-100 py-2 max-h-56 overflow-y-auto"
+                    >
+                        <button type="button" @click="doctor=''; doctorLabel='Any Available Doctor'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">Any Available Doctor</button>
+                        @foreach ($specialists as $doc)
+                            <button type="button" x-show="availableForCentre('{{ $doc->slug }}')" @click="doctor='{{ $doc->slug }}'; doctorLabel='{{ addslashes($doc->name) }}'; open=null" class="block w-full text-left px-4 py-2 text-sm text-navy-600 hover:bg-mint-100 transition-colors">{{ $doc->name }}</button>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <div>
             <label class="block text-xs font-semibold text-navy-500 mb-1.5">Preferred Date</label>
