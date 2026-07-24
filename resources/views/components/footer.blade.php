@@ -111,12 +111,11 @@
 
     <div class="relative border-t border-white/10">
         <div class="mx-auto max-w-7xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-navy-300">
-            <p>&copy; {{ now()->year }} Dr Hans' Centre for ENT. All Rights Reserved.</p>
-            <div class="flex flex-wrap items-center justify-center gap-4">
+            <p class="text-center">&copy; {{ now()->year }} Dr Hans' Centre for ENT. All Rights Reserved.</p>
+            <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
                 <a href="{{ $privacyUrl }}" class="hover:text-teal-300 transition-colors">Privacy Policy</a>
                 <a href="{{ $termsUrl }}" class="hover:text-teal-300 transition-colors">Terms &amp; Conditions</a>
                 <a href="{{ $refundUrl }}" class="hover:text-teal-300 transition-colors">Refund Policy</a>
-                <span class="text-navy-500">&middot;</span>
                 <a href="https://www.vdpl.co.in" target="_blank" rel="noopener" class="hover:text-teal-300 transition-colors">Built by VDPL</a>
             </div>
         </div>
