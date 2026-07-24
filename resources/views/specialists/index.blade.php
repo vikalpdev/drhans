@@ -46,24 +46,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
             @foreach ($surgeons as $specialist)
                 <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity>
-                    <x-card.specialist :specialist="$specialist" />
+                    <x-card.specialist :specialist="$specialist" :show-qualification="false" />
                 </div>
             @endforeach
         </div>
-
-        @if ($allied->count())
-            <div class="flex items-center gap-3 mb-6">
-                <h2 class="font-heading font-bold text-xl text-navy-600">Audiologists &amp; Allied Specialists</h2>
-                <span class="text-xs font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $allied->count() }}</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                @foreach ($allied as $specialist)
-                    <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity>
-                        <x-card.specialist :specialist="$specialist" />
-                    </div>
-                @endforeach
-            </div>
-        @endif
     </section>
 
     <section class="relative bg-gradient-to-br from-navy-600 to-navy-700 py-16 overflow-hidden">

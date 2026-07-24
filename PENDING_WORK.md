@@ -41,6 +41,19 @@ To fix: create a `Page` record per slug (e.g. `centres`, `treatments`, `conditio
   ln -s "$(pwd)/storage/app/public" public/storage
   ```
 - After the symlink fix + `php artisan media-library:regenerate`, confirmed the homepage founder photo now displays correctly (screenshot verified).
+- **RECURRED 2026-07-24**: the `public/storage` symlink broke again — confirmed via `curl -I` on `/storage/.../*.webp` returning `403` with an `X-Powered-By: PHP` header (a working static file never touches PHP; this means the request fell through to Laravel's `index.php`, i.e. the symlink is missing/broken). Reported by user: photo saved in admin for a specialist but not showing on `/specialists`. Confirmed `public/storage` is correctly `.gitignore`d (not tracked), so `git pull` isn't the cause — most likely `php artisan storage:link` got re-run during a later deploy and silently failed (exec() disabled on Hostinger), clobbering the manual symlink. **Fix (same as before, run on production via SSH):**
+  ```bash
+  cd <site root>
+  rm -rf public/storage
+  ln -s "$(pwd)/storage/app/public" public/storage
+  php artisan media-library:regenerate --force
+  ```
+  **Going forward: never run `php artisan storage:link` on this production server** — always use the manual `ln -s` above. Add this as a standing note in any deploy checklist.
+- **Root cause found 2026-07-24 (bigger than the symlink):** the symlink was actually fine when checked with `namei -l`. The real problem: most media DB rows on production point to files that were **never physically copied to the server**. Confirmed via `Media::count()` (10 rows on prod) vs `ls storage/app/public/` (only folders `18`, `19` existed — the two most recent admin uploads). Comparing media IDs between local and prod:
+  - **IDs 1, 7, 8** exist on both sides with identical filenames (carried over via a DB copy, files never followed) — fixed by copying `storage/app/public/{1,7,8}/` from local dev to production via SFTP.
+  - **IDs 12, 13, 14, 16, 20** exist only in production's DB with no file on disk anywhere (not even locally) — these uploads silently failed to persist at write time on production. Affected records: Specialist "Dr. Vivek Gupta" (id 2), Specialist "Dr. Ruchi Bansal" (id 3), Gallery items "Delhi (Greater Kailash)" (id 1), "Gurgaon" (id 2), "Noida" (id 3) — **need re-upload via admin panel, originals are unrecoverable.**
+  - **Not yet root-caused:** why do production uploads sometimes save the DB row but not the file? Worth watching — if it recurs after the next photo upload, check disk quota and `QUEUE_CONNECTION` (see below) as suspects.
+  - **Lesson for future deploys:** a database migrate/seed only carries metadata — actual files under `storage/app/public` (gitignored, not part of any migration) must be separately transferred (rsync/SFTP) whenever going from local dev to production, or whenever production's DB is refreshed from a local copy.
 - **Not yet double-checked**: whether *other* specialist photos / gallery images / centre photos on production also render correctly now that the symlink is fixed. Worth a quick pass through `/specialists`, `/gallery`, `/our-centres` on the live site to confirm no other broken images remain.
 - **Settings table starts empty on production** — `/admin/manage-settings` needs the real phone/email/social links/Linktree/logo/favicon filled in on production (these were only ever set in the local dev database, never carried over — Settings didn't exist as a concept until partway through this session).
   - Note: an earlier attempt to save logo/favicon on production failed with "no visible response" — root-caused to the exact same symlink/exec() issue above (well, actually to a migration timing issue described in-session). Should now work cleanly since the underlying causes are fixed. **User should retry uploading logo + favicon on production and confirm it saves and displays.**
