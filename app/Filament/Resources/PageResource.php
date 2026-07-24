@@ -252,6 +252,12 @@ class PageResource extends Resource
                 // Chairman's Desk Page Fields
                 Forms\Components\Section::make('Chairman\'s Desk Content')
                     ->schema([
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('hero_image')
+                            ->collection('hero_image')
+                            ->image()
+                            ->imageEditor()
+                            ->helperText('Optional. Shown in the hero banner at the top of this page. Leave empty to hide the hero image.')
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('content.hero_title')
                             ->label('Hero Title'),
                         Forms\Components\Textarea::make('content.hero_subtitle')

@@ -3,8 +3,8 @@
         :title="$page->content['hero_title'] ?? 'From the Chairman\'s Desk'"
         :subtitle="$page->content['hero_subtitle'] ?? 'For over three decades, my mission has been simple yet profound - to restore the gift of hearing, balance and communication, and to bring hope back to the lives of thousands of patients and their families.'"
         :breadcrumbs="['About Us' => route('about.index'), 'Chairman\'s Desk' => null]"
-        :image-model="$chairman"
-        image-collection="photo"
+        :image-model="$page"
+        image-collection="hero_image"
     />
 
     @if ($chairman)
