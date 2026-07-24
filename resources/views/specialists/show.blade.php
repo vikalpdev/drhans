@@ -82,7 +82,9 @@
                     @endif
                 </div>
 
-                <x-booking-widget :centres="$specialist->centres" :specialist="$specialist->slug" />
+                @if ($specialist->centres->count())
+                    <x-booking-widget :centres="$specialist->centres" :specialist="$specialist->slug" />
+                @endif
             </div>
         </div>
     </section>
