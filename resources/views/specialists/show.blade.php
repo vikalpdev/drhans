@@ -281,6 +281,13 @@
                     </div>
 
                     <div>
+                        <label class="text-xs font-medium text-navy-500">Your Phone Number</label>
+                        <input type="tel" name="phone" value="{{ old('phone') }}" class="mt-1.5 w-full rounded-xl border border-navy-100 px-4 py-2.5 text-sm text-navy-600 bg-white transition-colors duration-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:outline-none @error('phone') border-red-400 @enderror" placeholder="Optional — not shown publicly">
+                        <p class="text-[11px] text-navy-400 mt-1">Helps our team verify your visit. Never displayed on the site.</p>
+                        @error('phone') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
                         <label class="text-xs font-medium text-navy-500">Your Review</label>
                         <textarea name="comment" rows="4" class="mt-1.5 w-full rounded-xl border border-navy-100 px-4 py-2.5 text-sm text-navy-600 bg-white transition-colors duration-200 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:outline-none @error('comment') border-red-400 @enderror" placeholder="Share details of your experience...">{{ old('comment') }}</textarea>
                         @error('comment') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror

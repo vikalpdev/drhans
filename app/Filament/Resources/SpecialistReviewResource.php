@@ -35,6 +35,10 @@ class SpecialistReviewResource extends Resource
                     ->relationship('specialist', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Phone (for verification, not public)')
+                    ->tel()
+                    ->maxLength(20),
                 Forms\Components\Select::make('rating')
                     ->options([1 => '1 Star', 2 => '2 Stars', 3 => '3 Stars', 4 => '4 Stars', 5 => '5 Stars'])
                     ->required(),
@@ -54,6 +58,7 @@ class SpecialistReviewResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('specialist.name')->searchable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->label('Reviewer'),
+                Tables\Columns\TextColumn::make('phone')->label('Phone')->toggleable()->default('—'),
                 Tables\Columns\TextColumn::make('rating')
                     ->formatStateUsing(fn (int $state) => str_repeat('★', $state).str_repeat('☆', 5 - $state)),
                 Tables\Columns\TextColumn::make('comment')->limit(60),
