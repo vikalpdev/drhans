@@ -111,6 +111,7 @@
                             <a href="{{ route('specialists.audiologists') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Know Your Audiologist</a>
                             <a href="{{ route('gallery.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Photo Gallery</a>
                             <a href="{{ route('gallery.videos') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Video Gallery</a>
+                            <a href="{{ route('centres.share-experience') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Share Your Experience</a>
                             <a href="{{ route('careers.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Careers</a>
                             <a href="{{ route('contact.index') }}" class="block px-4 py-2 text-sm hover:bg-mint-100">Contact Us</a>
                         </div>
@@ -147,6 +148,7 @@
                 <a href="{{ route('conditions.index') }}" class="py-3 border-b border-navy-50">Conditions Treated</a>
                 <a href="{{ route('gallery.index') }}" class="py-3 border-b border-navy-50">Photo Gallery</a>
                 <a href="{{ route('gallery.videos') }}" class="py-3 border-b border-navy-50">Video Gallery</a>
+                <a href="{{ route('centres.share-experience') }}" class="py-3 border-b border-navy-50">Share Your Experience</a>
                 <a href="{{ route('careers.index') }}" class="py-3 border-b border-navy-50">Careers</a>
                 <a href="{{ route('contact.index') }}" class="py-3 border-b border-navy-50">Contact Us</a>
                 <a href="{{ route('appointment.create') }}" class="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 text-white font-semibold px-5 py-3 rounded-full shadow-md shadow-navy-600/20">

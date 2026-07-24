@@ -61,12 +61,16 @@ class SpecialistReviewResource extends Resource
                 Tables\Columns\TextColumn::make('phone')->label('Phone')->toggleable()->default('—'),
                 Tables\Columns\TextColumn::make('rating')
                     ->formatStateUsing(fn (int $state) => str_repeat('★', $state).str_repeat('☆', 5 - $state)),
-                Tables\Columns\TextColumn::make('comment')->limit(60),
+                Tables\Columns\TextColumn::make('comment')->limit(60)->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')->badge()->color(fn (string $state) => match ($state) {
                     'pending' => 'warning',
                     'approved' => 'success',
                     'rejected' => 'danger',
                 }),
+                Tables\Columns\ToggleColumn::make('is_approved')
+                    ->label('Active')
+                    ->getStateUsing(fn (SpecialistReview $record) => $record->status === 'approved')
+                    ->updateStateUsing(fn (SpecialistReview $record, $state) => $record->update(['status' => $state ? 'approved' : 'rejected'])),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
@@ -78,16 +82,6 @@ class SpecialistReviewResource extends Resource
                     ->relationship('specialist', 'name'),
             ])
             ->actions([
-                Tables\Actions\Action::make('approve')
-                    ->icon('heroicon-o-check')
-                    ->color('success')
-                    ->visible(fn (SpecialistReview $record) => $record->status !== 'approved')
-                    ->action(fn (SpecialistReview $record) => $record->update(['status' => 'approved'])),
-                Tables\Actions\Action::make('reject')
-                    ->icon('heroicon-o-x-mark')
-                    ->color('danger')
-                    ->visible(fn (SpecialistReview $record) => $record->status !== 'rejected')
-                    ->action(fn (SpecialistReview $record) => $record->update(['status' => 'rejected'])),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

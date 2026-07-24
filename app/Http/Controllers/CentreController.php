@@ -12,4 +12,11 @@ class CentreController extends Controller
             'centres' => Centre::orderBy('order')->get(),
         ]);
     }
+
+    public function shareExperience()
+    {
+        return view('centres.share-experience', [
+            'centres' => Centre::orderBy('order')->get(),
+        ]);
+    }
 }

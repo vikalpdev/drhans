@@ -77,6 +77,14 @@ class CentreResource extends Resource
                             ->image()
                             ->imageEditor(),
                     ]),
+                Forms\Components\Section::make('Review Platform Links')
+                    ->description('Used on the "Share Your Experience" page to direct patients to leave a review for this centre.')
+                    ->schema([
+                        Forms\Components\TextInput::make('practo_url')->label('Practo Review URL')->url()->maxLength(255),
+                        Forms\Components\TextInput::make('justdial_url')->label('Justdial Review URL')->url()->maxLength(255),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
                 Forms\Components\Section::make('SEO')
                     ->schema([
                         Forms\Components\TextInput::make('meta_title')->maxLength(255),
