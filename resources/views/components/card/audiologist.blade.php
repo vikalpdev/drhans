@@ -1,6 +1,6 @@
 @props(['specialist'])
 
-<div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 overflow-hidden flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="group bg-white rounded-2xl border border-navy-100 hover:border-teal-100 overflow-hidden flex flex-col h-full shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
     <div class="relative aspect-[4/3] overflow-hidden">
         <x-media-image :model="$specialist" collection="photo" conversion="card" :alt="$specialist->name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
     </div>
@@ -11,7 +11,7 @@
 
         @if ($specialist->designation)
             <div class="mt-2.5">
-                <span class="inline-flex w-fit items-center text-[11px] font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $specialist->designation }}</span>
+                <span class="inline-flex items-center text-xs font-semibold text-teal-700 bg-mint-100 border border-teal-100 px-3 py-1.5 rounded-lg leading-snug">{{ $specialist->designation }}</span>
             </div>
         @endif
 

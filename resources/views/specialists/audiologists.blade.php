@@ -1,4 +1,4 @@
-<x-layouts.app title="Our Team of Audiologists">
+<x-layouts.app title="Our Team of Audiologists" description="Meet the audiologists at Dr Hans' Centre for ENT, specialists in hearing assessment, cochlear implant rehabilitation and hearing aid fitting.">
     <x-hero
         title="Know Your Audiologist"
         subtitle="Meet our team of experienced audiologists dedicated to helping you hear better, backed by advanced diagnostics and personalised hearing care."
@@ -33,7 +33,7 @@
         @if ($audiologists->count())
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @foreach ($audiologists as $specialist)
-                    <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity>
+                    <div x-show="centre === 'all' || {{ collect($specialist->centres)->pluck('slug')->map(fn ($s) => "centre === '$s'")->implode(' || ') ?: 'false' }}" x-transition.opacity class="h-full">
                         <x-card.audiologist :specialist="$specialist" />
                     </div>
                 @endforeach
