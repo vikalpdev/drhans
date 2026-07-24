@@ -16,7 +16,7 @@ class Specialist extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name', 'slug', 'type', 'designation', 'qualifications',
+        'name', 'slug', 'meta_title', 'meta_description', 'type', 'designation', 'qualifications',
         'is_chairman', 'is_founder', 'experience_years', 'procedures_count',
         'bio', 'expertise', 'interests', 'education', 'experience_timeline',
         'quote', 'order',

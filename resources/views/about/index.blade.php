@@ -120,10 +120,11 @@
             <div>
                 <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">Our Founder</p>
                 <h2 class="font-heading font-bold text-2xl text-navy-600 mt-2">{{ $founder->name }}</h2>
-                <div class="mt-3 space-y-3">
-                    @foreach (array_slice(explode("\n\n", $founder->bio), 0, 2) as $paragraph)
-                        <p class="text-sm text-navy-500 leading-relaxed">{{ $paragraph }}</p>
-                    @endforeach
+                <div class="mt-3 space-y-3 [&>p]:text-sm [&>p]:text-navy-500 [&>p]:leading-relaxed">
+                    @php
+                        preg_match_all('/<p>.*?<\/p>/s', $founder->bio ?? '', $founderBioMatches);
+                    @endphp
+                    {!! implode('', array_slice($founderBioMatches[0] ?? [], 0, 2)) !!}
                 </div>
                 <ul class="mt-4 space-y-2 text-sm text-navy-600">
                     @foreach ($founder->expertise ?? [] as $item)

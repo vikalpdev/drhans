@@ -23,7 +23,14 @@
         <div class="relative mx-auto max-w-7xl px-6">
             <div class="text-center mb-10" data-reveal>
                 <p class="inline-block text-teal-300 font-semibold text-xs tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full">What We Treat</p>
-                <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-3">Explore Conditions by Category</h2>
+                @if ($activeCategory)
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-3">{{ \App\Models\ConditionTreated::CATEGORIES[$activeCategory] }} Conditions</h2>
+                    <a href="{{ route('conditions.index') }}" class="inline-flex items-center gap-1.5 mt-3 text-sm text-teal-300 hover:text-teal-200 font-semibold transition-colors">
+                        <x-app-icon name="close" class="w-3.5 h-3.5" /> Clear filter — view all conditions
+                    </a>
+                @else
+                    <h2 class="font-heading font-bold text-2xl lg:text-3xl text-white mt-3">Explore Conditions by Category</h2>
+                @endif
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach ($conditions as $condition)

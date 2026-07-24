@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Centre;
 use App\Models\ConditionTreated;
+use Illuminate\Http\Request;
 
 class ConditionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $category = $request->query('category');
+
         return view('conditions.index', [
-            'conditions' => ConditionTreated::orderBy('order')->get(),
+            'conditions' => ConditionTreated::when($category, fn ($q) => $q->where('category', $category))
+                ->orderBy('order')
+                ->get(),
+            'activeCategory' => $category && isset(ConditionTreated::CATEGORIES[$category]) ? $category : null,
         ]);
     }
 

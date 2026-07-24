@@ -60,6 +60,7 @@
                     <div x-show="conditionsOpen" x-cloak x-transition class="absolute right-0 top-full pt-3 w-[820px]">
                         <div class="bg-white rounded-2xl shadow-xl border border-navy-100 p-6">
                             @php
+                                $maxPerColumn = 6;
                                 $multiGroups = $navConditionGroups->filter(fn ($g) => $g['items']->count() > 1)->values();
                                 $singleItems = $navConditionGroups->filter(fn ($g) => $g['items']->count() === 1)->map(fn ($g) => $g['items']->first())->values();
                             @endphp
@@ -68,25 +69,24 @@
                                     <div class="{{ !$loop->first ? 'pl-6 border-l border-navy-100' : '' }}">
                                         <p class="inline-block text-teal-700 font-semibold text-[11px] tracking-wide uppercase bg-mint-100 px-2.5 py-1 rounded-full mb-3">{{ $group['label'] }}</p>
                                         <div class="space-y-0.5">
-                                            @foreach ($group['items'] as $item)
-                                                <a href="{{ route('conditions.show', $item) }}" class="group flex items-center gap-2.5 px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
-                                                    <span class="w-7 h-7 rounded-lg bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-150">
-                                                        <x-app-icon :name="$item->icon ?? 'check'" class="w-3.5 h-3.5 text-teal-600 group-hover:text-white transition-colors duration-150" />
-                                                    </span>
+                                            @foreach ($group['items']->take($maxPerColumn) as $item)
+                                                <a href="{{ route('conditions.show', $item) }}" class="flex items-center px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
                                                     {{ $item->name }}
                                                 </a>
                                             @endforeach
                                         </div>
+                                        @if ($group['items']->count() > $maxPerColumn)
+                                            <a href="{{ route('conditions.index', ['category' => $group['key']]) }}" class="flex items-center gap-1 px-2 py-1.5 mt-0.5 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors duration-150">
+                                                +{{ $group['items']->count() - $maxPerColumn }} more <x-app-icon name="arrow-right" class="w-3 h-3" />
+                                            </a>
+                                        @endif
                                     </div>
                                 @endforeach
                                 <div class="pl-6 border-l border-navy-100">
                                     <p class="inline-block text-teal-700 font-semibold text-[11px] tracking-wide uppercase bg-mint-100 px-2.5 py-1 rounded-full mb-3">More Conditions</p>
                                     <div class="space-y-0.5">
                                         @foreach ($singleItems as $item)
-                                            <a href="{{ route('conditions.show', $item) }}" class="group flex items-center gap-2.5 px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
-                                                <span class="w-7 h-7 rounded-lg bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-150">
-                                                    <x-app-icon :name="$item->icon ?? 'check'" class="w-3.5 h-3.5 text-teal-600 group-hover:text-white transition-colors duration-150" />
-                                                </span>
+                                            <a href="{{ route('conditions.show', $item) }}" class="flex items-center px-2 py-1.5 text-sm text-navy-700 rounded-lg hover:bg-mint-50 hover:text-teal-600 transition-colors duration-150">
                                                 {{ $item->name }}
                                             </a>
                                         @endforeach

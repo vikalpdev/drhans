@@ -17,8 +17,8 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/about-us', [AboutController::class, 'index'])->name('about.index');
 Route::get('/about-us/chairmans-desk', [AboutController::class, 'chairman'])->name('about.chairman');
 
-Route::get('/treatments', [TreatmentController::class, 'index'])->name('treatments.index');
-Route::get('/treatments/{treatment:slug}', [TreatmentController::class, 'show'])->name('treatments.show');
+Route::get('/speciality-service', [TreatmentController::class, 'index'])->name('treatments.index');
+Route::get('/speciality-service/{treatment:slug}', [TreatmentController::class, 'show'])->name('treatments.show');
 
 Route::get('/conditions-treated', [ConditionController::class, 'index'])->name('conditions.index');
 Route::get('/conditions-treated/{condition:slug}', [ConditionController::class, 'show'])->name('conditions.show');

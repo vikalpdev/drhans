@@ -43,6 +43,14 @@ class CentreResource extends Resource
                             ->tel()
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('phone_general_enquiry')
+                            ->label('Phone (General Enquiry)')
+                            ->tel()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phone_appointment')
+                            ->label('Phone (For Appointment)')
+                            ->tel()
+                            ->maxLength(255),
                         Forms\Components\Textarea::make('address')
                             ->required()
                             ->columnSpanFull(),
@@ -69,6 +77,13 @@ class CentreResource extends Resource
                             ->image()
                             ->imageEditor(),
                     ]),
+                Forms\Components\Section::make('SEO')
+                    ->schema([
+                        Forms\Components\TextInput::make('meta_title')->maxLength(255),
+                        Forms\Components\TextInput::make('meta_description')->maxLength(255),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
             ]);
     }
 

@@ -16,7 +16,7 @@ class Centre extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
-        'name', 'slug', 'city', 'address', 'phone',
+        'name', 'slug', 'meta_title', 'meta_description', 'city', 'address', 'phone', 'phone_general_enquiry', 'phone_appointment',
         'opd_weekday', 'opd_sunday', 'lat', 'lng', 'facilities', 'order',
     ];
 

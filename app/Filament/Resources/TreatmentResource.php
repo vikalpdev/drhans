@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\TreatmentResource\Pages;
 use App\Models\Treatment;
 use Filament\Forms;
@@ -19,6 +20,12 @@ class TreatmentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
     protected static ?string $navigationGroup = 'Content';
+
+    protected static ?string $navigationLabel = 'Speciality Service';
+
+    protected static ?string $modelLabel = 'Speciality Service';
+
+    protected static ?string $pluralModelLabel = 'Speciality Services';
 
     public static function form(Form $form): Form
     {
@@ -40,20 +47,10 @@ class TreatmentResource extends Resource
                         Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
                         Forms\Components\TextInput::make('summary')->required()->columnSpanFull(),
                         Forms\Components\Textarea::make('overview')->columnSpanFull(),
-                    ]),
-                Forms\Components\Section::make('Detail page content')
-                    ->schema([
-                        Forms\Components\Repeater::make('process_steps')
-                            ->schema([
-                                Forms\Components\TextInput::make('title')->required(),
-                                Forms\Components\TextInput::make('description')->required(),
-                            ])
-                            ->columns(2)
+                        TinyEditor::make('details')
+                            ->profile('medical')
                             ->columnSpanFull(),
-                        Forms\Components\TagsInput::make('who_benefits')->columnSpanFull(),
-                        Forms\Components\TagsInput::make('why_choose_us')->columnSpanFull(),
-                    ])
-                    ->collapsible(),
+                    ]),
                 Forms\Components\Section::make('Hero image')
                     ->schema([
                         Forms\Components\SpatieMediaLibraryFileUpload::make('hero_image')
@@ -61,6 +58,51 @@ class TreatmentResource extends Resource
                             ->image()
                             ->imageEditor(),
                     ]),
+                Forms\Components\Section::make('Detail page content')
+                    ->schema([
+                        Forms\Components\Repeater::make('services')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->required(),
+                                TinyEditor::make('description')
+                                    ->profile('medical')
+                                    ->minHeight(200)
+                                    ->required(),
+                            ])
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Service')
+                            ->reorderable()
+                            ->collapsible(),
+                        Forms\Components\Repeater::make('process_steps')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\Textarea::make('description')->required(),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Step')
+                            ->reorderable()
+                            ->collapsible(),
+                        Forms\Components\TagsInput::make('who_benefits')->columnSpanFull(),
+                        Forms\Components\TagsInput::make('why_choose_us')->columnSpanFull(),
+                        Forms\Components\Repeater::make('faqs')
+                            ->schema([
+                                Forms\Components\TextInput::make('question')->required(),
+                                Forms\Components\Textarea::make('answer')
+                                    ->required(),
+                            ])
+                            ->columnSpanFull()
+                            ->addActionLabel('Add FAQ')
+                            ->reorderable()
+                            ->collapsible(),
+                    ])
+                    ->collapsible(),
+                Forms\Components\Section::make('SEO')
+                    ->schema([
+                        Forms\Components\TextInput::make('meta_title')->maxLength(255),
+                        Forms\Components\TextInput::make('meta_description')->maxLength(255),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
             ]);
     }
 

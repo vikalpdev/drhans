@@ -33,7 +33,7 @@ class Treatment extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->width(400)->height(300)->sharpen(10)->format('webp');
-        $this->addMediaConversion('hero')->width(1280)->height(720)->sharpen(10)->format('webp');
+        $this->addMediaConversion('thumb')->width(400)->height(300)->sharpen(10)->format('webp')->nonQueued();
+        $this->addMediaConversion('hero')->width(1280)->height(720)->sharpen(10)->format('webp')->nonQueued();
     }
 }

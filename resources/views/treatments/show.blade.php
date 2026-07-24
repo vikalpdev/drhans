@@ -22,10 +22,8 @@
                 <div class="bg-white rounded-2xl border border-navy-100 p-8">
                     <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">About the Treatment</p>
                     <h2 class="font-heading font-bold text-xl lg:text-2xl text-navy-600 mt-2 mb-5">Understanding {{ $treatment->name }}</h2>
-                    <div class="space-y-4">
-                        @foreach (explode("\n\n", $treatment->details) as $paragraph)
-                            <p class="text-sm text-navy-600 leading-relaxed">{{ $paragraph }}</p>
-                        @endforeach
+                    <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">
+                        {!! $treatment->details !!}
                     </div>
                 </div>
 
@@ -72,7 +70,7 @@
                             </div>
                             <div>
                                 <h3 class="font-heading font-bold text-lg text-navy-600 mb-2">{{ $service['title'] }}</h3>
-                                <p class="text-sm text-navy-500 leading-relaxed">{{ $service['description'] }}</p>
+                                <div class="text-sm text-navy-500 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_strong]:font-semibold [&_a]:text-teal-600 [&_a]:underline">{!! $service['description'] !!}</div>
                             </div>
                         </div>
                     @endforeach

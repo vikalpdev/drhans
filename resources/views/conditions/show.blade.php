@@ -1,8 +1,10 @@
-<x-layouts.app :title="$condition->name">
+<x-layouts.app :title="$condition->meta_title ?? $condition->name" :description="$condition->meta_description">
     <x-hero
         :title="$condition->name"
-        :subtitle="$condition->overview ?? $condition->summary"
+        :subtitle="$condition->summary"
         :breadcrumbs="['Conditions Treated' => route('conditions.index'), $condition->name => null]"
+        :image-model="$condition"
+        image-collection="hero_image"
     >
         <x-slot:stats>
             <span class="flex items-center gap-1.5"><x-app-icon name="user-group" class="w-4 h-4 text-teal-500" /> Expert ENT Specialists</span>
@@ -12,76 +14,180 @@
     </x-hero>
 
     <section class="mx-auto max-w-7xl px-6 py-16">
-        <div class="grid lg:grid-cols-[1fr_340px] gap-10">
-            <div>
+        <div class="grid lg:grid-cols-[1fr_340px] gap-10" x-data="{ openSection: 'symptoms' }">
+            <div class="space-y-8">
                 @if ($condition->overview)
-                    <div class="flex gap-5 pb-8 border-b border-navy-100">
-                        <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
-                            <x-app-icon :name="$condition->icon ?: 'heart'" class="w-6 h-6 text-teal-600" />
-                        </div>
-                        <div>
-                            <h2 class="font-heading font-bold text-lg text-navy-600 mb-2">Overview</h2>
-                            <p class="text-sm text-navy-600 leading-relaxed">{{ $condition->overview }}</p>
+                    <div id="overview" class="bg-white rounded-2xl border border-navy-100 p-7 lg:p-8 scroll-mt-28">
+                        <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full mb-2">Overview</p>
+                        <h2 class="font-heading font-bold text-lg text-navy-600 mb-2">Understanding {{ $condition->name }}</h2>
+                        <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                            {!! $condition->overview !!}
                         </div>
                     </div>
                 @endif
 
-                @if (!empty($condition->symptoms))
-                    <div class="flex gap-5 py-8 border-b border-navy-100">
-                        <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
-                            <x-app-icon name="voice" class="w-6 h-6 text-teal-600" />
-                        </div>
-                        <div class="flex-1">
-                            <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Common Symptoms</h2>
-                            <ul class="grid sm:grid-cols-2 gap-y-2 gap-x-4">
-                                @foreach ($condition->symptoms as $item)
-                                    <li class="flex items-center gap-2 text-sm text-navy-600">
-                                        <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $item }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                @if (!empty($condition->symptoms) || !empty($condition->causes) || !empty($condition->diagnosis) || !empty($condition->treatment_options))
+                    <div class="space-y-3">
+                        @if (!empty($condition->symptoms))
+                            <div id="symptoms" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'symptoms' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                                <button type="button" @click="openSection = (openSection === 'symptoms' ? null : 'symptoms')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                            <x-app-icon name="eye" class="w-5 h-5 text-teal-600" />
+                                        </span>
+                                        <span class="font-heading font-bold text-base text-navy-600">Common Symptoms</span>
+                                    </span>
+                                    <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'symptoms' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                        <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'symptoms' && 'rotate-180'" />
+                                    </span>
+                                </button>
+                                <div x-show="openSection === 'symptoms'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                    <div class="px-6 lg:px-7 pb-6 lg:pb-7">
+                                        @if ($condition->symptoms_intro)
+                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->symptoms_intro }}</p>
+                                        @endif
+                                        <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
+                                            @foreach ($condition->symptoms as $item)
+                                                <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0 mt-2"></span>
+                                                    {{ $item }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (!empty($condition->causes))
+                            <div id="causes" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'causes' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                                <button type="button" @click="openSection = (openSection === 'causes' ? null : 'causes')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                            <x-app-icon name="cog" class="w-5 h-5 text-teal-600" />
+                                        </span>
+                                        <span class="font-heading font-bold text-base text-navy-600">Causes &amp; Risk Factors</span>
+                                    </span>
+                                    <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'causes' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                        <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'causes' && 'rotate-180'" />
+                                    </span>
+                                </button>
+                                <div x-show="openSection === 'causes'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                    <div class="px-6 lg:px-7 pb-6 lg:pb-7">
+                                        @if ($condition->causes_intro)
+                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->causes_intro }}</p>
+                                        @endif
+                                        <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
+                                            @foreach ($condition->causes as $item)
+                                                <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0 mt-2"></span>
+                                                    {{ $item }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (!empty($condition->diagnosis))
+                            <div id="diagnosis" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'diagnosis' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                                <button type="button" @click="openSection = (openSection === 'diagnosis' ? null : 'diagnosis')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                            <x-app-icon name="diagnostic" class="w-5 h-5 text-teal-600" />
+                                        </span>
+                                        <span class="font-heading font-bold text-base text-navy-600">Diagnosis</span>
+                                    </span>
+                                    <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'diagnosis' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                        <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'diagnosis' && 'rotate-180'" />
+                                    </span>
+                                </button>
+                                <div x-show="openSection === 'diagnosis'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                    <div class="px-6 lg:px-7 pb-6 lg:pb-7">
+                                        @if ($condition->diagnosis_intro)
+                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->diagnosis_intro }}</p>
+                                        @endif
+                                        <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
+                                            @foreach ($condition->diagnosis as $item)
+                                                <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0 mt-2"></span>
+                                                    {{ $item }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (!empty($condition->treatment_options))
+                            <div id="treatment" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'treatment' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                                <button type="button" @click="openSection = (openSection === 'treatment' ? null : 'treatment')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                                    <span class="flex items-center gap-3">
+                                        <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                            <x-app-icon name="briefcase" class="w-5 h-5 text-teal-600" />
+                                        </span>
+                                        <span class="font-heading font-bold text-base text-navy-600">Treatment Options</span>
+                                    </span>
+                                    <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'treatment' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                        <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'treatment' && 'rotate-180'" />
+                                    </span>
+                                </button>
+                                <div x-show="openSection === 'treatment'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                                    <div class="px-6 lg:px-7 pb-6 lg:pb-7">
+                                        @if ($condition->treatment_options_intro)
+                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->treatment_options_intro }}</p>
+                                        @endif
+                                        <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
+                                            @foreach ($condition->treatment_options as $item)
+                                                <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0 mt-2"></span>
+                                                    {{ $item }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
+                @if ($condition->prevention)
+                    <div id="prevention" class="bg-mint-50 rounded-2xl p-7 lg:p-8 scroll-mt-28">
+                        <div class="flex gap-5">
+                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                                <x-app-icon name="shield" class="w-6 h-6 text-teal-600" />
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Prevention</h2>
+                                <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                                    {!! $condition->prevention !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif
 
-                @if (!empty($condition->causes))
-                    <div class="flex gap-5 py-8 border-b border-navy-100">
-                        <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
-                            <x-app-icon name="cog" class="w-6 h-6 text-teal-600" />
-                        </div>
-                        <div class="flex-1">
-                            <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Causes</h2>
-                            <ul class="grid sm:grid-cols-2 gap-y-2 gap-x-4">
-                                @foreach ($condition->causes as $item)
-                                    <li class="flex items-center gap-2 text-sm text-navy-600">
-                                        <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $item }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-
-                @if (!empty($condition->treatment_options))
-                    <div class="flex gap-5 py-8 border-b border-navy-100">
-                        <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
-                            <x-app-icon name="briefcase" class="w-6 h-6 text-teal-600" />
-                        </div>
-                        <div class="flex-1">
-                            <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Treatment Options</h2>
-                            <ul class="grid sm:grid-cols-2 gap-y-2 gap-x-4">
-                                @foreach ($condition->treatment_options as $item)
-                                    <li class="flex items-center gap-2 text-sm text-navy-600">
-                                        <x-app-icon name="check-circle" class="w-4 h-4 text-teal-500 shrink-0" /> {{ $item }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                @if ($condition->why_choose_us)
+                    <div id="why-choose-us" class="bg-white rounded-2xl border border-navy-100 p-7 lg:p-8 scroll-mt-28">
+                        <div class="flex gap-5">
+                            <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
+                                <x-app-icon name="award" class="w-6 h-6 text-teal-600" />
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Why Choose Dr Hans' Centre for ENT?</h2>
+                                <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                                    {!! $condition->why_choose_us !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif
 
                 @if (!empty($condition->when_to_see_doctor))
-                    <div class="relative mt-8 rounded-2xl bg-gradient-to-br from-navy-600 to-navy-700 p-6 lg:p-7 overflow-hidden">
+                    <div id="when-to-see-doctor" class="relative rounded-2xl bg-gradient-to-br from-navy-600 to-navy-700 p-6 lg:p-7 overflow-hidden scroll-mt-28">
                         <div class="absolute -top-12 -right-12 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl"></div>
                         <div class="relative flex gap-5">
                             <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
@@ -105,7 +211,49 @@
                 @endif
             </div>
 
-            <aside class="space-y-6">
+            <aside class="space-y-6 self-start">
+                @php
+                    $jumpLinks = collect([
+                        'overview' => 'Overview',
+                        'symptoms' => 'Symptoms',
+                        'causes' => 'Causes & Risk Factors',
+                        'diagnosis' => 'Diagnosis',
+                        'treatment' => 'Treatment Options',
+                        'prevention' => 'Prevention',
+                        'why-choose-us' => 'Why Choose Us',
+                        'when-to-see-doctor' => 'When to See a Doctor',
+                    ])->filter(fn ($label, $key) => match ($key) {
+                        'overview' => (bool) $condition->overview,
+                        'symptoms' => !empty($condition->symptoms),
+                        'causes' => !empty($condition->causes),
+                        'diagnosis' => !empty($condition->diagnosis),
+                        'treatment' => !empty($condition->treatment_options),
+                        'prevention' => (bool) $condition->prevention,
+                        'why-choose-us' => (bool) $condition->why_choose_us,
+                        'when-to-see-doctor' => !empty($condition->when_to_see_doctor),
+                        default => false,
+                    });
+                @endphp
+
+                @if ($jumpLinks->count() > 1)
+                    <div class="bg-white rounded-2xl border border-navy-100 p-5 lg:sticky lg:top-32 z-10">
+                        <h3 class="font-heading font-bold text-navy-600 mb-3 text-sm">On This Page</h3>
+                        <ul class="space-y-1">
+                            @foreach ($jumpLinks as $id => $label)
+                                <li>
+                                    <a
+                                        href="#{{ $id }}"
+                                        @if (in_array($id, ['symptoms', 'causes', 'diagnosis', 'treatment'])) @click="openSection = '{{ $id }}'" @endif
+                                        class="flex items-center gap-2 text-sm text-navy-500 hover:text-teal-600 py-1.5 px-2 rounded-lg hover:bg-mint-50 transition-colors duration-200"
+                                    >
+                                        <x-app-icon name="chevron-right" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ $label }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <x-booking-widget :centres="$centres" />
 
                 <div class="bg-mint-50 rounded-2xl p-6">
@@ -139,6 +287,36 @@
             </aside>
         </div>
     </section>
+
+    @if (!empty($condition->faqs))
+        <section class="bg-mint-50 py-16" x-data="{ openFaq: 0 }">
+            <div class="mx-auto max-w-4xl px-6">
+            <div class="text-center mb-10">
+                <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-white px-3 py-1 rounded-full shadow-sm">Common Questions</p>
+                <h2 class="font-heading font-bold text-2xl lg:text-3xl text-navy-600 mt-3">Frequently Asked Questions</h2>
+            </div>
+            <div class="space-y-3">
+                @foreach ($condition->faqs as $i => $faq)
+                    <div class="bg-white rounded-2xl border transition-colors duration-200" :class="openFaq === {{ $i }} ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                        <button
+                            type="button"
+                            @click="openFaq = (openFaq === {{ $i }} ? null : {{ $i }})"
+                            class="w-full flex items-center justify-between gap-4 text-left px-6 py-4"
+                        >
+                            <span class="font-heading font-semibold text-navy-600 text-sm lg:text-base">{{ $faq['question'] }}</span>
+                            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openFaq === {{ $i }} ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openFaq === {{ $i }} && 'rotate-180'" />
+                            </span>
+                        </button>
+                        <div x-show="openFaq === {{ $i }}" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                            <p class="px-6 pb-5 text-sm text-navy-500 leading-relaxed">{{ $faq['answer'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            </div>
+        </section>
+    @endif
 
     <x-cta-banner
         title="We're Here to Help You Hear Better"

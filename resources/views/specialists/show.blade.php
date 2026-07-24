@@ -83,10 +83,8 @@
                 <div class="bg-white rounded-2xl border border-navy-100 p-8">
                     <p class="text-teal-700 font-semibold text-xs tracking-widest uppercase mb-2">About {{ $specialist->is_chairman ? 'the Chairman' : 'the Doctor' }}</p>
                     <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Meet {{ $specialist->name }}</h2>
-                    <div class="space-y-4">
-                        @foreach (explode("\n\n", $specialist->bio) as $paragraph)
-                            <p class="text-sm text-navy-600 leading-relaxed">{{ $paragraph }}</p>
-                        @endforeach
+                    <div class="space-y-4 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                        {!! $specialist->bio !!}
                     </div>
                 </div>
 

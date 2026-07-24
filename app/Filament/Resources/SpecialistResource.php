@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\SpecialistResource\Pages;
 use App\Models\Centre;
 use App\Models\Specialist;
@@ -25,7 +26,8 @@ class SpecialistResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make()
+                Forms\Components\Section::make('Basic Info')
+                    ->description('Name, role and the centres this specialist is attached to.')
                     ->columns(2)
                     ->schema([
                         Forms\Components\TextInput::make('name')
@@ -57,9 +59,20 @@ class SpecialistResource extends Resource
                             ->preload()
                             ->columnSpanFull(),
                     ]),
-                Forms\Components\Section::make('Profile')
+                Forms\Components\Section::make('Photo')
                     ->schema([
-                        Forms\Components\Textarea::make('bio')->columnSpanFull(),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('photo')
+                            ->collection('photo')
+                            ->image()
+                            ->imageEditor(),
+                    ]),
+                Forms\Components\Section::make('Profile')
+                    ->description('Bio, quote and highlighted expertise shown on the specialist profile page.')
+                    ->schema([
+                        TinyEditor::make('bio')
+                            ->profile('medical')
+                            ->minHeight(120)
+                            ->columnSpanFull(),
                         Forms\Components\Textarea::make('quote')->columnSpanFull(),
                         Forms\Components\TagsInput::make('expertise')->columnSpanFull(),
                         Forms\Components\TagsInput::make('interests')->columnSpanFull(),
@@ -85,13 +98,13 @@ class SpecialistResource extends Resource
                     ])
                     ->collapsible()
                     ->collapsed(),
-                Forms\Components\Section::make('Photo')
+                Forms\Components\Section::make('SEO')
                     ->schema([
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('photo')
-                            ->collection('photo')
-                            ->image()
-                            ->imageEditor(),
-                    ]),
+                        Forms\Components\TextInput::make('meta_title')->maxLength(255),
+                        Forms\Components\TextInput::make('meta_description')->maxLength(255),
+                    ])
+                    ->columns(2)
+                    ->collapsible(),
             ]);
     }
 

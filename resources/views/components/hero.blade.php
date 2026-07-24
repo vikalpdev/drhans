@@ -8,8 +8,8 @@
     <div class="absolute -top-20 -right-20 w-72 h-72 bg-teal-200/20 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-navy-200/10 rounded-full blur-3xl"></div>
 
-    <div class="relative mx-auto max-w-7xl px-6 py-8 lg:py-10 grid {{ $hasImage ? 'lg:grid-cols-2 gap-8 items-center' : '' }}">
-        <div>
+    <div class="relative mx-auto max-w-7xl px-6 py-8 lg:py-10 grid {{ $hasImage ? 'lg:grid-cols-3 gap-8 items-center' : '' }}">
+        <div class="{{ $hasImage ? 'lg:col-span-2' : '' }}">
             @if (count($breadcrumbs))
                 <nav class="text-sm text-navy-500 mb-3 flex items-center flex-wrap gap-1">
                     <a href="{{ route('home') }}" class="hover:text-teal-500">Home</a>
@@ -44,7 +44,7 @@
         </div>
 
         @if ($hasImage)
-            <div class="relative hidden lg:block">
+            <div class="relative hidden lg:block lg:col-span-1">
                 <div class="rounded-3xl overflow-hidden aspect-[16/10] shadow-xl">
                     <x-media-image :model="$imageModel" :collection="$imageCollection" conversion="hero" :alt="$title" eager class="w-full h-full object-cover" />
                 </div>

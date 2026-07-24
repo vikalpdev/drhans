@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
                 $conditions = ConditionTreated::orderBy('order')->get()->groupBy('category');
 
                 return collect(ConditionTreated::CATEGORIES)
-                    ->map(fn ($label, $key) => ['label' => $label, 'items' => $conditions->get($key, collect())])
+                    ->map(fn ($label, $key) => ['key' => $key, 'label' => $label, 'items' => $conditions->get($key, collect())])
                     ->filter(fn ($group) => $group['items']->isNotEmpty())
                     ->values();
             }));

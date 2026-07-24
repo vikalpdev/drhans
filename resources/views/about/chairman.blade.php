@@ -41,10 +41,8 @@
                     <div>
                         <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full">My Journey</p>
                         <h2 class="font-heading font-bold text-xl text-navy-600 mt-2 mb-4">{{ $page->content['journey_title'] ?? 'A Journey of Purpose' }}</h2>
-                        <div class="space-y-3">
-                            @foreach (explode("\n\n", $chairman->bio) as $paragraph)
-                                <p class="text-sm text-navy-500 leading-relaxed">{{ $paragraph }}</p>
-                            @endforeach
+                        <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-500 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                            {!! $chairman->bio !!}
                         </div>
                     </div>
 
