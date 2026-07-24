@@ -1,6 +1,6 @@
 @php
     $chatbotCentres = \App\Models\Centre::where('is_active', true)->orderBy('order')->get();
-    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->orderBy('order')->get();
+    $chatbotSpecialists = \App\Models\Specialist::where('is_active', true)->orderBy('name')->get();
     $chatbotDepartments = ['ENT', 'Hearing Care', 'Vertigo'];
 @endphp
 
@@ -275,7 +275,7 @@
                     @input="if (step === 'phone') input = input.replace(/\D/g, '').slice(0, 10); errorMsg = '';"
                     @keydown.enter="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
                     :placeholder="step === 'name' ? 'Type your name...' : step === 'phone' ? '10-digit phone number...' : 'Type your email (optional)...'"
-                    class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                    class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-base sm:text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
                 >
                 <button
                     type="button"
@@ -294,7 +294,7 @@
                 type="date"
                 x-model="form.preferred_date"
                 :min="new Date().toISOString().split('T')[0]"
-                class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+                class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-base sm:text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             >
             <button
                 type="button"
