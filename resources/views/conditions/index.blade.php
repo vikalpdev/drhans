@@ -55,12 +55,12 @@
                     <p class="text-xs font-semibold text-teal-600 uppercase tracking-wide">Not sure what you are suffering from?</p>
                     <h3 class="font-heading font-bold text-navy-600 text-xl mt-1">Book a Consultation</h3>
                     <p class="text-sm text-navy-500 mt-1">Our ENT experts can help you find the right diagnosis and treatment plan.</p>
-                    <div class="flex flex-wrap gap-3 mt-4">
-                        <a href="{{ route('appointment.create') }}" class="group inline-flex items-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-5 py-2.5 rounded-full text-sm shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
-                            <x-app-icon name="calendar" class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" /> Book Appointment
+                    <div class="flex gap-2 sm:gap-3 mt-4">
+                        <a href="{{ route('appointment.create') }}" class="group flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold px-3 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
+                            <x-app-icon name="calendar" class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110" /> Book Appointment
                         </a>
-                        <a href="{{ route('centres.index') }}" class="group inline-flex items-center gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-5 py-2.5 rounded-full text-sm transition-colors duration-200">
-                            <x-app-icon name="location" class="w-4 h-4" /> Find a Centre
+                        <a href="{{ route('centres.index') }}" class="group flex-1 min-w-0 inline-flex items-center justify-center gap-1.5 sm:gap-2 border-2 border-navy-200 text-navy-700 hover:border-teal-500 hover:text-teal-600 font-heading font-semibold px-3 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm transition-colors duration-200">
+                            <x-app-icon name="location" class="w-4 h-4 shrink-0" /> Find a Centre
                         </a>
                     </div>
                 </div>
