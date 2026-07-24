@@ -117,7 +117,6 @@ class TreatmentResource extends Resource
                     ->collection('hero_image')
                     ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('summary')->limit(50),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([])

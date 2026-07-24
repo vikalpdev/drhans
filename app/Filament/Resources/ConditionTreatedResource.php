@@ -121,7 +121,6 @@ class ConditionTreatedResource extends Resource
                 Tables\Columns\TextColumn::make('category')
                     ->badge()
                     ->formatStateUsing(fn (string $state) => ConditionTreated::CATEGORIES[$state] ?? $state),
-                Tables\Columns\TextColumn::make('summary')->limit(50),
                 Tables\Columns\ToggleColumn::make('show_in_menu')->label('In Menu'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
