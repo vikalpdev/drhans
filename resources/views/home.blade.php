@@ -191,7 +191,7 @@
                         <div class="relative w-12 h-12 rounded-xl bg-mint-100 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-300">
                             <x-app-icon :name="$treatment->icon ?? 'heart'" class="w-6 h-6 text-teal-500 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
                         </div>
-                        <p class="relative font-heading font-semibold text-navy-600 group-hover:text-teal-600 text-sm mt-4 transition-colors duration-300">{{ $treatment->name }}</p>
+                        <h3 class="relative font-heading font-semibold text-navy-600 group-hover:text-teal-600 text-sm mt-4 transition-colors duration-300">{{ $treatment->name }}</h3>
                         <p class="relative text-xs text-navy-500 mt-1.5 line-clamp-2">{{ $treatment->summary }}</p>
                         <span class="relative mt-auto pt-3 inline-flex items-center gap-1 text-xs font-semibold text-teal-500 group-hover:text-teal-600">
                             Learn more <x-app-icon name="arrow-right" class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -201,7 +201,7 @@
             </div>
             <div class="text-center mt-8">
                 <a href="{{ route('treatments.index') }}" class="group inline-flex items-center gap-2 border-2 border-teal-500 text-teal-700 hover:bg-teal-500 hover:text-white font-heading font-semibold px-6 py-2.5 rounded-full text-sm hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
-                    Explore All Treatments <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    Explore All <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
             </div>
         </div>

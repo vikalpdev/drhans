@@ -44,6 +44,7 @@
             <ul x-show="open" class="lg:!block lg:!h-auto space-y-2 text-sm text-navy-200 mt-3">
                 <li><a href="{{ route('home') }}" class="hover:text-teal-300 transition-colors">Home</a></li>
                 <li><a href="{{ route('about.index') }}" class="hover:text-teal-300 transition-colors">About Us</a></li>
+				<li><a href="{{ route('about.chairman') }}" class="hover:text-teal-300 transition-colors">Chairman's Desk</a></li>
                 <li><a href="{{ route('centres.index') }}" class="hover:text-teal-300 transition-colors">Our Centres</a></li>
                 <li><a href="{{ route('treatments.index') }}" class="hover:text-teal-300 transition-colors">Speciality Service</a></li>
                 <li><a href="{{ route('specialists.index') }}" class="hover:text-teal-300 transition-colors">Specialists</a></li>
@@ -74,7 +75,7 @@
 
         <div x-data="{ open: false }" class="py-5 lg:py-0">
             <button type="button" @click="open = !open" class="w-full flex items-center justify-between gap-2 lg:pointer-events-none">
-                <h3 class="font-heading font-semibold text-white">Procedures / Services</h3>
+                <h3 class="font-heading font-semibold text-white">Speciality Services</h3>
                 <span class="lg:hidden text-lg leading-none text-teal-300 w-5 text-center" x-text="open ? '−' : '+'"></span>
             </button>
             <ul x-show="open" class="lg:!block lg:!h-auto space-y-2 text-sm text-navy-200 mt-3">
@@ -102,7 +103,7 @@
                 <ul class="space-y-2 text-sm text-navy-200">
                     <li><a href="{{ $siteSettings->phoneUrl() }}" class="flex items-center gap-2 hover:text-teal-300 transition-colors"><x-app-icon name="phone" class="w-4 h-4 shrink-0" /> {{ $siteSettings->phone }}</a></li>
                     <li><a href="mailto:{{ $siteSettings->email }}" class="flex items-center gap-2 hover:text-teal-300 transition-colors"><x-app-icon name="mail" class="w-4 h-4 shrink-0" /> {{ $siteSettings->email }}</a></li>
-                    <li class="flex items-start gap-2"><x-app-icon name="clock" class="w-4 h-4 shrink-0 mt-0.5" /> Mon - Sat: 9 AM - 7 PM<br>Sunday: 10 AM - 2 PM</li>
+                    <li class="flex items-start gap-2"><x-app-icon name="clock" class="w-4 h-4 shrink-0 mt-0.5" /> Mon - Sat: 9 AM - 7 PM</li>
                 </ul>
             </div>
         </div>
