@@ -31,7 +31,7 @@
             @endif
 
             @isset($stats)
-                <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-navy-600">
+                <div class="mt-5 grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-sm text-navy-600">
                     {{ $stats }}
                 </div>
             @endisset
