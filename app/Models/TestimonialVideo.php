@@ -14,7 +14,11 @@ class TestimonialVideo extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\TestimonialVideoFactory> */
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['patient_name', 'title', 'category_id', 'video_url', 'order'];
+    protected $fillable = ['patient_name', 'title', 'category_id', 'video_url', 'order', 'is_active'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function category(): BelongsTo
     {

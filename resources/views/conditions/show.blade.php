@@ -43,9 +43,6 @@
                                 </button>
                                 <div x-show="openSection === 'symptoms'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
                                     <div class="px-6 lg:px-7 pb-6 lg:pb-7">
-                                        @if ($condition->symptoms_intro)
-                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->symptoms_intro }}</p>
-                                        @endif
                                         <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
                                             @foreach ($condition->symptoms as $item)
                                                 <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
@@ -74,9 +71,6 @@
                                 </button>
                                 <div x-show="openSection === 'causes'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
                                     <div class="px-6 lg:px-7 pb-6 lg:pb-7">
-                                        @if ($condition->causes_intro)
-                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->causes_intro }}</p>
-                                        @endif
                                         <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
                                             @foreach ($condition->causes as $item)
                                                 <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
@@ -105,9 +99,6 @@
                                 </button>
                                 <div x-show="openSection === 'diagnosis'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
                                     <div class="px-6 lg:px-7 pb-6 lg:pb-7">
-                                        @if ($condition->diagnosis_intro)
-                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->diagnosis_intro }}</p>
-                                        @endif
                                         <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
                                             @foreach ($condition->diagnosis as $item)
                                                 <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">
@@ -136,9 +127,6 @@
                                 </button>
                                 <div x-show="openSection === 'treatment'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
                                     <div class="px-6 lg:px-7 pb-6 lg:pb-7">
-                                        @if ($condition->treatment_options_intro)
-                                            <p class="text-sm text-navy-500 leading-relaxed pb-3 mb-3 border-b border-dashed border-navy-100">{{ $condition->treatment_options_intro }}</p>
-                                        @endif
                                         <ul class="grid sm:grid-cols-2 gap-y-0.5 gap-x-4">
                                             @foreach ($condition->treatment_options as $item)
                                                 <li class="flex items-start gap-2.5 text-sm text-navy-600 rounded-lg px-2 py-1.5 -mx-2 hover:bg-mint-50/60 transition-colors duration-200">

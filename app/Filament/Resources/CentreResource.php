@@ -69,6 +69,10 @@ class CentreResource extends Resource
                             ->required()
                             ->numeric()
                             ->default(0),
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Active')
+                            ->helperText('Turn off to remove this centre from every public page without deleting it.')
+                            ->default(true),
                     ]),
                 Forms\Components\Section::make('Photo')
                     ->schema([
@@ -115,10 +119,11 @@ class CentreResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('city')->searchable(),
                 Tables\Columns\TextColumn::make('phone'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_active')->label('Active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

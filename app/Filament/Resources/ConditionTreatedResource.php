@@ -19,9 +19,11 @@ class ConditionTreatedResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Medical Content';
 
     protected static ?string $navigationLabel = 'Conditions Treated';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -62,6 +64,10 @@ class ConditionTreatedResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('icon')->maxLength(255),
                         Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
+                        Forms\Components\Toggle::make('show_in_menu')
+                            ->label('Show in Navigation Menu')
+                            ->helperText('Turn off to hide from the header mega menu while keeping the page itself accessible.')
+                            ->default(true),
                         TinyEditor::make('overview')
                             ->profile('medical')
                             ->minHeight(120)
@@ -69,25 +75,9 @@ class ConditionTreatedResource extends Resource
                     ]),
                 Forms\Components\Section::make('Detail page content')
                     ->schema([
-                        Forms\Components\TextInput::make('symptoms_intro')
-                            ->label('Symptoms — intro line')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
                         Forms\Components\TagsInput::make('symptoms')->columnSpanFull(),
-                        Forms\Components\TextInput::make('causes_intro')
-                            ->label('Causes & Risk Factors — intro line')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
                         Forms\Components\TagsInput::make('causes')->columnSpanFull(),
-                        Forms\Components\TextInput::make('diagnosis_intro')
-                            ->label('Diagnosis — intro line')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
                         Forms\Components\TagsInput::make('diagnosis')->columnSpanFull(),
-                        Forms\Components\TextInput::make('treatment_options_intro')
-                            ->label('Treatment Options — intro line')
-                            ->maxLength(255)
-                            ->columnSpanFull(),
                         Forms\Components\TagsInput::make('treatment_options')->columnSpanFull(),
                         TinyEditor::make('prevention')
                             ->profile('medical')
@@ -132,10 +122,12 @@ class ConditionTreatedResource extends Resource
                     ->badge()
                     ->formatStateUsing(fn (string $state) => ConditionTreated::CATEGORIES[$state] ?? $state),
                 Tables\Columns\TextColumn::make('summary')->limit(50),
+                Tables\Columns\ToggleColumn::make('show_in_menu')->label('In Menu'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')->options(ConditionTreated::CATEGORIES),
+                Tables\Filters\TernaryFilter::make('show_in_menu')->label('In Menu'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

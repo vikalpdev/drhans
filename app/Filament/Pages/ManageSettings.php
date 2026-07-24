@@ -33,6 +33,25 @@ class ManageSettings extends Page implements HasForms
     {
         return $form
             ->schema([
+                Forms\Components\Section::make('Branding')
+                    ->description('Logo shown in the site header. Favicon shown in the browser tab.')
+                    ->schema([
+                        Forms\Components\FileUpload::make('logo_path')
+                            ->label('Logo')
+                            ->image()
+                            ->disk('public')
+                            ->directory('branding')
+                            ->imageEditor()
+                            ->helperText('Recommended: transparent PNG or SVG, wide aspect ratio.'),
+                        Forms\Components\FileUpload::make('favicon_path')
+                            ->label('Favicon')
+                            ->image()
+                            ->disk('public')
+                            ->directory('branding')
+                            ->helperText('Recommended: square PNG or ICO, at least 32×32px.'),
+                    ])
+                    ->columns(2),
+
                 Forms\Components\Section::make('Contact Details')
                     ->description('Used across the header, footer, floating buttons, WhatsApp links and CTA sections site-wide.')
                     ->schema([
@@ -58,6 +77,7 @@ class ManageSettings extends Page implements HasForms
                         Forms\Components\TextInput::make('youtube_url')->url()->prefixIcon('heroicon-o-link'),
                         Forms\Components\TextInput::make('linkedin_url')->url()->prefixIcon('heroicon-o-link'),
                         Forms\Components\TextInput::make('x_url')->label('X (Twitter) URL')->url()->prefixIcon('heroicon-o-link'),
+                        Forms\Components\TextInput::make('linktree_url')->label('Linktree URL')->url()->prefixIcon('heroicon-o-link'),
                     ])
                     ->columns(2),
 

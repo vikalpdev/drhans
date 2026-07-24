@@ -11,7 +11,7 @@ class SpecialistController extends Controller
     public function index()
     {
         return view('specialists.index', [
-            'centres' => Centre::orderBy('order')->get(),
+            'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
             'surgeons' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderBy('name')->get(),
             'allied' => Specialist::where('is_active', true)->whereDoesntHave('type', fn ($q) => $q->where('slug', 'ent-surgeon'))->orderBy('name')->get(),
         ]);
@@ -20,7 +20,7 @@ class SpecialistController extends Controller
     public function audiologists()
     {
         return view('specialists.audiologists', [
-            'centres' => Centre::orderBy('order')->get(),
+            'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
             'audiologists' => Specialist::where('is_active', true)->whereHas('type', fn ($q) => $q->where('slug', 'audiologist'))->orderBy('name')->get(),
         ]);
     }

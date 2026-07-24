@@ -18,13 +18,14 @@ class Centre extends Model implements HasMedia
     protected $fillable = [
         'name', 'slug', 'meta_title', 'meta_description', 'city', 'address', 'phone', 'phone_general_enquiry', 'phone_appointment',
         'practo_url', 'justdial_url', 'virtual_tour_url',
-        'opd_weekday', 'opd_sunday', 'lat', 'lng', 'facilities', 'order',
+        'opd_weekday', 'opd_sunday', 'lat', 'lng', 'facilities', 'order', 'is_active',
     ];
 
     protected $casts = [
         'facilities' => 'array',
         'lat' => 'decimal:7',
         'lng' => 'decimal:7',
+        'is_active' => 'boolean',
     ];
 
     public function specialists(): BelongsToMany

@@ -19,9 +19,11 @@ class TreatmentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Medical Content';
 
     protected static ?string $navigationLabel = 'Speciality Service';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Speciality Service';
 

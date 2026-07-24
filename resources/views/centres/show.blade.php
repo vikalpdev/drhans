@@ -81,10 +81,16 @@
     @endif
 
     @if ($centre->virtualTourEmbedUrl())
-        <section class="mx-auto max-w-5xl px-6 py-14">
-            <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Virtual Tour</h2>
-            <div class="aspect-video rounded-2xl overflow-hidden shadow-xl bg-black">
-                <iframe src="{{ $centre->virtualTourEmbedUrl() }}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <section class="mx-auto max-w-7xl px-6 py-14">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="inline-block text-teal-700 font-semibold text-xs tracking-widest uppercase bg-mint-100 px-3 py-1 rounded-full mb-3">Explore Our Centre</p>
+                    <h2 class="font-heading font-bold text-2xl text-navy-600 mb-3">Take a Virtual Tour of {{ $centre->name }}</h2>
+                    <p class="text-sm text-navy-500 leading-relaxed max-w-md">Get a closer look at our facilities, consultation rooms and advanced diagnostic equipment before your visit.</p>
+                </div>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-xl bg-black">
+                    <iframe src="{{ $centre->virtualTourEmbedUrl() }}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                </div>
             </div>
         </section>
     @endif
@@ -107,11 +113,21 @@
             <h2 class="font-heading font-bold text-xl text-navy-600 mb-5">Glimpses of {{ $centre->name }}</h2>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($centre->galleryItems->take(8) as $item)
-                    <div class="rounded-xl overflow-hidden aspect-[4/3]">
+                    <div class="group relative rounded-xl overflow-hidden aspect-[4/3]">
                         <x-media-image :model="$item" collection="image" conversion="thumb" :alt="$item->title" class="w-full h-full object-cover" />
+                        @if ($item->title)
+                            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-900/80 to-transparent p-2.5">
+                                <span class="text-white text-xs font-medium">{{ $item->title }}</span>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
+            @if ($centre->galleryItems->count() > 8)
+                <a href="{{ route('gallery.index') }}" class="group/link mt-5 inline-flex items-center gap-1 text-teal-600 hover:text-teal-700 font-heading font-semibold text-sm">
+                    View Full Photo Gallery <x-app-icon name="chevron-right" class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
+                </a>
+            @endif
         </section>
     @endif
 

@@ -10,7 +10,11 @@ class GalleryCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'name', 'slug', 'order'];
+    protected $fillable = ['type', 'name', 'slug', 'order', 'is_active'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public const TYPES = [
         'photo' => 'Photo Gallery',

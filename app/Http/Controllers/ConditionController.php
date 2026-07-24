@@ -25,7 +25,7 @@ class ConditionController extends Controller
         return view('conditions.show', [
             'condition' => $condition,
             'otherConditions' => ConditionTreated::where('id', '!=', $condition->id)->orderBy('order')->take(7)->get(),
-            'centres' => Centre::orderBy('order')->get(),
+            'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
         ]);
     }
 }

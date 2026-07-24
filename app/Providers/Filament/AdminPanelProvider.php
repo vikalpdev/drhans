@@ -42,6 +42,14 @@ class AdminPanelProvider extends PanelProvider
                     950 => '7, 30, 27',
                 ],
             ])
+            ->navigationGroups([
+                'Team',
+                'Locations',
+                'Medical Content',
+                'Gallery',
+                'Site Pages',
+                'Submissions',
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

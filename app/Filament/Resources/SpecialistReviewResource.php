@@ -20,6 +20,8 @@ class SpecialistReviewResource extends Resource
 
     protected static ?string $navigationLabel = 'Doctor Reviews';
 
+    protected static ?int $navigationSort = 3;
+
     public static function getNavigationBadge(): ?string
     {
         $count = static::getModel()::where('status', 'pending')->count();

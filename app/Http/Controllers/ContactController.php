@@ -15,7 +15,7 @@ class ContactController extends Controller
     {
         return view('contact.index', [
             'page' => Page::where('slug', 'contact')->first(),
-            'centres' => Centre::orderBy('order')->get(),
+            'centres' => Centre::where('is_active', true)->orderBy('order')->get(),
         ]);
     }
 

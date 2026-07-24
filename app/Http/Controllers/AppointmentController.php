@@ -13,7 +13,7 @@ class AppointmentController extends Controller
 {
     public function create()
     {
-        $centres = Centre::orderBy('order')->get();
+        $centres = Centre::where('is_active', true)->orderBy('order')->get();
         $specialists = Specialist::where('is_active', true)->orderBy('order')->get();
 
         return view('appointment.create', [

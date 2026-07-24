@@ -15,9 +15,9 @@ class ConditionTreated extends Model implements HasMedia
 
     protected $fillable = [
         'name', 'slug', 'category', 'icon', 'summary', 'overview', 'meta_title', 'meta_description',
-        'symptoms_intro', 'symptoms', 'causes_intro', 'causes', 'diagnosis_intro', 'diagnosis',
-        'treatment_options_intro', 'treatment_options', 'prevention', 'why_choose_us',
-        'when_to_see_doctor', 'faqs', 'order',
+        'symptoms', 'causes', 'diagnosis',
+        'treatment_options', 'prevention', 'why_choose_us',
+        'when_to_see_doctor', 'faqs', 'order', 'show_in_menu',
     ];
 
     protected $casts = [
@@ -27,6 +27,7 @@ class ConditionTreated extends Model implements HasMedia
         'treatment_options' => 'array',
         'when_to_see_doctor' => 'array',
         'faqs' => 'array',
+        'show_in_menu' => 'boolean',
     ];
 
     public const CATEGORIES = [

@@ -23,8 +23,12 @@
     <div class="bg-white shadow-sm">
         <div class="mx-auto max-w-7xl px-6 flex items-center justify-between h-16 lg:h-[70px]">
             <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
-                <span class="font-heading font-extrabold text-xl text-navy-700 leading-none">Dr Hans'</span>
-                <span class="hidden sm:block text-[10px] tracking-widest text-teal-500 font-semibold uppercase">Centre for ENT</span>
+                @if ($siteSettings->logoUrl())
+                    <img src="{{ $siteSettings->logoUrl() }}" alt="{{ config('app.name') }}" class="h-9 w-auto">
+                @else
+                    <span class="font-heading font-extrabold text-xl text-navy-700 leading-none">Dr Hans'</span>
+                    <span class="hidden sm:block text-[10px] tracking-widest text-teal-500 font-semibold uppercase">Centre for ENT</span>
+                @endif
             </a>
 
             <nav class="hidden lg:flex items-center gap-7 font-heading text-[15px] font-medium text-navy-700">
@@ -35,7 +39,7 @@
                     <div x-show="centresOpen" x-cloak x-transition class="absolute left-0 top-full pt-3 w-64">
                         <div class="bg-white rounded-xl shadow-xl border border-navy-100 py-2">
                             @foreach ($navCentres as $centre)
-                                <a href="{{ route('centres.index') }}#{{ $centre->slug }}" class="block px-4 py-2 text-sm hover:bg-mint-100">{{ $centre->name }}</a>
+                                <a href="{{ route('centres.show', $centre) }}" class="block px-4 py-2 text-sm hover:bg-mint-100">{{ $centre->name }}</a>
                             @endforeach
                             <a href="{{ route('centres.index') }}" class="block px-4 py-2 text-sm font-semibold text-teal-500 border-t border-navy-100 mt-1 pt-2">View All Centres</a>
                         </div>
@@ -61,7 +65,7 @@
                     <div x-show="conditionsOpen" x-cloak x-transition class="absolute right-0 top-full pt-3 w-[820px]">
                         <div class="bg-white rounded-2xl shadow-xl border border-navy-100 p-6">
                             @php
-                                $maxPerColumn = 6;
+                                $maxPerColumn = 5;
                                 $multiGroups = $navConditionGroups->filter(fn ($g) => $g['items']->count() > 1)->values();
                                 $singleItems = $navConditionGroups->filter(fn ($g) => $g['items']->count() === 1)->map(fn ($g) => $g['items']->first())->values();
                             @endphp

@@ -17,7 +17,11 @@ class GalleryItemResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Gallery';
+
+    protected static ?string $navigationLabel = 'Gallery';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -31,6 +35,7 @@ class GalleryItemResource extends Resource
                 Forms\Components\Select::make('centre_id')
                     ->relationship('centre', 'name'),
                 Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
+                Forms\Components\Toggle::make('is_active')->label('Active')->default(true),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('image')
                     ->collection('image')
                     ->image()
@@ -50,12 +55,14 @@ class GalleryItemResource extends Resource
                 Tables\Columns\TextColumn::make('title')->searchable(),
                 Tables\Columns\TextColumn::make('category.name')->badge(),
                 Tables\Columns\TextColumn::make('centre.name'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category_id')
                     ->label('Category')
                     ->options(GalleryCategory::where('type', 'photo')->orderBy('order')->pluck('name', 'id')),
+                Tables\Filters\TernaryFilter::make('is_active')->label('Active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

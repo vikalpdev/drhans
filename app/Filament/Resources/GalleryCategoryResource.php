@@ -18,9 +18,11 @@ class GalleryCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Gallery';
 
     protected static ?string $navigationLabel = 'Gallery Categories';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -41,6 +43,7 @@ class GalleryCategoryResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
+                Forms\Components\Toggle::make('is_active')->label('Active')->default(true),
             ])
             ->columns(2);
     }
@@ -56,10 +59,12 @@ class GalleryCategoryResource extends Resource
                     ->formatStateUsing(fn (string $state) => GalleryCategory::TYPES[$state] ?? $state),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')->options(GalleryCategory::TYPES),
+                Tables\Filters\TernaryFilter::make('is_active')->label('Active'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

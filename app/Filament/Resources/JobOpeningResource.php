@@ -16,7 +16,9 @@ class JobOpeningResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Site Pages';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

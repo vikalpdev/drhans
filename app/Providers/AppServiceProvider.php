@@ -19,10 +19,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(['components.header', 'components.footer'], function ($view) {
-            $view->with('navCentres', Cache::remember('nav.centres', 3600, fn () => Centre::orderBy('order')->get()));
+            $view->with('navCentres', Cache::remember('nav.centres', 3600, fn () => Centre::where('is_active', true)->orderBy('order')->get()));
             $view->with('navTreatments', Cache::remember('nav.treatments', 3600, fn () => Treatment::orderBy('order')->get()));
             $view->with('navConditionGroups', Cache::remember('nav.condition-groups', 3600, function () {
-                $conditions = ConditionTreated::orderBy('order')->get()->groupBy('category');
+                $conditions = ConditionTreated::where('show_in_menu', true)->orderBy('order')->get()->groupBy('category');
 
                 return collect(ConditionTreated::CATEGORIES)
                     ->map(fn ($label, $key) => ['key' => $key, 'label' => $label, 'items' => $conditions->get($key, collect())])

@@ -11,16 +11,16 @@ class GalleryController extends Controller
     public function index()
     {
         return view('gallery.index', [
-            'items' => GalleryItem::with('category')->orderBy('order')->get()->groupBy(fn (GalleryItem $item) => $item->category?->slug),
-            'categories' => GalleryCategory::where('type', 'photo')->orderBy('order')->get(),
+            'items' => GalleryItem::where('is_active', true)->with('category')->orderBy('order')->get()->groupBy(fn (GalleryItem $item) => $item->category?->slug),
+            'categories' => GalleryCategory::where('type', 'photo')->where('is_active', true)->orderBy('order')->get(),
         ]);
     }
 
     public function videos()
     {
         return view('gallery.videos', [
-            'videos' => TestimonialVideo::with('category')->orderBy('order')->get(),
-            'categories' => GalleryCategory::where('type', 'video')->orderBy('order')->get(),
+            'videos' => TestimonialVideo::where('is_active', true)->with('category')->orderBy('order')->get(),
+            'categories' => GalleryCategory::where('type', 'video')->where('is_active', true)->orderBy('order')->get(),
         ]);
     }
 }

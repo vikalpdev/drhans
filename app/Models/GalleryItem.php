@@ -14,7 +14,11 @@ class GalleryItem extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\GalleryItemFactory> */
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['title', 'category_id', 'centre_id', 'order'];
+    protected $fillable = ['title', 'category_id', 'centre_id', 'order', 'is_active'];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function centre(): BelongsTo
     {

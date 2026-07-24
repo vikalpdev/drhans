@@ -19,7 +19,9 @@ class CmsPageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Site Pages';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'CMS Pages';
 

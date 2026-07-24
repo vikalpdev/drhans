@@ -16,7 +16,9 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Site Pages';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

@@ -7,6 +7,7 @@
         'youtube' => $siteSettings->youtube_url,
         'linkedin' => $siteSettings->linkedin_url,
         'x' => $siteSettings->x_url,
+        'linktree' => $siteSettings->linktree_url,
     ])->filter();
     $privacyUrl = $siteSettings->privacy_policy_url ?: (\Illuminate\Support\Facades\Route::has('cms.show') ? route('cms.show', 'privacy-policy') : '#');
     $termsUrl = $siteSettings->terms_url ?: (\Illuminate\Support\Facades\Route::has('cms.show') ? route('cms.show', 'terms-and-conditions') : '#');

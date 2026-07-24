@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? "Dr Hans' Centre for ENT" }} | {{ config('app.name') }}</title>
     <meta name="description" content="{{ $description ?? "India's advanced ENT & Hearing Care network led by Padma Shri awardee Dr. J. M. Hans. Precision ENT, hearing, vertigo, sinus and cochlear implant care across Delhi NCR." }}">
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    @php $__faviconUrl = \App\Models\Setting::current()->faviconUrl(); @endphp
+    <link rel="icon" href="{{ $__faviconUrl ?: '/favicon.ico' }}" sizes="any">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
