@@ -72,7 +72,61 @@ class PageResource extends Resource
                             
                         Forms\Components\Textarea::make('content.why_choose_description')
                             ->label('Why Choose Us Summary'),
+
+                        Forms\Components\TagsInput::make('content.our_values')
+                            ->label('Our Values — List')
+                            ->columnSpanFull(),
+
+                        Forms\Components\Repeater::make('content.why_choose_cards')
+                            ->label('Why Choose Us — Feature Cards')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. user-group, building, heart, shield.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('title')->required(),
+                                Forms\Components\Textarea::make('description')->rows(2)->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Card')
+                            ->reorderable(),
+
+                        Forms\Components\Repeater::make('content.why_choose_stats')
+                            ->label('Why Choose Us — Stat Strip')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat')->required(),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+
+                        Forms\Components\Repeater::make('content.impact_stats')
+                            ->label('Impact Stats (Bottom Strip)')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat')
+                                    ->label('Display text (e.g. "50,000+")')
+                                    ->required(),
+                                Forms\Components\TextInput::make('number')
+                                    ->numeric()
+                                    ->required(),
+                                Forms\Components\TextInput::make('suffix')
+                                    ->label('Suffix (e.g. "+")'),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(4)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+
+                        Forms\Components\TextInput::make('content.cta_title')
+                            ->label('Bottom CTA — Title'),
+                        Forms\Components\Textarea::make('content.cta_subtitle')
+                            ->label('Bottom CTA — Subtitle')
+                            ->rows(2),
                     ])
+                    ->columns(2)
                     ->visible(fn ($record) => $record?->slug === 'about'),
 
                 // Chairman's Desk Page Fields

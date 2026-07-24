@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TestimonialVideoResource\Pages;
+use App\Models\GalleryCategory;
 use App\Models\TestimonialVideo;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -24,6 +25,10 @@ class TestimonialVideoResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('patient_name')->required()->maxLength(255),
                 Forms\Components\TextInput::make('title')->required()->maxLength(255),
+                Forms\Components\Select::make('category_id')
+                    ->label('Category')
+                    ->options(GalleryCategory::where('type', 'video')->orderBy('order')->pluck('name', 'id'))
+                    ->required(),
                 Forms\Components\TextInput::make('video_url')->required()->url()->maxLength(255),
                 Forms\Components\TextInput::make('order')->required()->numeric()->default(0),
                 Forms\Components\SpatieMediaLibraryFileUpload::make('thumbnail')
@@ -44,9 +49,14 @@ class TestimonialVideoResource extends Resource
                     ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('patient_name')->searchable(),
                 Tables\Columns\TextColumn::make('title')->searchable(),
+                Tables\Columns\TextColumn::make('category.name')->badge(),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
-            ->filters([])
+            ->filters([
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Category')
+                    ->options(GalleryCategory::where('type', 'video')->orderBy('order')->pluck('name', 'id')),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

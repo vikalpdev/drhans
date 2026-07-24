@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Centre;
+use App\Models\GalleryCategory;
 use App\Models\GalleryItem;
 use Illuminate\Database\Seeder;
 
@@ -11,6 +12,7 @@ class GalleryItemSeeder extends Seeder
     public function run(): void
     {
         $centres = Centre::all();
+        $categoryIds = GalleryCategory::where('type', 'photo')->pluck('id', 'slug');
 
         $items = [
             ['title' => 'Delhi (Greater Kailash)', 'category' => 'centres'],
@@ -33,7 +35,8 @@ class GalleryItemSeeder extends Seeder
 
         foreach ($items as $index => $item) {
             GalleryItem::create([
-                ...$item,
+                'title' => $item['title'],
+                'category_id' => $categoryIds[$item['category']] ?? null,
                 'centre_id' => $item['category'] === 'centres' ? $centres[$index % $centres->count()]->id : null,
                 'order' => $index,
             ]);

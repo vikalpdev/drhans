@@ -18,14 +18,33 @@
 
     <section
         class="mx-auto max-w-7xl px-6 py-16"
-        x-data="{ lightboxOpen: false, activeVideo: null, activeTitle: '' }"
+        x-data="{ lightboxOpen: false, activeVideo: null, activeTitle: '', cat: 'all' }"
         @keydown.escape.window="lightboxOpen = false; activeVideo = null"
     >
         @if ($videos->count())
+            <div class="flex flex-wrap gap-2.5 mb-8 bg-mint-50 border border-navy-100 rounded-full p-2 w-fit">
+                <button
+                    @click="cat = 'all'"
+                    :class="cat === 'all' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
+                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                >
+                    <x-app-icon name="play" class="w-3.5 h-3.5" /> All Videos
+                </button>
+                @foreach ($categories as $category)
+                    <button
+                        @click="cat = '{{ $category->slug }}'"
+                        :class="cat === '{{ $category->slug }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
+                        class="px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
+                    >{{ $category->name }}</button>
+                @endforeach
+            </div>
+
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($videos as $video)
                     <button
                         type="button"
+                        x-show="cat === 'all' || cat === '{{ $video->category?->slug }}'"
+                        x-transition.opacity
                         @click="lightboxOpen = true; activeVideo = @js($video->embedUrl()); activeTitle = @js($video->title)"
                         class="group text-left bg-white rounded-2xl border border-navy-100 hover:border-teal-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                     >
@@ -40,6 +59,9 @@
                             </div>
                         </div>
                         <div class="p-4">
+                            @if ($video->category)
+                                <span class="inline-block text-[11px] font-semibold text-teal-700 bg-mint-100 px-2.5 py-0.5 rounded-full mb-1.5">{{ $video->category->name }}</span>
+                            @endif
                             <p class="font-heading font-semibold text-navy-600 text-sm">{{ $video->title }}</p>
                             @if ($video->patient_name)
                                 <p class="text-xs text-navy-500 mt-1 flex items-center gap-1.5">

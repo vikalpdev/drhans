@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -13,7 +14,12 @@ class TestimonialVideo extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\TestimonialVideoFactory> */
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['patient_name', 'title', 'video_url', 'order'];
+    protected $fillable = ['patient_name', 'title', 'category_id', 'video_url', 'order'];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(GalleryCategory::class, 'category_id');
+    }
 
     public function embedUrl(): string
     {

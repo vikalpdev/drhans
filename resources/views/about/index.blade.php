@@ -43,7 +43,7 @@
                 </div>
                 <h3 class="font-heading font-semibold text-navy-600">Our Values</h3>
                 <ul class="text-sm text-navy-500 mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5">
-                    @foreach (['Precision in Care', 'Trust & Transparency', 'Patient-first Approach', 'Clinical Excellence', 'Innovation That Evolves', 'Continuity of Care'] as $value)
+                    @foreach ($page->content['our_values'] ?? ['Precision in Care', 'Trust & Transparency', 'Patient-first Approach', 'Clinical Excellence', 'Innovation That Evolves', 'Continuity of Care'] as $value)
                         <li class="flex items-center gap-1.5"><x-app-icon name="check" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ $value }}</li>
                     @endforeach
                 </ul>
@@ -62,28 +62,28 @@
                 <h2 class="font-heading font-bold text-2xl text-white mt-2 mb-2">Why Choose Dr Hans' Centre for ENT?</h2>
                 <p class="text-sm text-navy-100 mb-6">{{ $page->content['why_choose_description'] ?? 'We combine world-class expertise with compassion and advanced technology to deliver the best outcomes for our patients.' }}</p>
                 <div class="space-y-1.5">
-                    @foreach ([
-                        ['user-group', 'Expertise You Can Trust', 'Led by highly experienced ENT surgeons, audiologists and rehabilitation specialists.'],
-                        ['building', 'Advanced Technology', 'State-of-the-art infrastructure and global standard treatment protocols.'],
-                        ['heart', 'Comprehensive Care', 'Complete range of ENT, Hearing and Vertigo care under one roof.'],
-                        ['shield', 'Patient-Centric Approach', 'Personalised treatment plans with focus on long-term results and rehabilitation.'],
-                    ] as [$icon, $title, $desc])
+                    @foreach ($page->content['why_choose_cards'] ?? [
+                        ['icon' => 'user-group', 'title' => 'Expertise You Can Trust', 'description' => 'Led by highly experienced ENT surgeons, audiologists and rehabilitation specialists.'],
+                        ['icon' => 'building', 'title' => 'Advanced Technology', 'description' => 'State-of-the-art infrastructure and global standard treatment protocols.'],
+                        ['icon' => 'heart', 'title' => 'Comprehensive Care', 'description' => 'Complete range of ENT, Hearing and Vertigo care under one roof.'],
+                        ['icon' => 'shield', 'title' => 'Patient-Centric Approach', 'description' => 'Personalised treatment plans with focus on long-term results and rehabilitation.'],
+                    ] as $card)
                         <div class="group flex items-start gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors duration-200" data-reveal style="--reveal-delay: {{ $loop->index * 0.06 }}s">
                             <div class="w-10 h-10 rounded-xl bg-white/10 group-hover:bg-teal-500 flex items-center justify-center shrink-0 transition-colors duration-200">
-                                <x-app-icon :name="$icon" class="w-5 h-5 text-teal-300 group-hover:text-white transition-colors duration-200" />
+                                <x-app-icon :name="$card['icon']" class="w-5 h-5 text-teal-300 group-hover:text-white transition-colors duration-200" />
                             </div>
                             <div>
-                                <p class="font-heading font-semibold text-white text-sm">{{ $title }}</p>
-                                <p class="text-sm text-navy-200">{{ $desc }}</p>
+                                <p class="font-heading font-semibold text-white text-sm">{{ $card['title'] }}</p>
+                                <p class="text-sm text-navy-200">{{ $card['description'] }}</p>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8" data-reveal>
-                    @foreach ([['3500+', 'Cochlear Implants Performed'], ['35+', 'Years of Clinical Excellence'], ['6', 'Centres Across India'], ['50K+', 'Patients Treated Successfully']] as [$stat, $label])
+                    @foreach ($page->content['why_choose_stats'] ?? [['stat' => '3500+', 'label' => 'Cochlear Implants Performed'], ['stat' => '35+', 'label' => 'Years of Clinical Excellence'], ['stat' => '6', 'label' => 'Centres Across India'], ['stat' => '50K+', 'label' => 'Patients Treated Successfully']] as $item)
                         <div class="bg-white/10 backdrop-blur-sm text-white rounded-xl p-3 text-center">
-                            <p class="font-heading font-bold text-teal-300">{{ $stat }}</p>
-                            <p class="text-[10px] mt-1 leading-tight text-navy-100">{{ $label }}</p>
+                            <p class="font-heading font-bold text-teal-300">{{ $item['stat'] }}</p>
+                            <p class="text-[10px] mt-1 leading-tight text-navy-100">{{ $item['label'] }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -148,17 +148,17 @@
     {{-- Impact --}}
     <section class="bg-mint-50 py-10">
         <div class="mx-auto max-w-7xl px-6 grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
-            @foreach ([['3500+', 3500, '+', 'Cochlear Implants'], ['50,000+', 50000, '+', 'Patients Treated'], ['9', 9, '', 'Expert Specialists'], ['100+', 100, '+', 'Advanced Equipment'], ['6', 6, '', 'Centres Across India']] as [$stat, $number, $suffix, $label])
+            @foreach ($page->content['impact_stats'] ?? [['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants'], ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated'], ['stat' => '9', 'number' => 9, 'suffix' => '', 'label' => 'Expert Specialists'], ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment'], ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India']] as $item)
                 <div class="{{ $loop->last ? 'col-span-2 lg:col-span-1' : '' }}">
-                    <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $number }}, '{{ $suffix }}')" x-text="display">{{ $stat }}</p>
-                    <p class="text-xs text-navy-500 mt-1">{{ $label }}</p>
+                    <p class="font-heading font-bold text-2xl text-navy-600" x-data="countUp({{ $item['number'] }}, '{{ $item['suffix'] }}')" x-text="display">{{ $item['stat'] }}</p>
+                    <p class="text-xs text-navy-500 mt-1">{{ $item['label'] }}</p>
                 </div>
             @endforeach
         </div>
     </section>
 
     <x-cta-banner
-        title="We're here to help you hear better, live better."
-        subtitle="Book an appointment or visit our nearest centre today."
+        :title="$page->content['cta_title'] ?? 'We\'re here to help you hear better, live better.'"
+        :subtitle="$page->content['cta_subtitle'] ?? 'Book an appointment or visit our nearest centre today.'"
     />
 </x-layouts.app>

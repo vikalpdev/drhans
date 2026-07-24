@@ -33,6 +33,33 @@ class PageSeeder extends Seeder
                 'vision_description' => 'To ensure every patient experiences clarity, confidence and long-term well-being through care that evolves with them.',
                 
                 'why_choose_description' => 'We combine world-class expertise with compassion and advanced technology to deliver the best outcomes for our patients.',
+
+                'our_values' => ['Precision in Care', 'Trust & Transparency', 'Patient-first Approach', 'Clinical Excellence', 'Innovation That Evolves', 'Continuity of Care'],
+
+                'why_choose_cards' => [
+                    ['icon' => 'user-group', 'title' => 'Expertise You Can Trust', 'description' => 'Led by highly experienced ENT surgeons, audiologists and rehabilitation specialists.'],
+                    ['icon' => 'building', 'title' => 'Advanced Technology', 'description' => 'State-of-the-art infrastructure and global standard treatment protocols.'],
+                    ['icon' => 'heart', 'title' => 'Comprehensive Care', 'description' => 'Complete range of ENT, Hearing and Vertigo care under one roof.'],
+                    ['icon' => 'shield', 'title' => 'Patient-Centric Approach', 'description' => 'Personalised treatment plans with focus on long-term results and rehabilitation.'],
+                ],
+
+                'why_choose_stats' => [
+                    ['stat' => '3500+', 'label' => 'Cochlear Implants Performed'],
+                    ['stat' => '35+', 'label' => 'Years of Clinical Excellence'],
+                    ['stat' => '6', 'label' => 'Centres Across India'],
+                    ['stat' => '50K+', 'label' => 'Patients Treated Successfully'],
+                ],
+
+                'impact_stats' => [
+                    ['stat' => '3500+', 'number' => 3500, 'suffix' => '+', 'label' => 'Cochlear Implants'],
+                    ['stat' => '50,000+', 'number' => 50000, 'suffix' => '+', 'label' => 'Patients Treated'],
+                    ['stat' => '9', 'number' => 9, 'suffix' => '', 'label' => 'Expert Specialists'],
+                    ['stat' => '100+', 'number' => 100, 'suffix' => '+', 'label' => 'Advanced Equipment'],
+                    ['stat' => '6', 'number' => 6, 'suffix' => '', 'label' => 'Centres Across India'],
+                ],
+
+                'cta_title' => "We're here to help you hear better, live better.",
+                'cta_subtitle' => 'Book an appointment or visit our nearest centre today.',
             ]
         ]);
 

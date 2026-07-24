@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryItemResource\Pages;
+use App\Models\GalleryCategory;
 use App\Models\GalleryItem;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,8 +24,9 @@ class GalleryItemResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')->required()->maxLength(255),
-                Forms\Components\Select::make('category')
-                    ->options(GalleryItem::CATEGORIES)
+                Forms\Components\Select::make('category_id')
+                    ->label('Category')
+                    ->options(GalleryCategory::where('type', 'photo')->orderBy('order')->pluck('name', 'id'))
                     ->required(),
                 Forms\Components\Select::make('centre_id')
                     ->relationship('centre', 'name'),
@@ -46,14 +48,14 @@ class GalleryItemResource extends Resource
                     ->collection('image')
                     ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('title')->searchable(),
-                Tables\Columns\TextColumn::make('category')
-                    ->badge()
-                    ->formatStateUsing(fn (string $state) => GalleryItem::CATEGORIES[$state] ?? $state),
+                Tables\Columns\TextColumn::make('category.name')->badge(),
                 Tables\Columns\TextColumn::make('centre.name'),
                 Tables\Columns\TextColumn::make('order')->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category')->options(GalleryItem::CATEGORIES),
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Category')
+                    ->options(GalleryCategory::where('type', 'photo')->orderBy('order')->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

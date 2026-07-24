@@ -14,20 +14,16 @@ class GalleryItem extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\GalleryItemFactory> */
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['title', 'category', 'centre_id', 'order'];
-
-    public const CATEGORIES = [
-        'centres' => 'Our Centres',
-        'facilities' => 'Facilities',
-        'treatments' => 'Treatments',
-        'events' => 'Events & Workshops',
-        'patient_care' => 'Patient Care',
-        'awards' => 'Awards & Recognition',
-    ];
+    protected $fillable = ['title', 'category_id', 'centre_id', 'order'];
 
     public function centre(): BelongsTo
     {
         return $this->belongsTo(Centre::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(GalleryCategory::class, 'category_id');
     }
 
     public function registerMediaCollections(): void

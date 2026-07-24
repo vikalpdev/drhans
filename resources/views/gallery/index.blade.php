@@ -24,22 +24,22 @@
             >
                 <x-app-icon name="camera" class="w-3.5 h-3.5" /> All Photos
             </button>
-            @foreach (\App\Models\GalleryItem::CATEGORIES as $key => $label)
+            @foreach ($categories as $category)
                 <button
-                    @click="cat = '{{ $key }}'"
-                    :class="cat === '{{ $key }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
+                    @click="cat = '{{ $category->slug }}'"
+                    :class="cat === '{{ $category->slug }}' ? 'bg-gradient-to-r from-navy-600 to-navy-700 text-white shadow-md shadow-navy-600/25' : 'bg-white text-navy-600 shadow-sm hover:text-teal-600'"
                     class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-heading font-medium transition-colors duration-200"
-                >{{ $label }}</button>
+                >{{ $category->name }}</button>
             @endforeach
         </div>
 
-        @foreach ($items as $category => $categoryItems)
-            <div x-show="cat === 'all' || cat === '{{ $category }}'" x-transition.opacity class="mb-12">
+        @foreach ($items as $categorySlug => $categoryItems)
+            <div x-show="cat === 'all' || cat === '{{ $categorySlug }}'" x-transition.opacity class="mb-12">
                 <div class="flex items-center gap-3 mb-5">
                     <div class="w-9 h-9 rounded-lg bg-mint-100 flex items-center justify-center shrink-0">
                         <x-app-icon name="camera" class="w-4 h-4 text-teal-500" />
                     </div>
-                    <h2 class="font-heading font-bold text-lg text-navy-600">{{ \App\Models\GalleryItem::CATEGORIES[$category] ?? $category }}</h2>
+                    <h2 class="font-heading font-bold text-lg text-navy-600">{{ $categories->firstWhere('slug', $categorySlug)?->name ?? $categorySlug }}</h2>
                     <span class="text-xs font-semibold text-teal-600 bg-mint-100 px-2.5 py-1 rounded-full">{{ $categoryItems->count() }}</span>
                 </div>
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
