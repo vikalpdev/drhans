@@ -5,9 +5,15 @@
         :breadcrumbs="['Specialists' => null]"
     >
         <x-slot:stats>
+            <span class="flex items-center gap-1.5">
+                <x-app-icon name="user-group" class="w-4 h-4 text-teal-500 shrink-0" />
+                <strong class="text-navy-600">{{ $surgeons->count() + $allied->count() }}</strong> Expert Specialists
+            </span>
+            <span class="flex items-center gap-1.5">
+                <x-app-icon name="location" class="w-4 h-4 text-teal-500 shrink-0" />
+                <strong class="text-navy-600">{{ $centres->count() }}</strong> Centres Across India
+            </span>
             @foreach ($page->content['stats'] ?? [
-                ['icon' => 'user-group', 'stat' => '9', 'label' => 'Expert Specialists'],
-                ['icon' => 'location', 'stat' => '6', 'label' => 'Centres Across India'],
                 ['icon' => 'heart', 'stat' => '50,000+', 'label' => 'Patients Treated'],
                 ['icon' => 'ear-implant', 'stat' => '3500+', 'label' => 'Cochlear Implants'],
             ] as ['icon' => $icon, 'stat' => $stat, 'label' => $label])

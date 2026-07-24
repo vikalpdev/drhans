@@ -204,8 +204,6 @@ class PageSeeder extends Seeder
                 'hero_subtitle' => 'Our team of experienced ENT surgeons, audiologists, speech therapists and support specialists work together to deliver the best outcomes for our patients.',
 
                 'stats' => [
-                    ['icon' => 'user-group', 'stat' => '9', 'label' => 'Expert Specialists'],
-                    ['icon' => 'location', 'stat' => '6', 'label' => 'Centres Across India'],
                     ['icon' => 'heart', 'stat' => '50,000+', 'label' => 'Patients Treated'],
                     ['icon' => 'ear-implant', 'stat' => '3500+', 'label' => 'Cochlear Implants'],
                 ],

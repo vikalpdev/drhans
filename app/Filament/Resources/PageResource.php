@@ -420,10 +420,11 @@ class PageResource extends Resource
                             ->rows(3),
 
                         Forms\Components\Repeater::make('content.stats')
-                            ->label('Stats Band')
+                            ->label('Additional Stats Band')
+                            ->helperText('"Expert Specialists" and "Centres Across India" are calculated automatically and not editable here.')
                             ->schema([
                                 Forms\Components\TextInput::make('icon')
-                                    ->helperText('Heroicon name, e.g. user-group, location, heart, ear-implant.')
+                                    ->helperText('Heroicon name, e.g. heart, ear-implant.')
                                     ->required(),
                                 Forms\Components\TextInput::make('stat')
                                     ->label('Display text (e.g. "3500+")')
