@@ -143,32 +143,42 @@
                 @endif
 
                 @if ($condition->prevention)
-                    <div id="prevention" class="bg-mint-50 rounded-2xl p-7 lg:p-8 scroll-mt-28">
-                        <div class="flex gap-5">
-                            <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
-                                <x-app-icon name="shield" class="w-6 h-6 text-teal-600" />
-                            </div>
-                            <div class="flex-1">
-                                <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Prevention</h2>
-                                <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
-                                    {!! $condition->prevention !!}
-                                </div>
+                    <div id="prevention" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'prevention' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                        <button type="button" @click="openSection = (openSection === 'prevention' ? null : 'prevention')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                            <span class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                    <x-app-icon name="shield" class="w-5 h-5 text-teal-600" />
+                                </span>
+                                <span class="font-heading font-bold text-base text-navy-600">Prevention</span>
+                            </span>
+                            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'prevention' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'prevention' && 'rotate-180'" />
+                            </span>
+                        </button>
+                        <div x-show="openSection === 'prevention'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                            <div class="px-6 lg:px-7 pb-6 lg:pb-7 space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                                {!! $condition->prevention !!}
                             </div>
                         </div>
                     </div>
                 @endif
 
                 @if ($condition->why_choose_us)
-                    <div id="why-choose-us" class="bg-white rounded-2xl border border-navy-100 p-7 lg:p-8 scroll-mt-28">
-                        <div class="flex gap-5">
-                            <div class="w-12 h-12 rounded-full bg-mint-50 flex items-center justify-center shrink-0">
-                                <x-app-icon name="award" class="w-6 h-6 text-teal-600" />
-                            </div>
-                            <div class="flex-1">
-                                <h2 class="font-heading font-bold text-lg text-navy-600 mb-3">Why Choose Dr Hans' Centre for ENT?</h2>
-                                <div class="space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
-                                    {!! $condition->why_choose_us !!}
-                                </div>
+                    <div id="why-choose-us" class="bg-white rounded-2xl border transition-colors duration-200 scroll-mt-28" :class="openSection === 'why-choose-us' ? 'border-teal-200 shadow-md' : 'border-navy-100'">
+                        <button type="button" @click="openSection = (openSection === 'why-choose-us' ? null : 'why-choose-us')" class="w-full flex items-center justify-between gap-4 text-left p-6 lg:p-7">
+                            <span class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-gradient-to-br from-mint-50 to-teal-50 ring-1 ring-teal-100 flex items-center justify-center shrink-0">
+                                    <x-app-icon name="award" class="w-5 h-5 text-teal-600" />
+                                </span>
+                                <span class="font-heading font-bold text-base text-navy-600">Why Choose Dr Hans' Centre for ENT?</span>
+                            </span>
+                            <span class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors duration-200" :class="openSection === 'why-choose-us' ? 'bg-teal-500 text-white' : 'bg-mint-100 text-teal-600'">
+                                <x-app-icon name="chevron-down" class="w-4 h-4 transition-transform duration-200" x-bind:class="openSection === 'why-choose-us' && 'rotate-180'" />
+                            </span>
+                        </button>
+                        <div x-show="openSection === 'why-choose-us'" x-cloak x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0">
+                            <div class="px-6 lg:px-7 pb-6 lg:pb-7 space-y-3 [&>p]:text-sm [&>p]:text-navy-600 [&>p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-semibold">
+                                {!! $condition->why_choose_us !!}
                             </div>
                         </div>
                     </div>
@@ -231,7 +241,7 @@
                                 <li>
                                     <a
                                         href="#{{ $id }}"
-                                        @if (in_array($id, ['symptoms', 'causes', 'diagnosis', 'treatment'])) @click="openSection = '{{ $id }}'" @endif
+                                        @if (in_array($id, ['symptoms', 'causes', 'diagnosis', 'treatment', 'prevention', 'why-choose-us'])) @click="openSection = '{{ $id }}'" @endif
                                         class="flex items-center gap-2 text-sm text-navy-500 hover:text-teal-600 py-1.5 px-2 rounded-lg hover:bg-mint-50 transition-colors duration-200"
                                     >
                                         <x-app-icon name="chevron-right" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ $label }}
