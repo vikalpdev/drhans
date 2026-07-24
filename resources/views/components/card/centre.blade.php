@@ -15,11 +15,11 @@
                 <x-app-icon name="phone" class="w-3.5 h-3.5 text-teal-500 shrink-0" /> {{ $centre->phone }}
             </a>
         </div>
-        <div class="mt-auto pt-4 flex items-center gap-2">
-            <a href="{{ route('appointment.create', ['centre' => $centre->slug]) }}" class="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold text-sm px-4 py-2.5 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
+        <div class="mt-auto pt-4 flex items-center gap-1.5 sm:gap-2">
+            <a href="{{ route('appointment.create', ['centre' => $centre->slug]) }}" class="flex-1 min-w-0 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-navy-600 to-navy-700 hover:from-navy-700 hover:to-navy-800 text-white font-heading font-semibold text-xs sm:text-sm px-3 sm:px-4 py-2.5 rounded-full shadow-md shadow-navy-600/20 hover:shadow-lg transition-all duration-200">
                 Book Appointment
             </a>
-            <a href="{{ $centre->directionsUrl() }}" target="_blank" rel="noopener" aria-label="Get directions to {{ $centre->name }}" title="Get Directions" class="w-10 h-10 shrink-0 rounded-full border-2 border-teal-500 text-teal-600 hover:bg-teal-500 hover:text-white flex items-center justify-center transition-colors duration-200">
+            <a href="{{ $centre->directionsUrl() }}" target="_blank" rel="noopener" aria-label="Get directions to {{ $centre->name }}" title="Get Directions" class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full border-2 border-teal-500 text-teal-600 hover:bg-teal-500 hover:text-white flex items-center justify-center transition-colors duration-200">
                 <x-app-icon name="location" class="w-4 h-4" />
             </a>
         </div>
