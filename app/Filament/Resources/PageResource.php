@@ -409,6 +409,34 @@ class PageResource extends Resource
                     ])
                     ->columns(2)
                     ->visible(fn ($record) => $record?->slug === 'careers'),
+
+                // Specialists Page Fields
+                Forms\Components\Section::make('Specialists Page Content')
+                    ->schema([
+                        Forms\Components\TextInput::make('content.hero_title')
+                            ->label('Hero Title'),
+                        Forms\Components\Textarea::make('content.hero_subtitle')
+                            ->label('Hero Subtitle')
+                            ->rows(3),
+
+                        Forms\Components\Repeater::make('content.stats')
+                            ->label('Stats Band')
+                            ->schema([
+                                Forms\Components\TextInput::make('icon')
+                                    ->helperText('Heroicon name, e.g. user-group, location, heart, ear-implant.')
+                                    ->required(),
+                                Forms\Components\TextInput::make('stat')
+                                    ->label('Display text (e.g. "3500+")')
+                                    ->required(),
+                                Forms\Components\TextInput::make('label')->required(),
+                            ])
+                            ->columns(3)
+                            ->columnSpanFull()
+                            ->addActionLabel('Add Stat')
+                            ->reorderable(),
+                    ])
+                    ->columns(2)
+                    ->visible(fn ($record) => $record?->slug === 'specialists'),
             ]);
     }
 

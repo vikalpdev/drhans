@@ -1,16 +1,16 @@
-<x-layouts.app title="Our Specialists">
+<x-layouts.app :title="$page->content['meta_title'] ?? 'Our Specialists'" :description="$page->content['meta_description'] ?? null">
     <x-hero
-        title="Our Specialists"
-        subtitle="Our team of experienced ENT surgeons, audiologists, speech therapists and support specialists work together to deliver the best outcomes for our patients."
+        :title="$page->content['hero_title'] ?? 'Our Specialists'"
+        :subtitle="$page->content['hero_subtitle'] ?? 'Our team of experienced ENT surgeons, audiologists, speech therapists and support specialists work together to deliver the best outcomes for our patients.'"
         :breadcrumbs="['Specialists' => null]"
     >
         <x-slot:stats>
-            @foreach ([
-                ['user-group', '9', 'Expert Specialists'],
-                ['location', '6', 'Centres Across India'],
-                ['heart', '50,000+', 'Patients Treated'],
-                ['ear-implant', '3500+', 'Cochlear Implants'],
-            ] as [$icon, $stat, $label])
+            @foreach ($page->content['stats'] ?? [
+                ['icon' => 'user-group', 'stat' => '9', 'label' => 'Expert Specialists'],
+                ['icon' => 'location', 'stat' => '6', 'label' => 'Centres Across India'],
+                ['icon' => 'heart', 'stat' => '50,000+', 'label' => 'Patients Treated'],
+                ['icon' => 'ear-implant', 'stat' => '3500+', 'label' => 'Cochlear Implants'],
+            ] as ['icon' => $icon, 'stat' => $stat, 'label' => $label])
                 <span class="flex items-center gap-1.5">
                     <x-app-icon :name="$icon" class="w-4 h-4 text-teal-500 shrink-0" />
                     <strong class="text-navy-600">{{ $stat }}</strong> {{ $label }}
