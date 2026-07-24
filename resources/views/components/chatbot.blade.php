@@ -11,7 +11,7 @@
         input: '',
         errorMsg: '',
         form: { name: '', phone: '', email: '', centre_id: '', centreLabel: '', department: '', specialist_id: '', specialistLabel: '', preferred_date: '', preferred_time: '' },
-        messages: [{ from: 'bot', text: \"Hi! I'm the booking assistant for Dr Hans' Centre for ENT. What's your name?\" }],
+        messages: [{ from: 'bot', text: 'Hi! I\'m the booking assistant for Dr Hans\' Centre for ENT. What\'s your name?' }],
         addBot(text) { this.messages.push({ from: 'bot', text }); this.scrollDown(); },
         addUser(text) { this.messages.push({ from: 'user', text }); this.scrollDown(); },
         scrollDown() { this.$nextTick(() => { if (this.$refs.scrollArea) this.$refs.scrollArea.scrollTop = this.$refs.scrollArea.scrollHeight; }); },
@@ -36,7 +36,7 @@
             this.addUser(this.form.phone);
             this.input = '';
             this.step = 'email';
-            this.addBot('Great. Would you like to share your email too? You can type skip if not.');
+            this.addBot('Great. Would you like to share your email too? You can type it in, or just skip.');
         },
         submitEmail() {
             const val = this.input.trim();
@@ -47,6 +47,12 @@
                 this.addUser('Skip');
             }
             this.input = '';
+            this.step = 'centre';
+            this.addBot('Which centre would you like to visit?');
+        },
+        skipEmail() {
+            this.input = '';
+            this.addUser('Skip');
             this.step = 'centre';
             this.addBot('Which centre would you like to visit?');
         },
@@ -81,11 +87,9 @@
             this.step = 'time';
             this.addBot('And a preferred time of day?');
         },
-        submitTime() {
-            const val = this.input.trim();
-            this.form.preferred_time = val;
-            this.addUser(val || 'No preference');
-            this.input = '';
+        selectTime(label) {
+            this.form.preferred_time = label === 'No preference' ? '' : label;
+            this.addUser(label);
             this.step = 'review';
             this.addBot('Here\'s your appointment request — shall I send it to our team?');
         },
@@ -158,7 +162,7 @@
         {{-- Header --}}
         <div class="bg-gradient-to-r from-navy-600 to-navy-700 px-4 py-3.5 flex items-center gap-3 shrink-0">
             <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
-                <x-app-icon name="calendar" class="w-4.5 h-4.5 text-white" />
+                <x-app-icon name="calendar" class="w-4 h-4 text-white" />
             </div>
             <div class="min-w-0">
                 <p class="font-heading font-semibold text-white text-sm leading-tight">Book an Appointment</p>
@@ -177,6 +181,18 @@
                     ></p>
                 </div>
             </template>
+
+            {{-- Email skip --}}
+            <div x-show="step === 'email'" class="flex flex-wrap gap-2 pt-1">
+                <button type="button" @click="skipEmail()" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">Skip, I'd rather not</button>
+            </div>
+
+            {{-- Time choices --}}
+            <div x-show="step === 'time'" class="flex flex-wrap gap-2 pt-1">
+                @foreach (['Morning', 'Afternoon', 'Evening', 'No preference'] as $time)
+                    <button type="button" @click="selectTime('{{ $time }}')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-navy-100 text-navy-600 hover:border-teal-500 hover:text-teal-600 transition-colors">{{ $time }}</button>
+                @endforeach
+            </div>
 
             {{-- Centre choices --}}
             <div x-show="step === 'centre'" class="flex flex-wrap gap-2 pt-1">
@@ -229,17 +245,17 @@
         </div>
 
         {{-- Text input footer (only for free-text steps) --}}
-        <div x-show="['name','phone','email','time'].includes(step)" class="border-t border-navy-100 p-3 flex items-center gap-2 shrink-0">
+        <div x-show="['name','phone','email'].includes(step)" class="border-t border-navy-100 p-3 flex items-center gap-2 shrink-0">
             <input
                 type="text"
                 x-model="input"
-                @keydown.enter="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : step === 'email' ? submitEmail() : submitTime()"
-                :placeholder="step === 'name' ? 'Type your name...' : step === 'phone' ? 'Type your phone number...' : step === 'email' ? 'Type your email (or skip)...' : 'Morning, afternoon, or a time...'"
+                @keydown.enter="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
+                :placeholder="step === 'name' ? 'Type your name...' : step === 'phone' ? 'Type your phone number...' : 'Type your email (optional)...'"
                 class="flex-1 min-w-0 bg-mint-50 border border-navy-100 rounded-xl px-3 py-2 text-sm text-navy-600 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             >
             <button
                 type="button"
-                @click="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : step === 'email' ? submitEmail() : submitTime()"
+                @click="step === 'name' ? submitName() : step === 'phone' ? submitPhone() : submitEmail()"
                 aria-label="Send"
                 class="w-9 h-9 rounded-xl bg-teal-500 hover:bg-teal-600 flex items-center justify-center text-white shrink-0 transition-colors"
             >
